@@ -1,0 +1,13 @@
+<section<?php if ($this->elementId): ?> id="<?= $this->elementId ?>"<?php endif; ?> class="<?= $this->elementClass ?>">
+    <?php if (!empty($this->headline['value'])): ?>
+        <<?= $this->headline['unit'] ?: 'h2' ?>><?= $this->headline['value'] ?></<?= $this->headline['unit'] ?: 'h2' ?>>
+    <?php endif; ?>
+    <div class="members-grid" data-members-grid>
+        <?php foreach ($this->members as $position => $member): ?>
+            <figure class="member member--<?= $position ?>">
+                <?php if ($member['image']): ?><img src="<?= $member['image'] ?>" alt="<?= $member['name'] ?>"><?php endif; ?>
+                <?php if ($member['name']): ?><figcaption><?= $member['name'] ?></figcaption><?php endif; ?>
+            </figure>
+        <?php endforeach; ?>
+    </div>
+</section>
