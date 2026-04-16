@@ -1,0 +1,19 @@
+{
+  "name": "vtxm-h/content-elements",
+  "description": "Contao 4.13 reusable content elements: accordion, tabs, members grid, live teaser, timeline, quote teaser, announcement, feature grid.",
+  "type": "contao-bundle",
+  "license": "MIT",
+  "require": {
+    "php": "^8.0",
+    "contao/core-bundle": "^4.13",
+    "contao/manager-plugin": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Vendor\\ContentElementsBundle\\": "src/"
+    }
+  },
+  "extra": {
+    "contao-manager-plugin": "Vendor\\ContentElementsBundle\\ContaoManager\\Plugin"
+  }
+}
