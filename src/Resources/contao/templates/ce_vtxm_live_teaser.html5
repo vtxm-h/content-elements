@@ -1,0 +1,16 @@
+<section<?php if ($this->elementId): ?> id="<?= $this->elementId ?>"<?php endif; ?> class="<?= $this->elementClass ?>">
+    <p class="gg-eyebrow">Live</p>
+    <div class="gg-live-grid">
+        <div class="gg-live-main">
+            <?php if (!empty($this->headline['value'])): ?>
+                <<?= $this->headline['unit'] ?: 'h2' ?> class="gg-live-title"><?= $this->headline['value'] ?></<?= $this->headline['unit'] ?: 'h2' ?>>
+            <?php endif; ?>
+            <?php if ($this->liveDate): ?><p class="gg-live-date"><?= $this->liveDate ?></p><?php endif; ?>
+            <?php if ($this->liveLocation): ?><p class="gg-live-location"><?= $this->liveLocation ?></p><?php endif; ?>
+        </div>
+        <div class="gg-live-side">
+            <?php if ($this->liveText): ?><div class="gg-live-copy"><?= $this->liveText ?></div><?php endif; ?>
+            <?php if ($this->liveLink): ?><p><a href="<?= $this->liveLink ?>" class="button large"><?= $this->liveLinkText ?></a></p><?php endif; ?>
+        </div>
+    </div>
+</section>
