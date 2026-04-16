@@ -1,0 +1,19 @@
+<section<?php if ($this->elementId): ?> id="<?= $this->elementId ?>"<?php endif; ?> class="<?= $this->elementClass ?> style--<?= $this->tabsStyle ?>">
+    <?php if (!empty($this->headline['value'])): ?>
+        <<?= $this->headline['unit'] ?: 'h2' ?>><?= $this->headline['value'] ?></<?= $this->headline['unit'] ?: 'h2' ?>>
+    <?php endif; ?>
+    <?php if (!empty($this->tabsItems)): ?>
+        <div class="tabs-nav">
+            <?php foreach ($this->tabsItems as $index => $item): ?>
+                <button type="button" data-tab="<?= $index ?>"><?= $item['title'] ?? '' ?></button>
+            <?php endforeach; ?>
+        </div>
+        <div class="tabs-panels">
+            <?php foreach ($this->tabsItems as $index => $item): ?>
+                <div class="tab-panel" data-panel="<?= $index ?>">
+                    <?= nl2br($item['content'] ?? '') ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</section>
