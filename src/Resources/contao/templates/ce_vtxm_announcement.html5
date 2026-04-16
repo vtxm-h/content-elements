@@ -1,0 +1,8 @@
+<section<?php if ($this->elementId): ?> id="<?= $this->elementId ?>"<?php endif; ?> class="<?= $this->elementClass ?> style--<?= $this->announcementStyle ?>">
+    <?php if ($this->announcementEyebrow): ?><p class="gg-eyebrow"><?= $this->announcementEyebrow ?></p><?php endif; ?>
+    <?php if (!empty($this->headline['value'])): ?>
+        <<?= $this->headline['unit'] ?: 'h2' ?>><?= $this->headline['value'] ?></<?= $this->headline['unit'] ?: 'h2' ?>>
+    <?php endif; ?>
+    <?php if ($this->announcementText): ?><div class="announcement-copy"><?= $this->announcementText ?></div><?php endif; ?>
+    <?php if ($this->announcementLink): ?><p><a href="<?= $this->announcementLink ?>" class="button"><?= $this->announcementLinkText ?></a></p><?php endif; ?>
+</section>
