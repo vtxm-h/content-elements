@@ -134,3 +134,12 @@ Add the repository to your **Contao project** `composer.json`:
     }
   ]
 }
+```
+## Compatibility
+
+Contao 4.13
+PHP 8.0+
+
+## License
+
+MIT
