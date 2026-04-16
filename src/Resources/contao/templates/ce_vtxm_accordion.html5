@@ -1,0 +1,15 @@
+<section<?php if ($this->elementId): ?> id="<?= $this->elementId ?>"<?php endif; ?> class="<?= $this->elementClass ?> style--<?= $this->accordionStyle ?>">
+    <?php if (!empty($this->headline['value'])): ?>
+        <<?= $this->headline['unit'] ?: 'h2' ?>><?= $this->headline['value'] ?></<?= $this->headline['unit'] ?: 'h2' ?>>
+    <?php endif; ?>
+    <?php if (!empty($this->accordionItems)): ?>
+        <div class="accordion-items">
+            <?php foreach ($this->accordionItems as $item): ?>
+                <details class="accordion-item">
+                    <summary><?= $item['title'] ?? '' ?></summary>
+                    <div class="accordion-content"><?= nl2br($item['content'] ?? '') ?></div>
+                </details>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</section>
