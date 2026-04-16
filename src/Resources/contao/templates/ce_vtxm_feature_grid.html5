@@ -1,0 +1,11 @@
+<section<?php if ($this->elementId): ?> id="<?= $this->elementId ?>"<?php endif; ?> class="<?= $this->elementClass ?> fg--<?= $this->fgStyle ?> fg--cols-<?= $this->fgColumns ?> fg--<?= $this->fgTheme ?>">
+    <?php if (!empty($this->headline['value'])): ?>
+        <<?= $this->headline['unit'] ?: 'h2' ?>><?= $this->headline['value'] ?></<?= $this->headline['unit'] ?: 'h2' ?>>
+    <?php endif; ?>
+
+    <div class="feature-grid__inner">
+        <?php foreach ($this->items as $item): ?>
+            <?= $item ?>
+        <?php endforeach; ?>
+    </div>
+</section>
