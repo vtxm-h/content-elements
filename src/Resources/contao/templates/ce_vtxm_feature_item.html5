@@ -1,0 +1,19 @@
+<div<?php if ($this->elementId): ?> id="<?= $this->elementId ?>"<?php endif; ?> class="<?= $this->elementClass ?> feature-grid__item">
+    <?php if ($this->fiIcon): ?>
+        <div class="feature-grid__icon"><?= $this->fiIcon ?></div>
+    <?php endif; ?>
+
+    <?php if (!empty($this->headline['value'])): ?>
+        <<?= $this->headline['unit'] ?: 'h3' ?> class="feature-grid__title"><?= $this->headline['value'] ?></<?= $this->headline['unit'] ?: 'h3' ?>>
+    <?php endif; ?>
+
+    <?php if ($this->fiText): ?>
+        <div class="feature-grid__text"><?= $this->fiText ?></div>
+    <?php endif; ?>
+
+    <?php if ($this->fiLink): ?>
+        <p class="feature-grid__action">
+            <a href="<?= $this->fiLink ?>" class="button"><?= $this->fiLinkText ?></a>
+        </p>
+    <?php endif; ?>
+</div>
