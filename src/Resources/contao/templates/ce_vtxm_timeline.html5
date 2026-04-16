@@ -1,0 +1,16 @@
+<section<?php if ($this->elementId): ?> id="<?= $this->elementId ?>"<?php endif; ?> class="<?= $this->elementClass ?>">
+    <?php if (!empty($this->headline['value'])): ?>
+        <<?= $this->headline['unit'] ?: 'h2' ?>><?= $this->headline['value'] ?></<?= $this->headline['unit'] ?: 'h2' ?>>
+    <?php endif; ?>
+    <?php if ($this->timelineTitle): ?><p class="timeline-title"><?= $this->timelineTitle ?></p><?php endif; ?>
+    <?php if (!empty($this->timelineItems)): ?>
+        <div class="timeline-items">
+            <?php foreach ($this->timelineItems as $item): ?>
+                <div class="timeline-item">
+                    <span class="timeline-year"><?= $item['year'] ?? '' ?></span>
+                    <span class="timeline-text"><?= $item['text'] ?? '' ?></span>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</section>
