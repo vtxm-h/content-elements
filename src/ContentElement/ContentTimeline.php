@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Vendor\ContentElementsBundle\ContentElement;
 
+use Contao\StringUtil;
+
 class ContentTimeline extends AbstractWrappedContentElement
 {
     protected $strTemplate = 'ce_vtxm_timeline';
@@ -14,6 +16,6 @@ class ContentTimeline extends AbstractWrappedContentElement
         $this->assignHeadline();
 
         $this->Template->timelineTitle = (string) $this->timelineTitle;
-        $this->Template->timelineItems = $this->decodeItems((string) $this->timelineItems);
+        $this->Template->timelineItems = StringUtil::deserialize($this->timelineItems, true);
     }
 }

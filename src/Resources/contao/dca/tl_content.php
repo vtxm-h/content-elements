@@ -190,9 +190,23 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tabsStyle'] = [
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tabsItems'] = [
     'exclude' => true,
-    'inputType' => 'textarea',
-    'eval' => ['class' => 'monospace', 'tl_class' => 'clr'],
-    'sql' => 'mediumtext NULL',
+    'inputType' => 'multiColumnWizard',
+    'eval' => [
+        'columnFields' => [
+            'title' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['tabsItemsTitle'],
+                'inputType' => 'text',
+                'eval' => ['style' => 'width:220px'],
+            ],
+            'content' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['tabsItemsContent'],
+                'inputType' => 'textarea',
+                'eval' => ['allowHtml' => true, 'style' => 'width:420px;height:80px'],
+            ],
+        ],
+        'tl_class' => 'clr',
+    ],
+    'sql' => 'blob NULL',
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['accordionStyle'] = [
@@ -207,9 +221,23 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['accordionStyle'] = [
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['accordionItems'] = [
     'exclude' => true,
-    'inputType' => 'textarea',
-    'eval' => ['class' => 'monospace', 'tl_class' => 'clr'],
-    'sql' => 'mediumtext NULL',
+    'inputType' => 'multiColumnWizard',
+    'eval' => [
+        'columnFields' => [
+            'title' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['accordionItemsTitle'],
+                'inputType' => 'text',
+                'eval' => ['style' => 'width:220px'],
+            ],
+            'content' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['accordionItemsContent'],
+                'inputType' => 'textarea',
+                'eval' => ['allowHtml' => true, 'style' => 'width:420px;height:80px'],
+            ],
+        ],
+        'tl_class' => 'clr',
+    ],
+    'sql' => 'blob NULL',
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['timelineTitle'] = [
@@ -221,7 +249,21 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['timelineTitle'] = [
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['timelineItems'] = [
     'exclude' => true,
-    'inputType' => 'textarea',
-    'eval' => ['class' => 'monospace', 'tl_class' => 'clr'],
-    'sql' => 'mediumtext NULL',
+    'inputType' => 'multiColumnWizard',
+    'eval' => [
+        'columnFields' => [
+            'year' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['timelineItemsYear'],
+                'inputType' => 'text',
+                'eval' => ['style' => 'width:160px'],
+            ],
+            'text' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['timelineItemsText'],
+                'inputType' => 'textarea',
+                'eval' => ['style' => 'width:480px;height:70px'],
+            ],
+        ],
+        'tl_class' => 'clr',
+    ],
+    'sql' => 'blob NULL',
 ];

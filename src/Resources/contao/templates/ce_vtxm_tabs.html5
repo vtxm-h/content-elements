@@ -21,7 +21,7 @@ $classes = trim($this->elementClass.' tabs--'.$this->tabsStyle);
     <div class="tabs__panels">
       <?php foreach ($this->tabsItems as $index => $item): ?>
         <div class="tabs__panel" data-panel="<?= (int) $index ?>">
-          <?= nl2br(StringUtil::specialchars((string) ($item['content'] ?? ''))) ?>
+          <?= (string) ($item['content'] ?? '') ?>
         </div>
       <?php endforeach; ?>
     </div>

@@ -59,36 +59,15 @@ No frontend CSS or JavaScript is included. The templates expose stable classes a
 
 All elements preserve Contao `cssID` support through the shared `AbstractWrappedContentElement`.
 
-## Simple Item Fields
+## Item Fields
 
-Tabs, accordion and timeline use simple textarea fields for item data in this version. Enter JSON arrays:
-
-```json
-[
-  {
-    "title": "First tab",
-    "content": "First tab content"
-  }
-]
-```
-
-Timeline entries use `year` and `text` keys:
-
-```json
-[
-  {
-    "year": "2026",
-    "text": "Timeline entry"
-  }
-]
-```
-
-Invalid JSON renders as an empty item list.
+Tabs, accordion and timeline use MultiColumnWizard fields in the Contao backend. Editors can manage entries in structured rows.
 
 ## Requirements
 
 - Contao `^4.13`
 - PHP `^8.0`
+- `menatwork/contao-multicolumnwizard-bundle`
 
 ## License
 

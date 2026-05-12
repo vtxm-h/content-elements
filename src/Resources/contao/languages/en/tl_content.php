@@ -53,11 +53,17 @@ $GLOBALS['TL_LANG']['tl_content']['announcementLinkText'] = ['Link text', 'Label
 $GLOBALS['TL_LANG']['tl_content']['announcementStyle'] = ['Style', 'Choose the announcement presentation style.'];
 
 $GLOBALS['TL_LANG']['tl_content']['tabsStyle'] = ['Style', 'Choose the tabs presentation style.'];
-$GLOBALS['TL_LANG']['tl_content']['tabsItems'] = ['Items', 'JSON array with title/content entries.'];
+$GLOBALS['TL_LANG']['tl_content']['tabsItems'] = ['Tab entries', 'Add the tab titles and content.'];
+$GLOBALS['TL_LANG']['tl_content']['tabsItemsTitle'] = ['Title', 'Tab title.'];
+$GLOBALS['TL_LANG']['tl_content']['tabsItemsContent'] = ['Content', 'Tab content.'];
 $GLOBALS['TL_LANG']['tl_content']['accordionStyle'] = ['Style', 'Choose the accordion presentation style.'];
-$GLOBALS['TL_LANG']['tl_content']['accordionItems'] = ['Items', 'JSON array with title/content entries.'];
+$GLOBALS['TL_LANG']['tl_content']['accordionItems'] = ['Accordion entries', 'Add the accordion titles and content.'];
+$GLOBALS['TL_LANG']['tl_content']['accordionItemsTitle'] = ['Title', 'Accordion title.'];
+$GLOBALS['TL_LANG']['tl_content']['accordionItemsContent'] = ['Content', 'Accordion content.'];
 $GLOBALS['TL_LANG']['tl_content']['timelineTitle'] = ['Timeline title', 'Optional title above the entries.'];
-$GLOBALS['TL_LANG']['tl_content']['timelineItems'] = ['Items', 'JSON array with year/text entries.'];
+$GLOBALS['TL_LANG']['tl_content']['timelineItems'] = ['Timeline entries', 'Add the timeline years and text entries.'];
+$GLOBALS['TL_LANG']['tl_content']['timelineItemsYear'] = ['Year', 'Timeline year or label.'];
+$GLOBALS['TL_LANG']['tl_content']['timelineItemsText'] = ['Text', 'Timeline text.'];
 
 $GLOBALS['TL_LANG']['tl_content']['iconboxStyleOptions'] = [
     'default' => 'Default',

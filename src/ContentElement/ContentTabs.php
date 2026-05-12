@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Vendor\ContentElementsBundle\ContentElement;
 
+use Contao\StringUtil;
+
 class ContentTabs extends AbstractWrappedContentElement
 {
     protected $strTemplate = 'ce_vtxm_tabs';
@@ -14,6 +16,6 @@ class ContentTabs extends AbstractWrappedContentElement
         $this->assignHeadline();
 
         $this->Template->tabsStyle = $this->normalizeOption((string) ($this->tabsStyle ?: 'default'), ['default', 'minimal'], 'default');
-        $this->Template->tabsItems = $this->decodeItems((string) $this->tabsItems);
+        $this->Template->tabsItems = StringUtil::deserialize($this->tabsItems, true);
     }
 }

@@ -42,13 +42,6 @@ abstract class AbstractWrappedContentElement extends ContentElement
         $this->Template->headlineUnit = $unit;
     }
 
-    protected function decodeItems(string $value): array
-    {
-        $data = json_decode($value, true);
-
-        return \is_array($data) ? $data : [];
-    }
-
     protected function normalizeOption(string $value, array $allowed, string $default): string
     {
         return \in_array($value, $allowed, true) ? $value : $default;
