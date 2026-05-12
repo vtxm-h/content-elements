@@ -1,16 +1,26 @@
-<section<?php if ($this->elementId): ?> id="<?= $this->elementId ?>"<?php endif; ?> class="<?= $this->elementClass ?>">
-    <?php if (!empty($this->headline['value'])): ?>
-        <<?= $this->headline['unit'] ?: 'h2' ?>><?= $this->headline['value'] ?></<?= $this->headline['unit'] ?: 'h2' ?>>
-    <?php endif; ?>
-    <?php if ($this->timelineTitle): ?><p class="timeline-title"><?= $this->timelineTitle ?></p><?php endif; ?>
-    <?php if (!empty($this->timelineItems)): ?>
-        <div class="timeline-items">
-            <?php foreach ($this->timelineItems as $item): ?>
-                <div class="timeline-item">
-                    <span class="timeline-year"><?= $item['year'] ?? '' ?></span>
-                    <span class="timeline-text"><?= $item['text'] ?? '' ?></span>
-                </div>
-            <?php endforeach; ?>
+<?php
+
+use Contao\StringUtil;
+
+?>
+
+<section<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($this->elementClass) ?>">
+  <?php if ($this->headlineText): ?>
+    <<?= $this->headlineUnit ?> class="timeline__headline"><?= StringUtil::specialchars($this->headlineText) ?></<?= $this->headlineUnit ?>>
+  <?php endif; ?>
+
+  <?php if ($this->timelineTitle): ?>
+    <p class="timeline__title"><?= StringUtil::specialchars($this->timelineTitle) ?></p>
+  <?php endif; ?>
+
+  <?php if (!empty($this->timelineItems)): ?>
+    <div class="timeline__items">
+      <?php foreach ($this->timelineItems as $item): ?>
+        <div class="timeline__item">
+          <span class="timeline__year"><?= StringUtil::specialchars((string) ($item['year'] ?? '')) ?></span>
+          <span class="timeline__text"><?= StringUtil::specialchars((string) ($item['text'] ?? '')) ?></span>
         </div>
-    <?php endif; ?>
+      <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
 </section>

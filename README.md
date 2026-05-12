@@ -1,129 +1,12 @@
-# Content Elements Old(Contao)
+# Content Elements
 
-Reusable Contao content elements bundle providing a collection of structured, theme-agnostic components.
+Reusable Contao 4.13 content elements for VTXM projects.
 
-Designed for flexible use across projects: clean HTML output, no enforced styling or JavaScript.
+This bundle contains presentation-ready content elements only. It intentionally does not include structural layout or container elements.
 
+## Installation
 
-## Features
-
-Content elements included:
-
-- Accordion
-- Tabs
-- Members Grid
-- Live Teaser
-- Timeline
-- Quote Teaser
-- Announcement
-- Feature Grid (Parent)
-- Feature Item (Child)
-
-### Feature Grid System
-
-- Parent element: **Feature Grid**
-- Child elements: **Feature Item**
-- Fully Contao-native (no MultiColumnWizard)
-- Drag & drop ordering via content elements
-
-Each feature item contains:
-- Icon (HTML / SVG / class)
-- Headline
-- Text (RTE)
-- Optional link
-
-Grid configuration:
-- Styles:
-  - centered
-  - inline
-  - minimal
-- Columns:
-  - 2
-  - 3
-  - 4
-- Theme:
-  - light
-  - dark
-
-
-## Requirements
-
-This bundle requires:
-
-contao/core-bundle ^4.13  
-PHP 8.0+
-
-No additional dependencies required.
-
-
-## Usage
-
-- Add content elements from category **vtxm**
-- Configure fields per element
-
-### Feature Grid
-
-- Add **Feature Grid**
-- Inside it, add multiple **Feature Item** elements
-- Configure grid style, columns and theme
-
-### Other Elements
-
-- Accordion / Tabs / Timeline use structured data fields
-- Members Grid uses fixed positions (top, left, right, bottom)
-- Live Teaser / Announcement / Quote Teaser are standalone blocks
-
-## Notes
-
-- No JavaScript is included by design
-- No styling is enforced
-- All elements output clean HTML hooks
-
-You are expected to handle:
-- Styling (CSS / Tailwind / etc.)
-- Interaction (JS)
-
-## HTML Hooks
-
-Examples:
-
-- Feature Grid:
-  - `.feature-grid`
-  - `.feature-grid__item`
-
-- Tabs:
-  - `[data-tabs]`
-  - `.tabs__button`
-  - `.tabs__panel`
-
-- Accordion:
-  - `.accordion-item`
-
-- Members Grid:
-  - `[data-members-grid]`
-
-## Templates
-
-Templates are located at:
-
-src/Resources/contao/templates/
-
-Examples:
-
-- ce_vtxm_feature_grid.html5
-- ce_vtxm_feature_item.html5
-- ce_vtxm_tabs.html5
-- ce_vtxm_accordion.html5
-- ce_vtxm_members_grid.html5
-- ce_vtxm_live_teaser.html5
-- ce_vtxm_timeline.html5
-- ce_vtxm_quote_teaser.html5
-- ce_vtxm_announcement.html5
-
-
-## Installation (via Composer / Contao Manager)
-
-Add the repository to your **Contao project** `composer.json`:
+Add the repository to your Contao project:
 
 ```json
 {
@@ -135,10 +18,77 @@ Add the repository to your **Contao project** `composer.json`:
   ]
 }
 ```
-## Compatibility
 
-Contao 4.13
-PHP 8.0+
+Then install the package:
+
+```bash
+composer require vtxm-h/content-elements
+```
+
+Update the database in the Contao install tool or Contao Manager afterwards.
+
+## Content Elements
+
+The bundle registers these content elements in the `vtxm` category:
+
+- `vtxm_iconbox`
+- `vtxm_members_grid`
+- `vtxm_live_teaser`
+- `vtxm_quote_teaser`
+- `vtxm_announcement`
+- `vtxm_tabs`
+- `vtxm_accordion`
+- `vtxm_timeline`
+
+## Templates
+
+Templates are located in `src/Resources/contao/templates/`:
+
+- `ce_vtxm_iconbox.html5`
+- `ce_vtxm_members_grid.html5`
+- `ce_vtxm_live_teaser.html5`
+- `ce_vtxm_quote_teaser.html5`
+- `ce_vtxm_announcement.html5`
+- `ce_vtxm_tabs.html5`
+- `ce_vtxm_accordion.html5`
+- `ce_vtxm_timeline.html5`
+
+## Styling
+
+No frontend CSS or JavaScript is included. The templates expose stable classes and data attributes so project themes can style and enhance the elements as needed.
+
+All elements preserve Contao `cssID` support through the shared `AbstractWrappedContentElement`.
+
+## Simple Item Fields
+
+Tabs, accordion and timeline use simple textarea fields for item data in this version. Enter JSON arrays:
+
+```json
+[
+  {
+    "title": "First tab",
+    "content": "First tab content"
+  }
+]
+```
+
+Timeline entries use `year` and `text` keys:
+
+```json
+[
+  {
+    "year": "2026",
+    "text": "Timeline entry"
+  }
+]
+```
+
+Invalid JSON renders as an empty item list.
+
+## Requirements
+
+- Contao `^4.13`
+- PHP `^8.0`
 
 ## License
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vendor\ContentElementsBundle\ContentElement;
 
 use Contao\FilesModel;
@@ -9,11 +11,10 @@ class ContentMembersGrid extends AbstractWrappedContentElement
 {
     protected $strTemplate = 'ce_vtxm_members_grid';
 
-    protected function compile(): void
+    protected function compile()
     {
-        $this->assignWrapper('ce_vtxm_members_grid');
-
-        $this->Template->headline = $this->headline;
+        $this->assignWrapper('vtxm-members-grid');
+        $this->assignHeadline();
 
         $this->Template->members = [
             'top' => [
@@ -37,13 +38,21 @@ class ContentMembersGrid extends AbstractWrappedContentElement
 
     protected function resolveImage($value): string
     {
-        $uuid = StringUtil::deserialize($value, true);
+        $uuid = $value;
 
-        if (empty($uuid[0])) {
+        if (!\is_array($uuid)) {
+            $uuid = StringUtil::deserialize($uuid);
+        }
+
+        if (\is_array($uuid)) {
+            $uuid = reset($uuid);
+        }
+
+        if (empty($uuid)) {
             return '';
         }
 
-        $file = FilesModel::findByUuid($uuid[0]);
+        $file = FilesModel::findByUuid($uuid);
 
         return $file ? $file->path : '';
     }

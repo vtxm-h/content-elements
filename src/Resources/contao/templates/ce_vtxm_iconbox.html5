@@ -1,0 +1,27 @@
+<?php
+
+use Contao\StringUtil;
+
+$classes = trim($this->elementClass.' iconbox--'.$this->iconboxStyle);
+
+?>
+
+<section<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>">
+  <?php if ($this->iconboxIcon): ?>
+    <div class="iconbox__icon"><?= StringUtil::specialchars($this->iconboxIcon) ?></div>
+  <?php endif; ?>
+
+  <?php if ($this->headlineText): ?>
+    <<?= $this->headlineUnit ?> class="iconbox__headline"><?= StringUtil::specialchars($this->headlineText) ?></<?= $this->headlineUnit ?>>
+  <?php endif; ?>
+
+  <?php if ($this->iconboxText): ?>
+    <div class="iconbox__text"><?= $this->iconboxText ?></div>
+  <?php endif; ?>
+
+  <?php if ($this->iconboxLink && $this->iconboxLinkText): ?>
+    <p class="iconbox__action">
+      <a href="<?= StringUtil::specialchars($this->iconboxLink) ?>"><?= StringUtil::specialchars($this->iconboxLinkText) ?></a>
+    </p>
+  <?php endif; ?>
+</section>

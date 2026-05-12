@@ -1,16 +1,34 @@
-<section<?php if ($this->elementId): ?> id="<?= $this->elementId ?>"<?php endif; ?> class="<?= $this->elementClass ?>">
-    <p class="gg-eyebrow">Live</p>
-    <div class="gg-live-grid">
-        <div class="gg-live-main">
-            <?php if (!empty($this->headline['value'])): ?>
-                <<?= $this->headline['unit'] ?: 'h2' ?> class="gg-live-title"><?= $this->headline['value'] ?></<?= $this->headline['unit'] ?: 'h2' ?>>
-            <?php endif; ?>
-            <?php if ($this->liveDate): ?><p class="gg-live-date"><?= $this->liveDate ?></p><?php endif; ?>
-            <?php if ($this->liveLocation): ?><p class="gg-live-location"><?= $this->liveLocation ?></p><?php endif; ?>
-        </div>
-        <div class="gg-live-side">
-            <?php if ($this->liveText): ?><div class="gg-live-copy"><?= $this->liveText ?></div><?php endif; ?>
-            <?php if ($this->liveLink): ?><p><a href="<?= $this->liveLink ?>" class="button large"><?= $this->liveLinkText ?></a></p><?php endif; ?>
-        </div>
+<?php
+
+use Contao\StringUtil;
+
+?>
+
+<section<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($this->elementClass) ?>">
+  <p class="live-teaser__eyebrow">Live</p>
+
+  <div class="live-teaser__inner">
+    <div class="live-teaser__main">
+      <?php if ($this->headlineText): ?>
+        <<?= $this->headlineUnit ?> class="live-teaser__headline"><?= StringUtil::specialchars($this->headlineText) ?></<?= $this->headlineUnit ?>>
+      <?php endif; ?>
+      <?php if ($this->liveDate): ?>
+        <p class="live-teaser__date"><?= StringUtil::specialchars($this->liveDate) ?></p>
+      <?php endif; ?>
+      <?php if ($this->liveLocation): ?>
+        <p class="live-teaser__location"><?= StringUtil::specialchars($this->liveLocation) ?></p>
+      <?php endif; ?>
     </div>
+
+    <div class="live-teaser__side">
+      <?php if ($this->liveText): ?>
+        <div class="live-teaser__text"><?= $this->liveText ?></div>
+      <?php endif; ?>
+      <?php if ($this->liveLink && $this->liveLinkText): ?>
+        <p class="live-teaser__action">
+          <a href="<?= StringUtil::specialchars($this->liveLink) ?>"><?= StringUtil::specialchars($this->liveLinkText) ?></a>
+        </p>
+      <?php endif; ?>
+    </div>
+  </div>
 </section>

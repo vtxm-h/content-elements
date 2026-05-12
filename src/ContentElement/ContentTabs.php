@@ -1,24 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vendor\ContentElementsBundle\ContentElement;
 
 class ContentTabs extends AbstractWrappedContentElement
 {
     protected $strTemplate = 'ce_vtxm_tabs';
 
-    protected function compile(): void
+    protected function compile()
     {
-        $this->assignWrapper('ce_vtxm_tabs');
+        $this->assignWrapper('vtxm-tabs');
+        $this->assignHeadline();
 
-        $this->Template->headline = $this->headline;
-        $this->Template->tabsStyle = (string) $this->tabsStyle;
+        $this->Template->tabsStyle = $this->normalizeOption((string) ($this->tabsStyle ?: 'default'), ['default', 'minimal'], 'default');
         $this->Template->tabsItems = $this->decodeItems((string) $this->tabsItems);
-    }
-
-    protected function decodeItems(string $json): array
-    {
-        $data = json_decode($json, true);
-
-        return \is_array($data) ? $data : [];
     }
 }
