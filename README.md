@@ -59,6 +59,19 @@ No frontend CSS or JavaScript is included. The templates expose stable classes a
 
 All elements preserve Contao `cssID` support through the shared `AbstractWrappedContentElement`.
 
+Root classes:
+
+- `.vtxm-iconbox`
+- `.vtxm-members-grid`
+- `.vtxm-live-teaser`
+- `.vtxm-quote-teaser`
+- `.vtxm-announcement`
+- `.vtxm-tabs`
+- `.vtxm-accordion`
+- `.vtxm-timeline`
+
+The `iconboxIcon` value is escaped in the template. Use it for icon class names, labels or short markers; SVG or HTML icon markup is intentionally not rendered raw in this version.
+
 ## Item Fields
 
 Tabs, accordion and timeline use MultiColumnWizard fields in the Contao backend. Editors can manage entries in structured rows.
