@@ -61,14 +61,14 @@ All elements preserve Contao `cssID` support through the shared `AbstractWrapped
 
 Root classes:
 
-- `.vtxm-iconbox`
-- `.vtxm-members-grid`
-- `.vtxm-live-teaser`
-- `.vtxm-quote-teaser`
-- `.vtxm-announcement`
-- `.vtxm-tabs`
-- `.vtxm-accordion`
-- `.vtxm-timeline`
+- `.ce_vtxm_iconbox`
+- `.ce_vtxm_members_grid`
+- `.ce_vtxm_live_teaser`
+- `.ce_vtxm_quote_teaser`
+- `.ce_vtxm_announcement`
+- `.ce_vtxm_tabs`
+- `.ce_vtxm_accordion`
+- `.ce_vtxm_timeline`
 
 The `iconboxIcon` value is escaped in the template. Use it for icon class names, labels or short markers; SVG or HTML icon markup is intentionally not rendered raw in this version.
 

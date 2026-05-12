@@ -10,7 +10,7 @@ class ContentIconbox extends AbstractWrappedContentElement
 
     protected function compile()
     {
-        $this->assignWrapper('vtxm-iconbox');
+        $this->assignWrapper('ce_vtxm_iconbox');
         $this->assignHeadline('h3');
 
         $this->Template->iconboxStyle = $this->normalizeOption((string) ($this->iconboxStyle ?: 'default'), ['default', 'centered', 'inline'], 'default');

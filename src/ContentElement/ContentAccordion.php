@@ -12,7 +12,7 @@ class ContentAccordion extends AbstractWrappedContentElement
 
     protected function compile()
     {
-        $this->assignWrapper('vtxm-accordion');
+        $this->assignWrapper('ce_vtxm_accordion');
         $this->assignHeadline();
 
         $this->Template->accordionStyle = $this->normalizeOption((string) ($this->accordionStyle ?: 'default'), ['default', 'minimal'], 'default');

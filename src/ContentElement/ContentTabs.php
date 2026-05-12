@@ -12,7 +12,7 @@ class ContentTabs extends AbstractWrappedContentElement
 
     protected function compile()
     {
-        $this->assignWrapper('vtxm-tabs');
+        $this->assignWrapper('ce_vtxm_tabs');
         $this->assignHeadline();
 
         $this->Template->tabsStyle = $this->normalizeOption((string) ($this->tabsStyle ?: 'default'), ['default', 'minimal'], 'default');

@@ -13,7 +13,7 @@ class ContentMembersGrid extends AbstractWrappedContentElement
 
     protected function compile()
     {
-        $this->assignWrapper('vtxm-members-grid');
+        $this->assignWrapper('ce_vtxm_members_grid');
         $this->assignHeadline();
 
         $this->Template->members = [

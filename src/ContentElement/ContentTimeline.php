@@ -12,7 +12,7 @@ class ContentTimeline extends AbstractWrappedContentElement
 
     protected function compile()
     {
-        $this->assignWrapper('vtxm-timeline');
+        $this->assignWrapper('ce_vtxm_timeline');
         $this->assignHeadline();
 
         $this->Template->timelineTitle = (string) $this->timelineTitle;

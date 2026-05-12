@@ -10,7 +10,7 @@ class ContentLiveTeaser extends AbstractWrappedContentElement
 
     protected function compile()
     {
-        $this->assignWrapper('vtxm-live-teaser');
+        $this->assignWrapper('ce_vtxm_live_teaser');
         $this->assignHeadline();
 
         $this->Template->liveDate = (string) $this->liveDate;

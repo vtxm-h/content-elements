@@ -10,7 +10,7 @@ class ContentAnnouncement extends AbstractWrappedContentElement
 
     protected function compile()
     {
-        $this->assignWrapper('vtxm-announcement');
+        $this->assignWrapper('ce_vtxm_announcement');
         $this->assignHeadline();
 
         $this->Template->announcementEyebrow = (string) $this->announcementEyebrow;

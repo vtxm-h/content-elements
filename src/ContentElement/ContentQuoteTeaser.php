@@ -10,7 +10,7 @@ class ContentQuoteTeaser extends AbstractWrappedContentElement
 
     protected function compile()
     {
-        $this->assignWrapper('vtxm-quote-teaser');
+        $this->assignWrapper('ce_vtxm_quote_teaser');
         $this->assignHeadline();
 
         $this->Template->quoteText = (string) $this->quoteText;
