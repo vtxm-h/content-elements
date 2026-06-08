@@ -3,6 +3,7 @@
 $GLOBALS['TL_LANG']['CTE']['vtxm'] = 'VTXM';
 $GLOBALS['TL_LANG']['CTE']['vtxm_iconbox'] = ['Iconbox', 'Reusable icon/text/link content block.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_media_text'] = ['Media Text', 'Displays media with complementary text content.'];
+$GLOBALS['TL_LANG']['CTE']['vtxm_link_list'] = ['Link List', 'Displays structured links as a list, buttons or icons.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_members_grid'] = ['Members grid', 'Grid with four fixed member positions.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_live_teaser'] = ['Live teaser', 'Concert or live announcement block.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_quote_teaser'] = ['Quote teaser', 'Quote or review block.'];
@@ -14,6 +15,7 @@ $GLOBALS['TL_LANG']['CTE']['vtxm_factsbox'] = ['Factsbox', 'Displays structured 
 
 $GLOBALS['TL_LANG']['tl_content']['iconbox_legend'] = 'Iconbox settings';
 $GLOBALS['TL_LANG']['tl_content']['media_text_legend'] = 'Media Text';
+$GLOBALS['TL_LANG']['tl_content']['link_list_legend'] = 'Link List';
 $GLOBALS['TL_LANG']['tl_content']['members_legend'] = 'Members';
 $GLOBALS['TL_LANG']['tl_content']['live_legend'] = 'Live teaser';
 $GLOBALS['TL_LANG']['tl_content']['quote_legend'] = 'Quote';
@@ -60,6 +62,15 @@ $GLOBALS['TL_LANG']['tl_content']['mediaTextLayout'] = ['Media position', 'Choos
 $GLOBALS['TL_LANG']['tl_content']['mediaTextStyle'] = ['Display style', 'Choose the media text display style.'];
 $GLOBALS['TL_LANG']['tl_content']['mediaTextEyebrow'] = ['Eyebrow', 'Small label above the headline.'];
 
+$GLOBALS['TL_LANG']['tl_content']['linkListStyle'] = ['Display style', 'Choose the link list display style.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListAlign'] = ['Alignment', 'Choose the link list alignment.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItems'] = ['Links', 'Define links with label, URL, optional icon and description.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItemsLabel'] = ['Label', 'Link label.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItemsUrl'] = ['URL', 'Link target.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItemsIcon'] = ['Icon', 'Optional icon marker such as instagram, youtube, spotify or external.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItemsDescription'] = ['Description', 'Optional short description.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItemsTarget'] = ['New window', 'Open the link in a new window.'];
+
 $GLOBALS['TL_LANG']['tl_content']['tabsStyle'] = ['Style', 'Choose the tabs presentation style.'];
 $GLOBALS['TL_LANG']['tl_content']['tabsItems'] = ['Tab entries', 'Add the tab titles and content.'];
 $GLOBALS['TL_LANG']['tl_content']['tabsItemsTitle'] = ['Title', 'Tab title.'];
@@ -103,6 +114,19 @@ $GLOBALS['TL_LANG']['tl_content']['mediaTextStyleOptions'] = [
     'editorial' => 'Editorial',
     'card' => 'Card',
     'minimal' => 'Minimal',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['linkListStyleOptions'] = [
+    'default' => 'Default',
+    'buttons' => 'Buttons',
+    'icons' => 'Icons',
+    'minimal' => 'Minimal',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['linkListAlignOptions'] = [
+    'left' => 'Left',
+    'center' => 'Centered',
+    'right' => 'Right',
 ];
 
 $GLOBALS['TL_LANG']['tl_content']['simpleStyleOptions'] = [

@@ -8,6 +8,7 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_live_teaser'] = '{type_legend
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_quote_teaser'] = '{type_legend},type,headline;{quote_legend},quoteText,quoteAuthor,quoteMeta,quoteLink,quoteLinkText;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_announcement'] = '{type_legend},type,headline;{announcement_legend},announcementEyebrow,announcementText,announcementLink,announcementLinkText,announcementStyle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_media_text'] = '{type_legend},type,headline;{media_legend},singleSRC,alt,size,fullsize,caption;{text_legend},mediaTextEyebrow,text;{link_legend:hide},url,linkTitle,target;{media_text_legend},mediaTextLayout,mediaTextStyle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_link_list'] = '{type_legend},type,headline;{link_list_legend},linkListStyle,linkListAlign,linkListItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_tabs'] = '{type_legend},type,headline;{tabs_legend},tabsStyle,tabsItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_accordion'] = '{type_legend},type,headline;{accordion_legend},accordionStyle,accordionItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_timeline'] = '{type_legend},type,headline;{timeline_legend},timelineTitle,timelineItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
@@ -205,6 +206,62 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['mediaTextEyebrow'] = [
     'inputType' => 'text',
     'eval' => ['maxlength' => 255, 'tl_class' => 'w50'],
     'sql' => "varchar(255) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['linkListStyle'] = [
+    'exclude' => true,
+    'default' => 'default',
+    'inputType' => 'select',
+    'options' => ['default', 'buttons', 'icons', 'minimal'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['linkListStyleOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(32) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['linkListAlign'] = [
+    'exclude' => true,
+    'default' => 'left',
+    'inputType' => 'select',
+    'options' => ['left', 'center', 'right'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['linkListAlignOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(32) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['linkListItems'] = [
+    'exclude' => true,
+    'inputType' => 'multiColumnWizard',
+    'eval' => [
+        'columnFields' => [
+            'label' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['linkListItemsLabel'],
+                'inputType' => 'text',
+                'eval' => ['style' => 'width:180px'],
+            ],
+            'url' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['linkListItemsUrl'],
+                'inputType' => 'text',
+                'eval' => ['style' => 'width:280px', 'rgxp' => 'url'],
+            ],
+            'icon' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['linkListItemsIcon'],
+                'inputType' => 'text',
+                'eval' => ['style' => 'width:160px'],
+            ],
+            'description' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['linkListItemsDescription'],
+                'inputType' => 'text',
+                'eval' => ['style' => 'width:260px'],
+            ],
+            'target' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['linkListItemsTarget'],
+                'inputType' => 'checkbox',
+                'eval' => ['style' => 'width:80px'],
+            ],
+        ],
+        'tl_class' => 'clr',
+    ],
+    'sql' => 'blob NULL',
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tabsStyle'] = [

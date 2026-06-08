@@ -13,6 +13,7 @@ Content elements included:
 
 - Iconbox
 - Media Text
+- Link List
 - Members Grid
 - Live Teaser
 - Quote Teaser
@@ -36,6 +37,7 @@ The bundle registers these content elements in the `vtxm` category:
 
 - `vtxm_iconbox`
 - `vtxm_media_text`
+- `vtxm_link_list`
 - `vtxm_members_grid`
 - `vtxm_live_teaser`
 - `vtxm_quote_teaser`
@@ -54,6 +56,7 @@ Typical use cases:
 
 - `vtxm_iconbox` for service boxes, benefits or compact feature blocks
 - `vtxm_media_text` for image/media plus text blocks, biographies, project stories and editorial image/text sections; supports image-left, image-right, image-top, image-bottom, float-left and float-right layouts plus default, editorial, card and minimal styles
+- `vtxm_link_list` for structured links, social links, streaming platforms, downloads, press kits, booking links and external resources; supports default, buttons, icons and minimal styles plus left, center and right alignment
 - `vtxm_members_grid` for team / band member layouts
 - `vtxm_live_teaser` for concerts, events or live announcements
 - `vtxm_quote_teaser` for quotes, reviews or press snippets
@@ -95,6 +98,7 @@ These elements use MultiColumnWizard fields in the Contao backend:
 - `vtxm_accordion`
 - `vtxm_timeline`
 - `vtxm_factsbox`
+- `vtxm_link_list`
 
 Editors can manage entries in structured rows instead of writing JSON manually.
 
@@ -123,6 +127,7 @@ Root classes:
 
 - `.ce_vtxm_iconbox`
 - `.ce_vtxm_media_text`
+- `.ce_vtxm_link_list`
 - `.ce_vtxm_members_grid`
 - `.ce_vtxm_live_teaser`
 - `.ce_vtxm_quote_teaser`
@@ -168,6 +173,26 @@ Media Text hooks:
 
 Media Text styling is expected through `frontend-assets`, especially `css/vtxm-components.css`.
 
+Link List hooks:
+
+- `.ce_vtxm_link_list`
+- `.link-list__headline`
+- `.link-list__items`
+- `.link-list__item`
+- `.link-list__link`
+- `.link-list__icon`
+- `.link-list__label`
+- `.link-list__description`
+- `.link-list--default`
+- `.link-list--buttons`
+- `.link-list--icons`
+- `.link-list--minimal`
+- `.link-list--align-left`
+- `.link-list--align-center`
+- `.link-list--align-right`
+
+Link List styling is expected through `frontend-assets`, especially `css/vtxm-components.css`.
+
 Additional hooks are available inside the individual templates.
 
 
@@ -183,6 +208,7 @@ Templates:
 
 - `ce_vtxm_iconbox.html5`
 - `ce_vtxm_media_text.html5`
+- `ce_vtxm_link_list.html5`
 - `ce_vtxm_members_grid.html5`
 - `ce_vtxm_live_teaser.html5`
 - `ce_vtxm_quote_teaser.html5`
@@ -215,12 +241,12 @@ Example package reference:
       "type": "package",
       "package": {
         "name": "vtxm-h/content-elements",
-        "version": "1.0.5",
+        "version": "1.0.6",
         "type": "contao-bundle",
         "license": "MIT",
         "description": "Reusable Contao 4.13 content elements for VTXM projects.",
         "dist": {
-          "url": "https://github.com/vtxm-h/content-elements/archive/refs/tags/v1.0.5.zip",
+          "url": "https://github.com/vtxm-h/content-elements/archive/refs/tags/v1.0.6.zip",
           "type": "zip"
         },
         "autoload": {
