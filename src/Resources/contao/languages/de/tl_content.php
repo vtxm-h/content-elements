@@ -3,12 +3,13 @@
 $GLOBALS['TL_LANG']['CTE']['vtxm'] = 'VTXM';
 $GLOBALS['TL_LANG']['CTE']['vtxm_iconbox'] = ['Iconbox', 'Wiederverwendbarer Icon-/Text-/Link-Block.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_members_grid'] = ['Members Grid', 'Grid mit vier festen Mitgliederpositionen.'];
-$GLOBALS['TL_LANG']['CTE']['vtxm_live_teaser'] = ['Live Teaser', 'Konzert- oder Live-Ankuendigungsblock.'];
+$GLOBALS['TL_LANG']['CTE']['vtxm_live_teaser'] = ['Live Teaser', 'Konzert- oder Live-Ankündigungsblock.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_quote_teaser'] = ['Quote Teaser', 'Zitat- oder Review-Block.'];
-$GLOBALS['TL_LANG']['CTE']['vtxm_announcement'] = ['Announcement', 'Ankuendigungsblock.'];
+$GLOBALS['TL_LANG']['CTE']['vtxm_announcement'] = ['Announcement', 'Ankündigungsblock.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_tabs'] = ['Tabs', 'Einfaches Tabs-Element.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_accordion'] = ['Accordion', 'Einfaches Accordion-Element.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_timeline'] = ['Timeline', 'Einfacher Zeitstrahl-Block.'];
+$GLOBALS['TL_LANG']['CTE']['vtxm_factsbox'] = ['Factsbox', 'Zeigt strukturierte Fakten als Label-Wert-Paare an.'];
 
 $GLOBALS['TL_LANG']['tl_content']['iconbox_legend'] = 'Iconbox-Einstellungen';
 $GLOBALS['TL_LANG']['tl_content']['members_legend'] = 'Mitglieder';
@@ -18,8 +19,9 @@ $GLOBALS['TL_LANG']['tl_content']['announcement_legend'] = 'Announcement';
 $GLOBALS['TL_LANG']['tl_content']['tabs_legend'] = 'Tabs';
 $GLOBALS['TL_LANG']['tl_content']['accordion_legend'] = 'Accordion';
 $GLOBALS['TL_LANG']['tl_content']['timeline_legend'] = 'Timeline';
+$GLOBALS['TL_LANG']['tl_content']['factsbox_legend'] = 'Factsbox';
 
-$GLOBALS['TL_LANG']['tl_content']['iconboxStyle'] = ['Stil', 'Waehlen Sie die Darstellung der Iconbox.'];
+$GLOBALS['TL_LANG']['tl_content']['iconboxStyle'] = ['Stil', 'Wählen Sie die Darstellung der Iconbox.'];
 $GLOBALS['TL_LANG']['tl_content']['iconboxIcon'] = ['Icon', 'Icon-Text, Klassenname oder kurzer Marker.'];
 $GLOBALS['TL_LANG']['tl_content']['iconboxText'] = ['Text', 'Iconbox-Text.'];
 $GLOBALS['TL_LANG']['tl_content']['iconboxLink'] = ['Link', 'Optionaler Link.'];
@@ -47,23 +49,27 @@ $GLOBALS['TL_LANG']['tl_content']['quoteLink'] = ['Link', 'Optionaler Link.'];
 $GLOBALS['TL_LANG']['tl_content']['quoteLinkText'] = ['Link-Text', 'Beschriftung des Links.'];
 
 $GLOBALS['TL_LANG']['tl_content']['announcementEyebrow'] = ['Eyebrow', 'Kleine Oberzeile.'];
-$GLOBALS['TL_LANG']['tl_content']['announcementText'] = ['Text', 'Ankuendigungstext.'];
+$GLOBALS['TL_LANG']['tl_content']['announcementText'] = ['Text', 'Ankündigungstext.'];
 $GLOBALS['TL_LANG']['tl_content']['announcementLink'] = ['Link', 'Optionaler Link.'];
 $GLOBALS['TL_LANG']['tl_content']['announcementLinkText'] = ['Link-Text', 'Beschriftung des Links.'];
-$GLOBALS['TL_LANG']['tl_content']['announcementStyle'] = ['Stil', 'Waehlen Sie die Darstellung der Announcement.'];
+$GLOBALS['TL_LANG']['tl_content']['announcementStyle'] = ['Stil', 'Wählen Sie die Darstellung der Announcement.'];
 
-$GLOBALS['TL_LANG']['tl_content']['tabsStyle'] = ['Stil', 'Waehlen Sie die Darstellung der Tabs.'];
-$GLOBALS['TL_LANG']['tl_content']['tabsItems'] = ['Tab-Eintraege', 'Fuegen Sie die Tab-Titel und Inhalte hinzu.'];
+$GLOBALS['TL_LANG']['tl_content']['tabsStyle'] = ['Stil', 'Wählen Sie die Darstellung der Tabs.'];
+$GLOBALS['TL_LANG']['tl_content']['tabsItems'] = ['Tab-Einträge', 'Fügen Sie die Tab-Titel und Inhalte hinzu.'];
 $GLOBALS['TL_LANG']['tl_content']['tabsItemsTitle'] = ['Titel', 'Tab-Titel.'];
 $GLOBALS['TL_LANG']['tl_content']['tabsItemsContent'] = ['Inhalt', 'Tab-Inhalt.'];
-$GLOBALS['TL_LANG']['tl_content']['accordionStyle'] = ['Stil', 'Waehlen Sie die Darstellung des Accordions.'];
-$GLOBALS['TL_LANG']['tl_content']['accordionItems'] = ['Accordion-Eintraege', 'Fuegen Sie die Accordion-Titel und Inhalte hinzu.'];
+$GLOBALS['TL_LANG']['tl_content']['accordionStyle'] = ['Stil', 'Wählen Sie die Darstellung des Accordions.'];
+$GLOBALS['TL_LANG']['tl_content']['accordionItems'] = ['Accordion-Einträge', 'Fügen Sie die Accordion-Titel und Inhalte hinzu.'];
 $GLOBALS['TL_LANG']['tl_content']['accordionItemsTitle'] = ['Titel', 'Accordion-Titel.'];
 $GLOBALS['TL_LANG']['tl_content']['accordionItemsContent'] = ['Inhalt', 'Accordion-Inhalt.'];
-$GLOBALS['TL_LANG']['tl_content']['timelineTitle'] = ['Timeline-Titel', 'Optionaler Titel oberhalb der Eintraege.'];
-$GLOBALS['TL_LANG']['tl_content']['timelineItems'] = ['Timeline-Eintraege', 'Fuegen Sie die Timeline-Jahre und Texte hinzu.'];
+$GLOBALS['TL_LANG']['tl_content']['timelineTitle'] = ['Timeline-Titel', 'Optionaler Titel oberhalb der Einträge.'];
+$GLOBALS['TL_LANG']['tl_content']['timelineItems'] = ['Timeline-Einträge', 'Fügen Sie die Timeline-Jahre und Texte hinzu.'];
 $GLOBALS['TL_LANG']['tl_content']['timelineItemsYear'] = ['Jahr', 'Timeline-Jahr oder Label.'];
 $GLOBALS['TL_LANG']['tl_content']['timelineItemsText'] = ['Text', 'Timeline-Text.'];
+$GLOBALS['TL_LANG']['tl_content']['factsboxStyle'] = ['Darstellung', 'Wählen Sie die Darstellung der Factsbox.'];
+$GLOBALS['TL_LANG']['tl_content']['factsboxItems'] = ['Fakten', 'Legen Sie die Fakten als Label-Wert-Paare an.'];
+$GLOBALS['TL_LANG']['tl_content']['factsboxItemsLabel'] = ['Label', 'Bezeichnung des Fakts.'];
+$GLOBALS['TL_LANG']['tl_content']['factsboxItemsValue'] = ['Wert', 'Wert des Fakts.'];
 
 $GLOBALS['TL_LANG']['tl_content']['iconboxStyleOptions'] = [
     'default' => 'Standard',
@@ -80,4 +86,10 @@ $GLOBALS['TL_LANG']['tl_content']['announcementStyleOptions'] = [
 $GLOBALS['TL_LANG']['tl_content']['simpleStyleOptions'] = [
     'default' => 'Standard',
     'minimal' => 'Minimal',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['factsboxStyleOptions'] = [
+    'default' => 'Standard',
+    'compact' => 'Kompakt',
+    'card' => 'Karte',
 ];

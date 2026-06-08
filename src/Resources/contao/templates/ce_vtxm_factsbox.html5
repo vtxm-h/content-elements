@@ -1,0 +1,28 @@
+<?php
+
+use Contao\StringUtil;
+
+$classes = trim($this->elementClass.' factsbox--'.$this->factsboxStyle);
+
+?>
+
+<div<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>">
+  <?php if ($this->headlineText): ?>
+    <<?= $this->headlineUnit ?> class="factsbox__headline"><?= StringUtil::specialchars($this->headlineText) ?></<?= $this->headlineUnit ?>>
+  <?php endif; ?>
+
+  <?php if (!empty($this->factsboxItems)): ?>
+    <div class="factsbox__items">
+      <?php foreach ($this->factsboxItems as $item): ?>
+        <div class="factsbox__item">
+          <?php if ('' !== $item['label']): ?>
+            <span class="factsbox__key"><?= StringUtil::specialchars($item['label']) ?></span>
+          <?php endif; ?>
+          <?php if ('' !== $item['value']): ?>
+            <span class="factsbox__value"><?= StringUtil::specialchars($item['value']) ?></span>
+          <?php endif; ?>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
+</div>

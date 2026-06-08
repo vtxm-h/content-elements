@@ -9,6 +9,7 @@ $GLOBALS['TL_LANG']['CTE']['vtxm_announcement'] = ['Announcement', 'Announcement
 $GLOBALS['TL_LANG']['CTE']['vtxm_tabs'] = ['Tabs', 'Simple tabs element.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_accordion'] = ['Accordion', 'Simple accordion element.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_timeline'] = ['Timeline', 'Simple timeline block.'];
+$GLOBALS['TL_LANG']['CTE']['vtxm_factsbox'] = ['Factsbox', 'Displays structured facts as label-value pairs.'];
 
 $GLOBALS['TL_LANG']['tl_content']['iconbox_legend'] = 'Iconbox settings';
 $GLOBALS['TL_LANG']['tl_content']['members_legend'] = 'Members';
@@ -18,6 +19,7 @@ $GLOBALS['TL_LANG']['tl_content']['announcement_legend'] = 'Announcement';
 $GLOBALS['TL_LANG']['tl_content']['tabs_legend'] = 'Tabs';
 $GLOBALS['TL_LANG']['tl_content']['accordion_legend'] = 'Accordion';
 $GLOBALS['TL_LANG']['tl_content']['timeline_legend'] = 'Timeline';
+$GLOBALS['TL_LANG']['tl_content']['factsbox_legend'] = 'Factsbox';
 
 $GLOBALS['TL_LANG']['tl_content']['iconboxStyle'] = ['Style', 'Choose the iconbox presentation style.'];
 $GLOBALS['TL_LANG']['tl_content']['iconboxIcon'] = ['Icon', 'Icon text, class name or short marker.'];
@@ -64,6 +66,10 @@ $GLOBALS['TL_LANG']['tl_content']['timelineTitle'] = ['Timeline title', 'Optiona
 $GLOBALS['TL_LANG']['tl_content']['timelineItems'] = ['Timeline entries', 'Add the timeline years and text entries.'];
 $GLOBALS['TL_LANG']['tl_content']['timelineItemsYear'] = ['Year', 'Timeline year or label.'];
 $GLOBALS['TL_LANG']['tl_content']['timelineItemsText'] = ['Text', 'Timeline text.'];
+$GLOBALS['TL_LANG']['tl_content']['factsboxStyle'] = ['Display style', 'Choose the factsbox display style.'];
+$GLOBALS['TL_LANG']['tl_content']['factsboxItems'] = ['Facts', 'Define facts as label-value pairs.'];
+$GLOBALS['TL_LANG']['tl_content']['factsboxItemsLabel'] = ['Label', 'Fact label.'];
+$GLOBALS['TL_LANG']['tl_content']['factsboxItemsValue'] = ['Value', 'Fact value.'];
 
 $GLOBALS['TL_LANG']['tl_content']['iconboxStyleOptions'] = [
     'default' => 'Default',
@@ -80,4 +86,10 @@ $GLOBALS['TL_LANG']['tl_content']['announcementStyleOptions'] = [
 $GLOBALS['TL_LANG']['tl_content']['simpleStyleOptions'] = [
     'default' => 'Default',
     'minimal' => 'Minimal',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['factsboxStyleOptions'] = [
+    'default' => 'Default',
+    'compact' => 'Compact',
+    'card' => 'Card',
 ];

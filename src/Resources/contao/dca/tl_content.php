@@ -10,6 +10,7 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_announcement'] = '{type_legen
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_tabs'] = '{type_legend},type,headline;{tabs_legend},tabsStyle,tabsItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_accordion'] = '{type_legend},type,headline;{accordion_legend},accordionStyle,accordionItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_timeline'] = '{type_legend},type,headline;{timeline_legend},timelineTitle,timelineItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_factsbox'] = '{type_legend},type,headline;{factsbox_legend},factsboxStyle,factsboxItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['iconboxStyle'] = [
     'exclude' => true,
@@ -261,6 +262,37 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['timelineItems'] = [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['timelineItemsText'],
                 'inputType' => 'textarea',
                 'eval' => ['style' => 'width:480px;height:70px'],
+            ],
+        ],
+        'tl_class' => 'clr',
+    ],
+    'sql' => 'blob NULL',
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['factsboxStyle'] = [
+    'exclude' => true,
+    'default' => 'default',
+    'inputType' => 'select',
+    'options' => ['default', 'compact', 'card'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['factsboxStyleOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(32) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['factsboxItems'] = [
+    'exclude' => true,
+    'inputType' => 'multiColumnWizard',
+    'eval' => [
+        'columnFields' => [
+            'label' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['factsboxItemsLabel'],
+                'inputType' => 'text',
+                'eval' => ['style' => 'width:220px'],
+            ],
+            'value' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['factsboxItemsValue'],
+                'inputType' => 'text',
+                'eval' => ['style' => 'width:360px'],
             ],
         ],
         'tl_class' => 'clr',

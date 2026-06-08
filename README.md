@@ -19,6 +19,7 @@ Content elements included:
 - Tabs
 - Accordion
 - Timeline
+- Factsbox
 
 The bundle is theme-agnostic:
 
@@ -40,6 +41,7 @@ The bundle registers these content elements in the `vtxm` category:
 - `vtxm_tabs`
 - `vtxm_accordion`
 - `vtxm_timeline`
+- `vtxm_factsbox`
 
 
 ## Usage
@@ -56,6 +58,7 @@ Typical use cases:
 - `vtxm_tabs` for tabbed content groups
 - `vtxm_accordion` for FAQ-style expandable content
 - `vtxm_timeline` for history, milestones or chronological entries
+- `vtxm_factsbox` for structured key-value facts, project facts, band facts, metadata or technical details; supports default, compact and card styles
 
 
 ## Recommended Role
@@ -88,6 +91,7 @@ These elements use MultiColumnWizard fields in the Contao backend:
 - `vtxm_tabs`
 - `vtxm_accordion`
 - `vtxm_timeline`
+- `vtxm_factsbox`
 
 Editors can manage entries in structured rows instead of writing JSON manually.
 
@@ -122,6 +126,20 @@ Root classes:
 - `.ce_vtxm_tabs`
 - `.ce_vtxm_accordion`
 - `.ce_vtxm_timeline`
+- `.ce_vtxm_factsbox`
+
+Factsbox hooks:
+
+- `.factsbox__headline`
+- `.factsbox__items`
+- `.factsbox__item`
+- `.factsbox__key`
+- `.factsbox__value`
+- `.factsbox--default`
+- `.factsbox--compact`
+- `.factsbox--card`
+
+Factsbox styling is expected through `frontend-assets`, especially `css/vtxm-components.css`.
 
 Additional hooks are available inside the individual templates.
 
@@ -144,6 +162,7 @@ Templates:
 - `ce_vtxm_tabs.html5`
 - `ce_vtxm_accordion.html5`
 - `ce_vtxm_timeline.html5`
+- `ce_vtxm_factsbox.html5`
 
 
 ## Requirements
@@ -168,12 +187,12 @@ Example package reference:
       "type": "package",
       "package": {
         "name": "vtxm-h/content-elements",
-        "version": "1.0.2",
+        "version": "1.0.4",
         "type": "contao-bundle",
         "license": "MIT",
         "description": "Reusable Contao 4.13 content elements for VTXM projects.",
         "dist": {
-          "url": "https://github.com/vtxm-h/content-elements/archive/refs/tags/v1.0.2.zip",
+          "url": "https://github.com/vtxm-h/content-elements/archive/refs/tags/v1.0.4.zip",
           "type": "zip"
         },
         "autoload": {
