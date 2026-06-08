@@ -2,6 +2,7 @@
 
 $GLOBALS['TL_LANG']['CTE']['vtxm'] = 'VTXM';
 $GLOBALS['TL_LANG']['CTE']['vtxm_iconbox'] = ['Iconbox', 'Wiederverwendbarer Icon-/Text-/Link-Block.'];
+$GLOBALS['TL_LANG']['CTE']['vtxm_media_text'] = ['Media Text', 'Zeigt ein Medium mit ergänzendem Textinhalt an.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_members_grid'] = ['Members Grid', 'Grid mit vier festen Mitgliederpositionen.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_live_teaser'] = ['Live Teaser', 'Konzert- oder Live-Ankündigungsblock.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_quote_teaser'] = ['Quote Teaser', 'Zitat- oder Review-Block.'];
@@ -12,6 +13,7 @@ $GLOBALS['TL_LANG']['CTE']['vtxm_timeline'] = ['Timeline', 'Einfacher Zeitstrahl
 $GLOBALS['TL_LANG']['CTE']['vtxm_factsbox'] = ['Factsbox', 'Zeigt strukturierte Fakten als Label-Wert-Paare an.'];
 
 $GLOBALS['TL_LANG']['tl_content']['iconbox_legend'] = 'Iconbox-Einstellungen';
+$GLOBALS['TL_LANG']['tl_content']['media_text_legend'] = 'Media Text';
 $GLOBALS['TL_LANG']['tl_content']['members_legend'] = 'Mitglieder';
 $GLOBALS['TL_LANG']['tl_content']['live_legend'] = 'Live Teaser';
 $GLOBALS['TL_LANG']['tl_content']['quote_legend'] = 'Zitat';
@@ -54,6 +56,10 @@ $GLOBALS['TL_LANG']['tl_content']['announcementLink'] = ['Link', 'Optionaler Lin
 $GLOBALS['TL_LANG']['tl_content']['announcementLinkText'] = ['Link-Text', 'Beschriftung des Links.'];
 $GLOBALS['TL_LANG']['tl_content']['announcementStyle'] = ['Stil', 'Wählen Sie die Darstellung der Announcement.'];
 
+$GLOBALS['TL_LANG']['tl_content']['mediaTextLayout'] = ['Medienposition', 'Wählen Sie die Position des Mediums im Verhältnis zum Text.'];
+$GLOBALS['TL_LANG']['tl_content']['mediaTextStyle'] = ['Darstellung', 'Wählen Sie die Darstellung des Media-Text-Elements.'];
+$GLOBALS['TL_LANG']['tl_content']['mediaTextEyebrow'] = ['Eyebrow', 'Kleine Oberzeile über der Überschrift.'];
+
 $GLOBALS['TL_LANG']['tl_content']['tabsStyle'] = ['Stil', 'Wählen Sie die Darstellung der Tabs.'];
 $GLOBALS['TL_LANG']['tl_content']['tabsItems'] = ['Tab-Einträge', 'Fügen Sie die Tab-Titel und Inhalte hinzu.'];
 $GLOBALS['TL_LANG']['tl_content']['tabsItemsTitle'] = ['Titel', 'Tab-Titel.'];
@@ -81,6 +87,22 @@ $GLOBALS['TL_LANG']['tl_content']['announcementStyleOptions'] = [
     'default' => 'Standard',
     'outline' => 'Outline',
     'soft' => 'Soft',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['mediaTextLayoutOptions'] = [
+    'image-top' => 'Bild oben',
+    'image-left' => 'Bild links',
+    'image-right' => 'Bild rechts',
+    'image-bottom' => 'Bild unten',
+    'float-left' => 'Umflossen links',
+    'float-right' => 'Umflossen rechts',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['mediaTextStyleOptions'] = [
+    'default' => 'Standard',
+    'editorial' => 'Editorial',
+    'card' => 'Karte',
+    'minimal' => 'Minimal',
 ];
 
 $GLOBALS['TL_LANG']['tl_content']['simpleStyleOptions'] = [

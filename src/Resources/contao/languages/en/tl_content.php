@@ -2,6 +2,7 @@
 
 $GLOBALS['TL_LANG']['CTE']['vtxm'] = 'VTXM';
 $GLOBALS['TL_LANG']['CTE']['vtxm_iconbox'] = ['Iconbox', 'Reusable icon/text/link content block.'];
+$GLOBALS['TL_LANG']['CTE']['vtxm_media_text'] = ['Media Text', 'Displays media with complementary text content.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_members_grid'] = ['Members grid', 'Grid with four fixed member positions.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_live_teaser'] = ['Live teaser', 'Concert or live announcement block.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_quote_teaser'] = ['Quote teaser', 'Quote or review block.'];
@@ -12,6 +13,7 @@ $GLOBALS['TL_LANG']['CTE']['vtxm_timeline'] = ['Timeline', 'Simple timeline bloc
 $GLOBALS['TL_LANG']['CTE']['vtxm_factsbox'] = ['Factsbox', 'Displays structured facts as label-value pairs.'];
 
 $GLOBALS['TL_LANG']['tl_content']['iconbox_legend'] = 'Iconbox settings';
+$GLOBALS['TL_LANG']['tl_content']['media_text_legend'] = 'Media Text';
 $GLOBALS['TL_LANG']['tl_content']['members_legend'] = 'Members';
 $GLOBALS['TL_LANG']['tl_content']['live_legend'] = 'Live teaser';
 $GLOBALS['TL_LANG']['tl_content']['quote_legend'] = 'Quote';
@@ -54,6 +56,10 @@ $GLOBALS['TL_LANG']['tl_content']['announcementLink'] = ['Link', 'Optional link.
 $GLOBALS['TL_LANG']['tl_content']['announcementLinkText'] = ['Link text', 'Label for the link.'];
 $GLOBALS['TL_LANG']['tl_content']['announcementStyle'] = ['Style', 'Choose the announcement presentation style.'];
 
+$GLOBALS['TL_LANG']['tl_content']['mediaTextLayout'] = ['Media position', 'Choose the position of the media in relation to the text.'];
+$GLOBALS['TL_LANG']['tl_content']['mediaTextStyle'] = ['Display style', 'Choose the media text display style.'];
+$GLOBALS['TL_LANG']['tl_content']['mediaTextEyebrow'] = ['Eyebrow', 'Small label above the headline.'];
+
 $GLOBALS['TL_LANG']['tl_content']['tabsStyle'] = ['Style', 'Choose the tabs presentation style.'];
 $GLOBALS['TL_LANG']['tl_content']['tabsItems'] = ['Tab entries', 'Add the tab titles and content.'];
 $GLOBALS['TL_LANG']['tl_content']['tabsItemsTitle'] = ['Title', 'Tab title.'];
@@ -81,6 +87,22 @@ $GLOBALS['TL_LANG']['tl_content']['announcementStyleOptions'] = [
     'default' => 'Default',
     'outline' => 'Outline',
     'soft' => 'Soft',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['mediaTextLayoutOptions'] = [
+    'image-top' => 'Image top',
+    'image-left' => 'Image left',
+    'image-right' => 'Image right',
+    'image-bottom' => 'Image bottom',
+    'float-left' => 'Float left',
+    'float-right' => 'Float right',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['mediaTextStyleOptions'] = [
+    'default' => 'Default',
+    'editorial' => 'Editorial',
+    'card' => 'Card',
+    'minimal' => 'Minimal',
 ];
 
 $GLOBALS['TL_LANG']['tl_content']['simpleStyleOptions'] = [

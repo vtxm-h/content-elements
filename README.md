@@ -12,6 +12,7 @@ Structural elements such as `article-insert`, `layout-preset` and `content-grid`
 Content elements included:
 
 - Iconbox
+- Media Text
 - Members Grid
 - Live Teaser
 - Quote Teaser
@@ -34,6 +35,7 @@ The bundle is theme-agnostic:
 The bundle registers these content elements in the `vtxm` category:
 
 - `vtxm_iconbox`
+- `vtxm_media_text`
 - `vtxm_members_grid`
 - `vtxm_live_teaser`
 - `vtxm_quote_teaser`
@@ -51,6 +53,7 @@ Add a new content element from the `vtxm` category.
 Typical use cases:
 
 - `vtxm_iconbox` for service boxes, benefits or compact feature blocks
+- `vtxm_media_text` for image/media plus text blocks, biographies, project stories and editorial image/text sections; supports image-left, image-right, image-top, image-bottom, float-left and float-right layouts plus default, editorial, card and minimal styles
 - `vtxm_members_grid` for team / band member layouts
 - `vtxm_live_teaser` for concerts, events or live announcements
 - `vtxm_quote_teaser` for quotes, reviews or press snippets
@@ -119,6 +122,7 @@ The `iconboxIcon` value is escaped in the template. Use it for icon class names,
 Root classes:
 
 - `.ce_vtxm_iconbox`
+- `.ce_vtxm_media_text`
 - `.ce_vtxm_members_grid`
 - `.ce_vtxm_live_teaser`
 - `.ce_vtxm_quote_teaser`
@@ -141,6 +145,29 @@ Factsbox hooks:
 
 Factsbox styling is expected through `frontend-assets`, especially `css/vtxm-components.css`.
 
+Media Text hooks:
+
+- `.media-text__inner`
+- `.media-text__media`
+- `.media-text__caption`
+- `.media-text__content`
+- `.media-text__eyebrow`
+- `.media-text__headline`
+- `.media-text__text`
+- `.media-text__action`
+- `.media-text--image-left`
+- `.media-text--image-right`
+- `.media-text--image-top`
+- `.media-text--image-bottom`
+- `.media-text--float-left`
+- `.media-text--float-right`
+- `.media-text--default`
+- `.media-text--editorial`
+- `.media-text--card`
+- `.media-text--minimal`
+
+Media Text styling is expected through `frontend-assets`, especially `css/vtxm-components.css`.
+
 Additional hooks are available inside the individual templates.
 
 
@@ -155,6 +182,7 @@ src/Resources/contao/templates/
 Templates:
 
 - `ce_vtxm_iconbox.html5`
+- `ce_vtxm_media_text.html5`
 - `ce_vtxm_members_grid.html5`
 - `ce_vtxm_live_teaser.html5`
 - `ce_vtxm_quote_teaser.html5`
@@ -187,12 +215,12 @@ Example package reference:
       "type": "package",
       "package": {
         "name": "vtxm-h/content-elements",
-        "version": "1.0.4",
+        "version": "1.0.5",
         "type": "contao-bundle",
         "license": "MIT",
         "description": "Reusable Contao 4.13 content elements for VTXM projects.",
         "dist": {
-          "url": "https://github.com/vtxm-h/content-elements/archive/refs/tags/v1.0.4.zip",
+          "url": "https://github.com/vtxm-h/content-elements/archive/refs/tags/v1.0.5.zip",
           "type": "zip"
         },
         "autoload": {

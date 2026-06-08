@@ -1,0 +1,40 @@
+<?php
+
+use Contao\StringUtil;
+
+$classes = trim($this->elementClass.' media-text--'.$this->mediaTextLayout.' media-text--'.$this->mediaTextStyle);
+
+?>
+
+<div<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>">
+  <div class="media-text__inner">
+    <?php if ($this->mediaTextImage): ?>
+      <figure class="media-text__media">
+        <img src="<?= StringUtil::specialchars($this->mediaTextImage) ?>" alt="<?= StringUtil::specialchars($this->mediaTextAlt) ?>">
+        <?php if ($this->mediaTextCaption): ?>
+          <figcaption class="media-text__caption"><?= StringUtil::specialchars($this->mediaTextCaption) ?></figcaption>
+        <?php endif; ?>
+      </figure>
+    <?php endif; ?>
+
+    <div class="media-text__content">
+      <?php if ($this->mediaTextEyebrow): ?>
+        <p class="media-text__eyebrow"><?= StringUtil::specialchars($this->mediaTextEyebrow) ?></p>
+      <?php endif; ?>
+
+      <?php if ($this->headlineText): ?>
+        <<?= $this->headlineUnit ?> class="media-text__headline"><?= StringUtil::specialchars($this->headlineText) ?></<?= $this->headlineUnit ?>>
+      <?php endif; ?>
+
+      <?php if ($this->mediaTextText): ?>
+        <div class="media-text__text"><?= $this->mediaTextText ?></div>
+      <?php endif; ?>
+
+      <?php if ($this->mediaTextUrl): ?>
+        <p class="media-text__action">
+          <a href="<?= StringUtil::specialchars($this->mediaTextUrl) ?>"<?php if ($this->mediaTextTarget): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>><?= StringUtil::specialchars($this->mediaTextLinkTitle) ?></a>
+        </p>
+      <?php endif; ?>
+    </div>
+  </div>
+</div>

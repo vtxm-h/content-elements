@@ -5,12 +5,14 @@ use Vendor\ContentElementsBundle\ContentElement\ContentAnnouncement;
 use Vendor\ContentElementsBundle\ContentElement\FactsboxElement;
 use Vendor\ContentElementsBundle\ContentElement\ContentIconbox;
 use Vendor\ContentElementsBundle\ContentElement\ContentLiveTeaser;
+use Vendor\ContentElementsBundle\ContentElement\MediaTextElement;
 use Vendor\ContentElementsBundle\ContentElement\ContentMembersGrid;
 use Vendor\ContentElementsBundle\ContentElement\ContentQuoteTeaser;
 use Vendor\ContentElementsBundle\ContentElement\ContentTabs;
 use Vendor\ContentElementsBundle\ContentElement\ContentTimeline;
 
 $GLOBALS['TL_CTE']['vtxm']['vtxm_iconbox'] = ContentIconbox::class;
+$GLOBALS['TL_CTE']['vtxm']['vtxm_media_text'] = MediaTextElement::class;
 $GLOBALS['TL_CTE']['vtxm']['vtxm_members_grid'] = ContentMembersGrid::class;
 $GLOBALS['TL_CTE']['vtxm']['vtxm_live_teaser'] = ContentLiveTeaser::class;
 $GLOBALS['TL_CTE']['vtxm']['vtxm_quote_teaser'] = ContentQuoteTeaser::class;
