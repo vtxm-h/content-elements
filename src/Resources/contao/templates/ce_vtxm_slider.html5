@@ -1,0 +1,52 @@
+<?php
+
+use Contao\StringUtil;
+
+$classes = trim($this->elementClass.' slider--'.$this->sliderStyle.' slider--gap-'.$this->sliderGap);
+$ariaLabel = $this->headlineText ?: 'Slider';
+
+?>
+
+<section<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>" aria-label="<?= StringUtil::specialchars($ariaLabel) ?>">
+  <?php if (!empty($this->sliderItems)): ?>
+    <div class="splide" data-vtxm-slider data-options="<?= StringUtil::specialchars($this->sliderOptions) ?>">
+      <div class="splide__track">
+        <ul class="splide__list">
+          <?php foreach ($this->sliderItems as $item): ?>
+            <li class="splide__slide vtxm-slider__slide">
+              <article class="vtxm-slider__item">
+                <?php if ('' !== $item['image']): ?>
+                  <figure class="vtxm-slider__media">
+                    <img src="<?= StringUtil::specialchars($item['image']) ?>" alt="<?= StringUtil::specialchars($item['alt']) ?>">
+                  </figure>
+                <?php endif; ?>
+
+                <?php if ($item['hasContent']): ?>
+                  <div class="vtxm-slider__content">
+                    <?php if ('' !== $item['eyebrow']): ?>
+                      <p class="vtxm-slider__eyebrow"><?= StringUtil::specialchars($item['eyebrow']) ?></p>
+                    <?php endif; ?>
+
+                    <?php if ('' !== $item['headline']): ?>
+                      <h3 class="vtxm-slider__headline"><?= StringUtil::specialchars($item['headline']) ?></h3>
+                    <?php endif; ?>
+
+                    <?php if ('' !== $item['text']): ?>
+                      <div class="vtxm-slider__text"><?= nl2br(StringUtil::specialchars($item['text'])) ?></div>
+                    <?php endif; ?>
+
+                    <?php if ('' !== $item['linkUrl'] && '' !== $item['linkLabel']): ?>
+                      <p class="vtxm-slider__action">
+                        <a href="<?= StringUtil::specialchars($item['linkUrl']) ?>"<?php if ($item['target']): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>><?= StringUtil::specialchars($item['linkLabel']) ?></a>
+                      </p>
+                    <?php endif; ?>
+                  </div>
+                <?php endif; ?>
+              </article>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    </div>
+  <?php endif; ?>
+</section>

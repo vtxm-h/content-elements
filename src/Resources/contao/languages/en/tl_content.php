@@ -4,6 +4,7 @@ $GLOBALS['TL_LANG']['CTE']['vtxm'] = 'VTXM';
 $GLOBALS['TL_LANG']['CTE']['vtxm_iconbox'] = ['Iconbox', 'Reusable icon/text/link content block.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_media_text'] = ['Media Text', 'Displays media with complementary text content.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_link_list'] = ['Link List', 'Displays structured links as a list, buttons or icons.'];
+$GLOBALS['TL_LANG']['CTE']['vtxm_slider'] = ['Slider', 'Displays structured slides as hero, image, card or quote slider.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_members_grid'] = ['Members grid', 'Grid with four fixed member positions.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_live_teaser'] = ['Live teaser', 'Concert or live announcement block.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_quote_teaser'] = ['Quote teaser', 'Quote or review block.'];
@@ -16,6 +17,8 @@ $GLOBALS['TL_LANG']['CTE']['vtxm_factsbox'] = ['Factsbox', 'Displays structured 
 $GLOBALS['TL_LANG']['tl_content']['iconbox_legend'] = 'Iconbox settings';
 $GLOBALS['TL_LANG']['tl_content']['media_text_legend'] = 'Media Text';
 $GLOBALS['TL_LANG']['tl_content']['link_list_legend'] = 'Link List';
+$GLOBALS['TL_LANG']['tl_content']['slider_legend'] = 'Slider';
+$GLOBALS['TL_LANG']['tl_content']['slider_settings_legend'] = 'Slider settings';
 $GLOBALS['TL_LANG']['tl_content']['members_legend'] = 'Members';
 $GLOBALS['TL_LANG']['tl_content']['live_legend'] = 'Live teaser';
 $GLOBALS['TL_LANG']['tl_content']['quote_legend'] = 'Quote';
@@ -70,6 +73,24 @@ $GLOBALS['TL_LANG']['tl_content']['linkListItemsUrl'] = ['URL', 'Link target.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListItemsIcon'] = ['Icon', 'Optional icon marker such as instagram, youtube, spotify or external.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListItemsDescription'] = ['Description', 'Optional short description.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListItemsTarget'] = ['New window', 'Open the link in a new window.'];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderStyle'] = ['Display style', 'Choose the slider display style.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderAutoplay'] = ['Autoplay', 'Change slides automatically.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderInterval'] = ['Interval', 'Autoplay interval in milliseconds.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderArrows'] = ['Show arrows', 'Show arrow navigation.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderPagination'] = ['Show pagination', 'Show dot navigation.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderLoop'] = ['Loop', 'Restart the slider after the last slide.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderPerPage'] = ['Slides per page', 'Number of visible slides on large screens.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderGap'] = ['Gap', 'Gap between slides.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItems'] = ['Slides', 'Define slides with image, text and optional link.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsImage'] = ['Image', 'Slide image.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsAlt'] = ['Alt text', 'Alternative text for the image.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsEyebrow'] = ['Eyebrow', 'Small label above the headline.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsHeadline'] = ['Headline', 'Slide headline.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsText'] = ['Text', 'Slide text.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsLinkLabel'] = ['Link label', 'Label for the link.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsLinkUrl'] = ['Link URL', 'Link target.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsTarget'] = ['New window', 'Open the link in a new window.'];
 
 $GLOBALS['TL_LANG']['tl_content']['tabsStyle'] = ['Style', 'Choose the tabs presentation style.'];
 $GLOBALS['TL_LANG']['tl_content']['tabsItems'] = ['Tab entries', 'Add the tab titles and content.'];
@@ -127,6 +148,27 @@ $GLOBALS['TL_LANG']['tl_content']['linkListAlignOptions'] = [
     'left' => 'Left',
     'center' => 'Centered',
     'right' => 'Right',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderStyleOptions'] = [
+    'hero' => 'Hero',
+    'images' => 'Images',
+    'cards' => 'Cards',
+    'quotes' => 'Quotes',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderPerPageOptions'] = [
+    '1' => '1',
+    '2' => '2',
+    '3' => '3',
+    '4' => '4',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderGapOptions'] = [
+    'none' => 'No gap',
+    'small' => 'Small',
+    'medium' => 'Medium',
+    'large' => 'Large',
 ];
 
 $GLOBALS['TL_LANG']['tl_content']['simpleStyleOptions'] = [

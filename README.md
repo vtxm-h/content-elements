@@ -14,6 +14,7 @@ Content elements included:
 - Iconbox
 - Media Text
 - Link List
+- Slider
 - Members Grid
 - Live Teaser
 - Quote Teaser
@@ -38,6 +39,7 @@ The bundle registers these content elements in the `vtxm` category:
 - `vtxm_iconbox`
 - `vtxm_media_text`
 - `vtxm_link_list`
+- `vtxm_slider`
 - `vtxm_members_grid`
 - `vtxm_live_teaser`
 - `vtxm_quote_teaser`
@@ -57,6 +59,7 @@ Typical use cases:
 - `vtxm_iconbox` for service boxes, benefits or compact feature blocks
 - `vtxm_media_text` for image/media plus text blocks, biographies, project stories and editorial image/text sections; supports image-left, image-right, image-top, image-bottom, float-left and float-right layouts plus default, editorial, card and minimal styles
 - `vtxm_link_list` for structured links, social links, streaming platforms, downloads, press kits, booking links and external resources; supports default, buttons, icons and minimal styles plus left, center and right alignment
+- `vtxm_slider` for structured Splide-compatible hero sliders, image sliders, quotes and card sliders; supports hero, images, cards and quotes styles plus autoplay, arrows, pagination, loop, perPage and gap settings
 - `vtxm_members_grid` for team / band member layouts
 - `vtxm_live_teaser` for concerts, events or live announcements
 - `vtxm_quote_teaser` for quotes, reviews or press snippets
@@ -99,6 +102,7 @@ These elements use MultiColumnWizard fields in the Contao backend:
 - `vtxm_timeline`
 - `vtxm_factsbox`
 - `vtxm_link_list`
+- `vtxm_slider`
 
 Editors can manage entries in structured rows instead of writing JSON manually.
 
@@ -115,10 +119,13 @@ Use your project CSS and JavaScript to define:
 - animations
 - tab switching
 - accordion behavior
+- slider initialization
 
 All elements preserve Contao `cssID` support through the shared `AbstractWrappedContentElement`.
 
 The `iconboxIcon` value is escaped in the template. Use it for icon class names, labels or short markers. SVG or HTML icon markup is intentionally not rendered raw in this version.
+
+The `vtxm_slider` element outputs Splide-compatible markup and data attributes only. Styling and JavaScript are expected through `frontend-assets`, especially `css/vtxm-components.css`, `js/vtxm-components.js`, and vendor Splide assets or a local Splide build.
 
 
 ## HTML Hooks
@@ -128,6 +135,7 @@ Root classes:
 - `.ce_vtxm_iconbox`
 - `.ce_vtxm_media_text`
 - `.ce_vtxm_link_list`
+- `.ce_vtxm_slider`
 - `.ce_vtxm_members_grid`
 - `.ce_vtxm_live_teaser`
 - `.ce_vtxm_quote_teaser`
@@ -193,6 +201,30 @@ Link List hooks:
 
 Link List styling is expected through `frontend-assets`, especially `css/vtxm-components.css`.
 
+Slider hooks:
+
+- `.ce_vtxm_slider`
+- `.vtxm-slider`
+- `.vtxm-slider__slide`
+- `.vtxm-slider__item`
+- `.vtxm-slider__media`
+- `.vtxm-slider__content`
+- `.vtxm-slider__eyebrow`
+- `.vtxm-slider__headline`
+- `.vtxm-slider__text`
+- `.vtxm-slider__action`
+- `.slider--hero`
+- `.slider--images`
+- `.slider--cards`
+- `.slider--quotes`
+- `.slider--gap-none`
+- `.slider--gap-small`
+- `.slider--gap-medium`
+- `.slider--gap-large`
+- `[data-vtxm-slider]`
+
+Slider styling and JavaScript initialization are expected through `frontend-assets`, especially `css/vtxm-components.css`, `js/vtxm-components.js`, and vendor Splide assets or a local Splide build.
+
 Additional hooks are available inside the individual templates.
 
 
@@ -209,6 +241,7 @@ Templates:
 - `ce_vtxm_iconbox.html5`
 - `ce_vtxm_media_text.html5`
 - `ce_vtxm_link_list.html5`
+- `ce_vtxm_slider.html5`
 - `ce_vtxm_members_grid.html5`
 - `ce_vtxm_live_teaser.html5`
 - `ce_vtxm_quote_teaser.html5`
@@ -241,12 +274,12 @@ Example package reference:
       "type": "package",
       "package": {
         "name": "vtxm-h/content-elements",
-        "version": "1.0.6",
+        "version": "1.1.0",
         "type": "contao-bundle",
         "license": "MIT",
         "description": "Reusable Contao 4.13 content elements for VTXM projects.",
         "dist": {
-          "url": "https://github.com/vtxm-h/content-elements/archive/refs/tags/v1.0.6.zip",
+          "url": "https://github.com/vtxm-h/content-elements/archive/refs/tags/v1.1.0.zip",
           "type": "zip"
         },
         "autoload": {
