@@ -15,6 +15,7 @@ Content elements included:
 - Media Text
 - Link List
 - Slider
+- Teaser Grid
 - Members Grid
 - Live Teaser
 - Quote Teaser
@@ -40,6 +41,7 @@ The bundle registers these content elements in the `vtxm` category:
 - `vtxm_media_text`
 - `vtxm_link_list`
 - `vtxm_slider`
+- `vtxm_teaser_grid`
 - `vtxm_members_grid`
 - `vtxm_live_teaser`
 - `vtxm_quote_teaser`
@@ -60,6 +62,7 @@ Typical use cases:
 - `vtxm_media_text` for image/media plus text blocks, biographies, project stories and editorial image/text sections; supports image-left, image-right, image-top, image-bottom, float-left and float-right layouts plus default, editorial, card and minimal styles
 - `vtxm_link_list` for structured links, social links, streaming platforms, downloads, press kits, booking links and external resources; supports default, buttons, icons and minimal styles plus left, center and right alignment
 - `vtxm_slider` for structured Splide-compatible hero sliders, image sliders, quotes and card sliders; supports hero, images, cards and quotes styles plus autoplay, arrows, pagination, loop, perPage and gap settings
+- `vtxm_teaser_grid` for reusable teaser cards with image, title, text, badge and optional link; supports default, cards, editorial and minimal styles plus 2, 3 or 4 columns and small, medium or large gaps
 - `vtxm_members_grid` for team / band member layouts
 - `vtxm_live_teaser` for concerts, events or live announcements
 - `vtxm_quote_teaser` for quotes, reviews or press snippets
@@ -103,8 +106,50 @@ These elements use MultiColumnWizard fields in the Contao backend:
 - `vtxm_factsbox`
 - `vtxm_link_list`
 - `vtxm_slider`
+- `vtxm_teaser_grid`
 
 Editors can manage entries in structured rows instead of writing JSON manually.
+
+
+## Teaser Grid
+
+`vtxm_teaser_grid` renders reusable teaser entries in a stable frontend structure. It is intended for project teasers, editorial cards, campaign links or compact overview grids.
+
+Available styles:
+
+- `default`
+- `cards`
+- `editorial`
+- `minimal`
+
+Column options:
+
+- `2`
+- `3`
+- `4`
+
+Gap options:
+
+- `small`
+- `medium`
+- `large`
+
+Item fields:
+
+- image
+- alt text
+- title
+- text
+- badge
+- link URL
+- link label
+- new-window target
+
+Images are selected through the Contao file picker and resolved from stored UUIDs. Invalid UUIDs, folders and missing files do not render an image. No image resizing, fullsize or lightbox behavior is included in this element.
+
+The badge and link are optional. Links are rendered only when both a URL and a visible label are provided. The entire teaser card is not clickable.
+
+This bundle does not include frontend CSS or JavaScript for Teaser Grid. Styling is expected through `frontend-assets` or project CSS.
 
 
 ## Notes
@@ -136,6 +181,7 @@ Root classes:
 - `.ce_vtxm_media_text`
 - `.ce_vtxm_link_list`
 - `.ce_vtxm_slider`
+- `.ce_vtxm_teaser_grid`
 - `.ce_vtxm_members_grid`
 - `.ce_vtxm_live_teaser`
 - `.ce_vtxm_quote_teaser`
@@ -225,6 +271,34 @@ Slider hooks:
 
 Slider styling and JavaScript initialization are expected through `frontend-assets`, especially `css/vtxm-components.css`, `js/vtxm-components.js`, and vendor Splide assets or a local Splide build.
 
+Teaser Grid hooks:
+
+- `.ce_vtxm_teaser_grid`
+- `.teaser-grid`
+- `.teaser-grid--default`
+- `.teaser-grid--cards`
+- `.teaser-grid--editorial`
+- `.teaser-grid--minimal`
+- `.teaser-grid--cols-2`
+- `.teaser-grid--cols-3`
+- `.teaser-grid--cols-4`
+- `.teaser-grid--gap-small`
+- `.teaser-grid--gap-medium`
+- `.teaser-grid--gap-large`
+- `.teaser-grid__headline`
+- `.teaser-grid__items`
+- `.teaser-grid__item`
+- `.teaser-grid__media`
+- `.teaser-grid__image`
+- `.teaser-grid__overlay`
+- `.teaser-grid__content`
+- `.teaser-grid__title`
+- `.teaser-grid__text`
+- `.teaser-grid__link`
+- `.teaser-grid__badge`
+
+Teaser Grid styling is expected through `frontend-assets`, especially `css/vtxm-components.css`, or project CSS.
+
 Additional hooks are available inside the individual templates.
 
 
@@ -242,6 +316,7 @@ Templates:
 - `ce_vtxm_media_text.html5`
 - `ce_vtxm_link_list.html5`
 - `ce_vtxm_slider.html5`
+- `ce_vtxm_teaser_grid.html5`
 - `ce_vtxm_members_grid.html5`
 - `ce_vtxm_live_teaser.html5`
 - `ce_vtxm_quote_teaser.html5`

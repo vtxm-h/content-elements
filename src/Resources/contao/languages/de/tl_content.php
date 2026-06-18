@@ -5,6 +5,7 @@ $GLOBALS['TL_LANG']['CTE']['vtxm_iconbox'] = ['Iconbox', 'Wiederverwendbarer Ico
 $GLOBALS['TL_LANG']['CTE']['vtxm_media_text'] = ['Media Text', 'Zeigt ein Medium mit ergänzendem Textinhalt an.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_link_list'] = ['Linkliste', 'Zeigt strukturierte Links als Liste, Buttons oder Icons an.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_slider'] = ['Slider', 'Zeigt strukturierte Slides als Hero-, Bild-, Karten- oder Zitat-Slider an.'];
+$GLOBALS['TL_LANG']['CTE']['vtxm_teaser_grid'] = ['Teaser Grid', 'Zeigt wiederverwendbare Teaser-Karten mit Bild, Text, Badge und optionalem Link an.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_members_grid'] = ['Members Grid', 'Grid mit vier festen Mitgliederpositionen.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_live_teaser'] = ['Live Teaser', 'Konzert- oder Live-Ankündigungsblock.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_quote_teaser'] = ['Quote Teaser', 'Zitat- oder Review-Block.'];
@@ -19,6 +20,7 @@ $GLOBALS['TL_LANG']['tl_content']['media_text_legend'] = 'Media Text';
 $GLOBALS['TL_LANG']['tl_content']['link_list_legend'] = 'Linkliste';
 $GLOBALS['TL_LANG']['tl_content']['slider_legend'] = 'Slider';
 $GLOBALS['TL_LANG']['tl_content']['slider_settings_legend'] = 'Slider-Einstellungen';
+$GLOBALS['TL_LANG']['tl_content']['teaser_grid_legend'] = 'Teaser Grid';
 $GLOBALS['TL_LANG']['tl_content']['members_legend'] = 'Mitglieder';
 $GLOBALS['TL_LANG']['tl_content']['live_legend'] = 'Live Teaser';
 $GLOBALS['TL_LANG']['tl_content']['quote_legend'] = 'Zitat';
@@ -91,6 +93,19 @@ $GLOBALS['TL_LANG']['tl_content']['sliderItemsText'] = ['Text', 'Slide-Text.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsLinkLabel'] = ['Link-Text', 'Beschriftung des Links.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsLinkUrl'] = ['Link-URL', 'Linkziel.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsTarget'] = ['Neues Fenster', 'Link in einem neuen Fenster öffnen.'];
+
+$GLOBALS['TL_LANG']['tl_content']['teaserGridStyle'] = ['Darstellung', 'Wählen Sie die Darstellung des Teaser Grids.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridColumns'] = ['Spalten', 'Wählen Sie die Spaltenanzahl für große Bildschirme.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridGap'] = ['Abstand', 'Wählen Sie den Abstand zwischen den Teasern.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItems'] = ['Teaser', 'Legen Sie Teaser mit Bild, Text, Badge und optionalem Link an.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsImage'] = ['Bild', 'Teaser-Bild.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsAlt'] = ['Alt-Text', 'Alternativtext für das Bild.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsTitle'] = ['Titel', 'Teaser-Titel.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsText'] = ['Text', 'Teaser-Text.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsBadge'] = ['Badge', 'Optionaler Badge-Text.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsLinkUrl'] = ['Link-URL', 'Optionales Linkziel.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsLinkLabel'] = ['Link-Text', 'Beschriftung des optionalen Links.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsTarget'] = ['Neues Fenster', 'Link in einem neuen Fenster öffnen.'];
 
 $GLOBALS['TL_LANG']['tl_content']['tabsStyle'] = ['Stil', 'Wählen Sie die Darstellung der Tabs.'];
 $GLOBALS['TL_LANG']['tl_content']['tabsItems'] = ['Tab-Einträge', 'Fügen Sie die Tab-Titel und Inhalte hinzu.'];
@@ -166,6 +181,25 @@ $GLOBALS['TL_LANG']['tl_content']['sliderPerPageOptions'] = [
 
 $GLOBALS['TL_LANG']['tl_content']['sliderGapOptions'] = [
     'none' => 'Kein Abstand',
+    'small' => 'Klein',
+    'medium' => 'Mittel',
+    'large' => 'Groß',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teaserGridStyleOptions'] = [
+    'default' => 'Standard',
+    'cards' => 'Karten',
+    'editorial' => 'Editorial',
+    'minimal' => 'Minimal',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teaserGridColumnsOptions'] = [
+    '2' => '2 Spalten',
+    '3' => '3 Spalten',
+    '4' => '4 Spalten',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teaserGridGapOptions'] = [
     'small' => 'Klein',
     'medium' => 'Mittel',
     'large' => 'Groß',

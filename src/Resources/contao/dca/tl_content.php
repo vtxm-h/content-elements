@@ -10,6 +10,7 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_announcement'] = '{type_legen
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_media_text'] = '{type_legend},type,headline;{media_legend},singleSRC,alt,size,fullsize,caption;{text_legend},mediaTextEyebrow,text;{link_legend:hide},url,linkTitle,target;{media_text_legend},mediaTextLayout,mediaTextStyle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_link_list'] = '{type_legend},type,headline;{link_list_legend},linkListStyle,linkListAlign,linkListItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_slider'] = '{type_legend},type,headline;{slider_legend},sliderStyle,sliderItems;{slider_settings_legend:hide},sliderAutoplay,sliderInterval,sliderArrows,sliderPagination,sliderLoop,sliderPerPage,sliderGap;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_teaser_grid'] = '{type_legend},type,headline;{teaser_grid_legend},teaserGridStyle,teaserGridColumns,teaserGridGap,teaserGridItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_tabs'] = '{type_legend},type,headline;{tabs_legend},tabsStyle,tabsItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_accordion'] = '{type_legend},type,headline;{accordion_legend},accordionStyle,accordionItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_timeline'] = '{type_legend},type,headline;{timeline_legend},timelineTitle,timelineItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
@@ -381,6 +382,92 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderItems'] = [
             ],
             'target' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderItemsTarget'],
+                'inputType' => 'checkbox',
+                'eval' => ['style' => 'width:80px'],
+            ],
+        ],
+        'tl_class' => 'clr',
+    ],
+    'sql' => 'blob NULL',
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['teaserGridStyle'] = [
+    'exclude' => true,
+    'default' => 'default',
+    'inputType' => 'select',
+    'options' => ['default', 'cards', 'editorial', 'minimal'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['teaserGridStyleOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(32) NOT NULL default 'default'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['teaserGridColumns'] = [
+    'exclude' => true,
+    'default' => '3',
+    'inputType' => 'select',
+    'options' => ['2', '3', '4'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['teaserGridColumnsOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(8) NOT NULL default '3'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['teaserGridGap'] = [
+    'exclude' => true,
+    'default' => 'medium',
+    'inputType' => 'select',
+    'options' => ['small', 'medium', 'large'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['teaserGridGapOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'medium'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['teaserGridItems'] = [
+    'exclude' => true,
+    'inputType' => 'multiColumnWizard',
+    'eval' => [
+        'columnFields' => [
+            'image' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsImage'],
+                'inputType' => 'fileTree',
+                'eval' => [
+                    'filesOnly' => true,
+                    'fieldType' => 'radio',
+                    'extensions' => Config::get('validImageTypes'),
+                    'style' => 'width:260px',
+                ],
+            ],
+            'alt' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsAlt'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 255, 'style' => 'width:180px'],
+            ],
+            'title' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsTitle'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 255, 'style' => 'width:220px'],
+            ],
+            'text' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsText'],
+                'inputType' => 'textarea',
+                'eval' => ['allowHtml' => false, 'style' => 'width:260px;height:70px'],
+            ],
+            'badge' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsBadge'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 128, 'style' => 'width:160px'],
+            ],
+            'linkUrl' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsLinkUrl'],
+                'inputType' => 'text',
+                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'dcaPicker' => true, 'style' => 'width:240px'],
+            ],
+            'linkLabel' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsLinkLabel'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 128, 'style' => 'width:160px'],
+            ],
+            'target' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsTarget'],
                 'inputType' => 'checkbox',
                 'eval' => ['style' => 'width:80px'],
             ],

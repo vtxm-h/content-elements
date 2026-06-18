@@ -1,0 +1,47 @@
+<?php
+
+use Contao\StringUtil;
+
+$classes = trim($this->elementClass.' teaser-grid--'.$this->teaserGridStyle.' teaser-grid--cols-'.$this->teaserGridColumns.' teaser-grid--gap-'.$this->teaserGridGap);
+
+?>
+
+<div<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>">
+  <?php if ($this->headlineText): ?>
+    <<?= $this->headlineUnit ?> class="teaser-grid__headline"><?= StringUtil::specialchars($this->headlineText) ?></<?= $this->headlineUnit ?>>
+  <?php endif; ?>
+
+  <?php if (!empty($this->teaserGridItems)): ?>
+    <div class="teaser-grid__items">
+      <?php foreach ($this->teaserGridItems as $item): ?>
+        <article class="teaser-grid__item">
+          <?php if ('' !== $item['image']): ?>
+            <figure class="teaser-grid__media">
+              <img class="teaser-grid__image" src="<?= StringUtil::specialchars($item['image']) ?>" alt="<?= StringUtil::specialchars($item['alt']) ?>" loading="lazy">
+            </figure>
+          <?php endif; ?>
+
+          <div class="teaser-grid__overlay">
+            <div class="teaser-grid__content">
+              <?php if ('' !== $item['title']): ?>
+                <h3 class="teaser-grid__title"><?= StringUtil::specialchars($item['title']) ?></h3>
+              <?php endif; ?>
+
+              <?php if ('' !== $item['text']): ?>
+                <p class="teaser-grid__text"><?= StringUtil::specialchars($item['text']) ?></p>
+              <?php endif; ?>
+
+              <?php if ('' !== $item['linkUrl'] && '' !== $item['linkLabel']): ?>
+                <a class="teaser-grid__link" href="<?= StringUtil::specialchars($item['linkUrl']) ?>"<?php if ($item['target']): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>><?= StringUtil::specialchars($item['linkLabel']) ?></a>
+              <?php endif; ?>
+            </div>
+
+            <?php if ('' !== $item['badge']): ?>
+              <span class="teaser-grid__badge"><?= StringUtil::specialchars($item['badge']) ?></span>
+            <?php endif; ?>
+          </div>
+        </article>
+      <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
+</div>
