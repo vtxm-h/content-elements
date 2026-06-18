@@ -111,6 +111,39 @@ These elements use MultiColumnWizard fields in the Contao backend:
 Editors can manage entries in structured rows instead of writing JSON manually.
 
 
+## Media Text
+
+`vtxm_media_text` renders one optional image/media block next to editorial content. It is intended for image/text sections, biographies, project stories and compact editorial blocks.
+
+Available layouts:
+
+- `image-top`
+- `image-left`
+- `image-right`
+- `image-bottom`
+- `float-left`
+- `float-right`
+
+Available styles:
+
+- `default`
+- `editorial`
+- `card`
+- `minimal`
+
+The image is selected through the Contao `singleSRC` file picker. Stored UUIDs are resolved through Contao's file model and only valid image files with configured image extensions are rendered. Invalid UUIDs, folders, missing files and files outside the configured image types do not render broken image markup.
+
+The explicit alt text field is used first. If it is empty, the element tries to use the selected file metadata alt text for the current frontend language. It does not derive alt text from filenames or captions.
+
+The Contao `size` field is normalized and exposed to the template. Width and height attributes are emitted when reliable values are available: configured size dimensions are used when present; otherwise natural local image dimensions are used when they can be read safely. SVG files can render, but SVG dimensions are not inferred by this bundle. The element keeps the original image path and does not generate resized image files or cache paths.
+
+When `fullsize` is enabled and a valid image exists, the image is wrapped in `.media-text__link` with `data-lightbox="media-text"` and an `href` to the original image path. This only exposes a Contao-compatible lightbox hook; no lightbox JavaScript or CSS is included here.
+
+Captions are escaped and rendered inside the figure only when set. Multiline captions keep safe line breaks. The text field keeps Contao editor-managed rich text output. The optional action link is rendered only for a safe URL and uses `rel="noopener noreferrer"` when opened in a new window.
+
+Existing Media Text records remain compatible. Visual layout, responsive styling, card/editorial/minimal presentation, hover states and any lightbox behavior belong in `frontend-assets` or project CSS/JavaScript, not in this bundle.
+
+
 ## Slider
 
 `vtxm_slider` outputs Splide-compatible markup and configuration for structured hero, image, card, quote and decorative background-video sliders. It does not include Splide, Splide Premium files, CSS, JavaScript, scroll listeners, video lifecycle code or slider initialization.
@@ -280,6 +313,8 @@ Media Text hooks:
 
 - `.media-text__inner`
 - `.media-text__media`
+- `.media-text__link`
+- `.media-text__image`
 - `.media-text__caption`
 - `.media-text__content`
 - `.media-text__eyebrow`
