@@ -2,12 +2,12 @@
 
 use Contao\StringUtil;
 
-$classes = trim($this->elementClass.' slider--'.$this->sliderStyle.' slider--gap-'.$this->sliderGap.' slider--transition-'.$this->sliderTransition.' slider--image-'.$this->sliderImageEffect.' slider--text-'.$this->sliderTextAnimation.' slider--overlay-'.$this->sliderOverlay);
+$classes = trim($this->elementClass.' slider--'.$this->sliderStyle.' slider--gap-'.$this->sliderGap.' slider--transition-'.$this->sliderTransition.' slider--image-'.$this->sliderImageEffect.' slider--text-'.$this->sliderTextAnimation.' slider--overlay-'.$this->sliderOverlay.' slider--mode-'.$this->sliderMode.' slider--width-'.$this->sliderWidth.' slider--height-'.$this->sliderHeight.' slider--pattern-'.$this->sliderPattern.' slider--scroll-'.$this->sliderScrollEffect);
 $ariaLabel = $this->headlineText ?: 'Slider';
 
 ?>
 
-<section<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>" aria-label="<?= StringUtil::specialchars($ariaLabel) ?>">
+<section<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>" aria-label="<?= StringUtil::specialchars($ariaLabel) ?>" data-vtxm-slider-mode="<?= StringUtil::specialchars($this->sliderMode) ?>" data-vtxm-slider-width="<?= StringUtil::specialchars($this->sliderWidth) ?>" data-vtxm-slider-height="<?= StringUtil::specialchars($this->sliderHeight) ?>" data-vtxm-slider-custom-height="<?= StringUtil::specialchars((string) $this->sliderCustomHeight) ?>" data-vtxm-slider-pattern="<?= StringUtil::specialchars($this->sliderPattern) ?>" data-vtxm-slider-scroll-effect="<?= StringUtil::specialchars($this->sliderScrollEffect) ?>" data-vtxm-slider-scroll-distance="<?= StringUtil::specialchars((string) $this->sliderScrollDistance) ?>">
   <?php if (!empty($this->sliderItems)): ?>
     <div class="splide" data-vtxm-slider data-options="<?= StringUtil::specialchars($this->sliderOptions) ?>">
       <div class="splide__track">
@@ -15,8 +15,14 @@ $ariaLabel = $this->headlineText ?: 'Slider';
           <?php foreach ($this->sliderItems as $item): ?>
             <li class="splide__slide vtxm-slider__slide">
               <article class="vtxm-slider__item">
-                <?php if ('' !== $item['image']): ?>
-                  <figure class="vtxm-slider__media">
+                <?php if ('video' === $item['mediaType'] && '' !== $item['videoDesktop']): ?>
+                  <figure class="vtxm-slider__media vtxm-slider__media--video">
+                    <video class="vtxm-slider__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"<?php if ('' !== $item['videoPoster']): ?> poster="<?= StringUtil::specialchars($item['videoPoster']) ?>"<?php endif; ?> data-vtxm-video data-vtxm-video-desktop="<?= StringUtil::specialchars($item['videoDesktop']) ?>" data-vtxm-video-mobile="<?= StringUtil::specialchars($item['videoMobile']) ?>">
+                      <source src="<?= StringUtil::specialchars($item['videoDesktop']) ?>"<?php if ('' !== $item['videoMimeType']): ?> type="<?= StringUtil::specialchars($item['videoMimeType']) ?>"<?php endif; ?>>
+                    </video>
+                  </figure>
+                <?php elseif ('' !== $item['image']): ?>
+                  <figure class="vtxm-slider__media vtxm-slider__media--image">
                     <div class="vtxm-slider__image">
                       <img src="<?= StringUtil::specialchars($item['image']) ?>" alt="<?= StringUtil::specialchars($item['alt']) ?>">
                     </div>
@@ -25,6 +31,10 @@ $ariaLabel = $this->headlineText ?: 'Slider';
 
                 <?php if ($this->sliderHasOverlay): ?>
                   <div class="vtxm-slider__overlay" aria-hidden="true"></div>
+                <?php endif; ?>
+
+                <?php if ($this->sliderHasPattern): ?>
+                  <div class="vtxm-slider__pattern" aria-hidden="true"></div>
                 <?php endif; ?>
 
                 <?php if ($item['hasContent']): ?>

@@ -88,8 +88,19 @@ $GLOBALS['TL_LANG']['tl_content']['sliderTransition'] = ['Transition', 'Choose t
 $GLOBALS['TL_LANG']['tl_content']['sliderImageEffect'] = ['Image effect', 'Choose an optional image effect for the complete slider.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderTextAnimation'] = ['Text animation', 'Choose an optional text animation for the complete slider.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderOverlay'] = ['Overlay', 'Choose an optional overlay for the complete slider.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderMode'] = ['Mode', 'Choose standard slider output or Hero media output.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderWidth'] = ['Width', 'Choose whether the slider stays contained or exposes full-width hooks.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderHeight'] = ['Height', 'Choose the Hero height preset.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderCustomHeight'] = ['Custom height in pixels', 'Enter the custom Hero height in pixels.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderPattern'] = ['Pattern', 'Choose an optional decorative pattern overlay.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderScrollEffect'] = ['Scroll effect', 'Choose whether frontend-assets may fade the Hero while scrolling.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderScrollDistance'] = ['Fade distance in pixels', 'Enter the scroll distance used by frontend-assets for the fade effect.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItems'] = ['Slides', 'Define slides with image, text and optional link.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsMediaType'] = ['Media type', 'Choose whether this slide uses an image or a decorative background video.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsImage'] = ['Image', 'Slide image.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsVideoDesktop'] = ['Desktop video', 'Video file for desktop and default playback.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsVideoMobile'] = ['Mobile video', 'Optional video file for mobile playback.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsVideoPoster'] = ['Poster image', 'Optional poster image for the video.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsAlt'] = ['Alt text', 'Alternative text for the image.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsEyebrow'] = ['Eyebrow', 'Small label above the headline.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsHeadline'] = ['Headline', 'Slide headline.'];
@@ -209,6 +220,44 @@ $GLOBALS['TL_LANG']['tl_content']['sliderOverlayOptions'] = [
     'none' => 'No overlay',
     'dark' => 'Dark',
     'light' => 'Light',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderModeOptions'] = [
+    'standard' => 'Standard',
+    'hero' => 'Hero',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderWidthOptions'] = [
+    'contained' => 'Contained',
+    'fullwidth' => 'Full width',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderHeightOptions'] = [
+    'auto' => 'Automatic',
+    'compact' => 'Compact',
+    'medium' => 'Medium',
+    'large' => 'Large',
+    'viewport' => 'Viewport height',
+    'custom' => 'Custom height',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderPatternOptions'] = [
+    'none' => 'None',
+    'dots-fine' => 'Fine dots',
+    'dots-coarse' => 'Coarse dots',
+    'lines-diagonal' => 'Diagonal lines',
+    'lines-horizontal' => 'Horizontal lines',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderScrollEffectOptions'] = [
+    'none' => 'None',
+    'fade' => 'Fade out',
+    'fade-background' => 'Fade into page background',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsMediaTypeOptions'] = [
+    'image' => 'Image',
+    'video' => 'Video',
 ];
 
 $GLOBALS['TL_LANG']['tl_content']['teaserGridStyleOptions'] = [

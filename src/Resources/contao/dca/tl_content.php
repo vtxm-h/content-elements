@@ -9,12 +9,19 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_quote_teaser'] = '{type_legen
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_announcement'] = '{type_legend},type,headline;{announcement_legend},announcementEyebrow,announcementText,announcementLink,announcementLinkText,announcementStyle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_media_text'] = '{type_legend},type,headline;{media_legend},singleSRC,alt,size,fullsize,caption;{text_legend},mediaTextEyebrow,text;{link_legend:hide},url,linkTitle,target;{media_text_legend},mediaTextLayout,mediaTextStyle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_link_list'] = '{type_legend},type,headline;{link_list_legend},linkListStyle,linkListAlign,linkListItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
-$GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_slider'] = '{type_legend},type,headline;{slider_legend},sliderStyle,sliderItems;{slider_settings_legend:hide},sliderAutoplay,sliderInterval,sliderArrows,sliderPagination,sliderLoop,sliderPerPage,sliderGap,sliderTransition,sliderImageEffect,sliderTextAnimation,sliderOverlay;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_slider'] = '{type_legend},type,headline;{slider_legend},sliderStyle,sliderItems;{slider_settings_legend:hide},sliderAutoplay,sliderInterval,sliderArrows,sliderPagination,sliderLoop,sliderPerPage,sliderGap,sliderTransition,sliderImageEffect,sliderTextAnimation,sliderOverlay,sliderMode,sliderWidth,sliderHeight,sliderPattern,sliderScrollEffect;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_teaser_grid'] = '{type_legend},type,headline;{teaser_grid_legend},teaserGridStyle,teaserGridColumns,teaserGridGap,teaserGridItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_tabs'] = '{type_legend},type,headline;{tabs_legend},tabsStyle,tabsItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_accordion'] = '{type_legend},type,headline;{accordion_legend},accordionStyle,accordionItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_timeline'] = '{type_legend},type,headline;{timeline_legend},timelineTitle,timelineItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_factsbox'] = '{type_legend},type,headline;{factsbox_legend},factsboxStyle,factsboxItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
+
+$GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'sliderHeight';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'sliderScrollEffect';
+
+$GLOBALS['TL_DCA']['tl_content']['subpalettes']['sliderHeight_custom'] = 'sliderCustomHeight';
+$GLOBALS['TL_DCA']['tl_content']['subpalettes']['sliderScrollEffect_fade'] = 'sliderScrollDistance';
+$GLOBALS['TL_DCA']['tl_content']['subpalettes']['sliderScrollEffect_fade-background'] = 'sliderScrollDistance';
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['iconboxStyle'] = [
     'exclude' => true,
@@ -375,11 +382,85 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderOverlay'] = [
     'sql' => "varchar(16) NOT NULL default 'none'",
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderMode'] = [
+    'exclude' => true,
+    'default' => 'standard',
+    'inputType' => 'select',
+    'options' => ['standard', 'hero'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['sliderModeOptions'],
+    'eval' => ['chosen' => true, 'submitOnChange' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'standard'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderWidth'] = [
+    'exclude' => true,
+    'default' => 'contained',
+    'inputType' => 'select',
+    'options' => ['contained', 'fullwidth'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['sliderWidthOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'contained'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderHeight'] = [
+    'exclude' => true,
+    'default' => 'auto',
+    'inputType' => 'select',
+    'options' => ['auto', 'compact', 'medium', 'large', 'viewport', 'custom'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['sliderHeightOptions'],
+    'eval' => ['chosen' => true, 'submitOnChange' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'auto'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderCustomHeight'] = [
+    'exclude' => true,
+    'default' => 640,
+    'inputType' => 'text',
+    'eval' => ['rgxp' => 'digit', 'minval' => 160, 'maxval' => 1600, 'maxlength' => 4, 'tl_class' => 'w50'],
+    'sql' => 'smallint(5) unsigned NOT NULL default 640',
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderPattern'] = [
+    'exclude' => true,
+    'default' => 'none',
+    'inputType' => 'select',
+    'options' => ['none', 'dots-fine', 'dots-coarse', 'lines-diagonal', 'lines-horizontal'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['sliderPatternOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(32) NOT NULL default 'none'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderScrollEffect'] = [
+    'exclude' => true,
+    'default' => 'none',
+    'inputType' => 'select',
+    'options' => ['none', 'fade', 'fade-background'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['sliderScrollEffectOptions'],
+    'eval' => ['chosen' => true, 'submitOnChange' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(32) NOT NULL default 'none'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderScrollDistance'] = [
+    'exclude' => true,
+    'default' => 600,
+    'inputType' => 'text',
+    'eval' => ['rgxp' => 'digit', 'minval' => 100, 'maxval' => 2000, 'maxlength' => 4, 'tl_class' => 'w50'],
+    'sql' => 'smallint(5) unsigned NOT NULL default 600',
+];
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderItems'] = [
     'exclude' => true,
     'inputType' => 'multiColumnWizard',
     'eval' => [
         'columnFields' => [
+            'mediaType' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderItemsMediaType'],
+                'default' => 'image',
+                'inputType' => 'select',
+                'options' => ['image', 'video'],
+                'reference' => &$GLOBALS['TL_LANG']['tl_content']['sliderItemsMediaTypeOptions'],
+                'eval' => ['style' => 'width:120px'],
+            ],
             'image' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderItemsImage'],
                 'inputType' => 'fileTree',
@@ -387,6 +468,36 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderItems'] = [
                     'filesOnly' => true,
                     'fieldType' => 'radio',
                     'extensions' => 'jpg,jpeg,png,webp,svg',
+                    'style' => 'width:260px',
+                ],
+            ],
+            'videoDesktop' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderItemsVideoDesktop'],
+                'inputType' => 'fileTree',
+                'eval' => [
+                    'filesOnly' => true,
+                    'fieldType' => 'radio',
+                    'extensions' => Config::get('validVideoTypes'),
+                    'style' => 'width:260px',
+                ],
+            ],
+            'videoMobile' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderItemsVideoMobile'],
+                'inputType' => 'fileTree',
+                'eval' => [
+                    'filesOnly' => true,
+                    'fieldType' => 'radio',
+                    'extensions' => Config::get('validVideoTypes'),
+                    'style' => 'width:260px',
+                ],
+            ],
+            'videoPoster' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['sliderItemsVideoPoster'],
+                'inputType' => 'fileTree',
+                'eval' => [
+                    'filesOnly' => true,
+                    'fieldType' => 'radio',
+                    'extensions' => Config::get('validImageTypes'),
                     'style' => 'width:260px',
                 ],
             ],
