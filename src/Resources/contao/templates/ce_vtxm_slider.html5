@@ -2,7 +2,7 @@
 
 use Contao\StringUtil;
 
-$classes = trim($this->elementClass.' slider--'.$this->sliderStyle.' slider--gap-'.$this->sliderGap);
+$classes = trim($this->elementClass.' slider--'.$this->sliderStyle.' slider--gap-'.$this->sliderGap.' slider--transition-'.$this->sliderTransition.' slider--image-'.$this->sliderImageEffect.' slider--text-'.$this->sliderTextAnimation.' slider--overlay-'.$this->sliderOverlay);
 $ariaLabel = $this->headlineText ?: 'Slider';
 
 ?>
@@ -17,8 +17,14 @@ $ariaLabel = $this->headlineText ?: 'Slider';
               <article class="vtxm-slider__item">
                 <?php if ('' !== $item['image']): ?>
                   <figure class="vtxm-slider__media">
-                    <img src="<?= StringUtil::specialchars($item['image']) ?>" alt="<?= StringUtil::specialchars($item['alt']) ?>">
+                    <div class="vtxm-slider__image">
+                      <img src="<?= StringUtil::specialchars($item['image']) ?>" alt="<?= StringUtil::specialchars($item['alt']) ?>">
+                    </div>
                   </figure>
+                <?php endif; ?>
+
+                <?php if ($this->sliderHasOverlay): ?>
+                  <div class="vtxm-slider__overlay" aria-hidden="true"></div>
                 <?php endif; ?>
 
                 <?php if ($item['hasContent']): ?>

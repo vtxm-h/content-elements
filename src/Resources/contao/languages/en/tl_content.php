@@ -84,6 +84,10 @@ $GLOBALS['TL_LANG']['tl_content']['sliderPagination'] = ['Show pagination', 'Sho
 $GLOBALS['TL_LANG']['tl_content']['sliderLoop'] = ['Loop', 'Restart the slider after the last slide.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderPerPage'] = ['Slides per page', 'Number of visible slides on large screens.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderGap'] = ['Gap', 'Gap between slides.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderTransition'] = ['Transition', 'Choose the slide transition.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderImageEffect'] = ['Image effect', 'Choose an optional image effect for the complete slider.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderTextAnimation'] = ['Text animation', 'Choose an optional text animation for the complete slider.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderOverlay'] = ['Overlay', 'Choose an optional overlay for the complete slider.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItems'] = ['Slides', 'Define slides with image, text and optional link.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsImage'] = ['Image', 'Slide image.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsAlt'] = ['Alt text', 'Alternative text for the image.'];
@@ -184,6 +188,27 @@ $GLOBALS['TL_LANG']['tl_content']['sliderGapOptions'] = [
     'small' => 'Small',
     'medium' => 'Medium',
     'large' => 'Large',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderTransitionOptions'] = [
+    'slide' => 'Slide',
+    'fade' => 'Fade',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderImageEffectOptions'] = [
+    'none' => 'No effect',
+    'slow-zoom' => 'Slow zoom',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderTextAnimationOptions'] = [
+    'none' => 'None',
+    'fade-up' => 'Fade up',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderOverlayOptions'] = [
+    'none' => 'No overlay',
+    'dark' => 'Dark',
+    'light' => 'Light',
 ];
 
 $GLOBALS['TL_LANG']['tl_content']['teaserGridStyleOptions'] = [

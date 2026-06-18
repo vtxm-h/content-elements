@@ -61,7 +61,7 @@ Typical use cases:
 - `vtxm_iconbox` for service boxes, benefits or compact feature blocks
 - `vtxm_media_text` for image/media plus text blocks, biographies, project stories and editorial image/text sections; supports image-left, image-right, image-top, image-bottom, float-left and float-right layouts plus default, editorial, card and minimal styles
 - `vtxm_link_list` for structured links, social links, streaming platforms, downloads, press kits, booking links and external resources; supports default, buttons, icons and minimal styles plus left, center and right alignment
-- `vtxm_slider` for structured Splide-compatible hero sliders, image sliders, quotes and card sliders; supports hero, images, cards and quotes styles plus autoplay, arrows, pagination, loop, perPage and gap settings
+- `vtxm_slider` for structured Splide-compatible hero sliders, image sliders, quotes and card sliders; supports hero, images, cards and quotes styles plus autoplay, arrows, pagination, loop, perPage, gap, transition, image effect, text animation and overlay settings
 - `vtxm_teaser_grid` for reusable teaser cards with image, title, text, badge and optional link; supports default, cards, editorial and minimal styles plus 2, 3 or 4 columns and small, medium or large gaps
 - `vtxm_members_grid` for team / band member layouts
 - `vtxm_live_teaser` for concerts, events or live announcements
@@ -109,6 +109,26 @@ These elements use MultiColumnWizard fields in the Contao backend:
 - `vtxm_teaser_grid`
 
 Editors can manage entries in structured rows instead of writing JSON manually.
+
+
+## Slider
+
+`vtxm_slider` outputs Splide-compatible markup and configuration for structured hero, image, card and quote sliders. It does not include Splide, Splide Premium files, CSS, JavaScript or slider initialization.
+
+Available transitions:
+
+- `slide`
+- `fade`
+
+Optional instance-wide effects:
+
+- image effect: `none` or `slow-zoom`
+- text animation: `none` or `fade-up`
+- overlay: `none`, `dark` or `light`
+
+Effects apply to the complete slider instance, not to individual slides. The visual implementation for transitions, image effects, text animation and overlays belongs in `frontend-assets` or project assets. This bundle only outputs stable classes, data attributes and Splide-compatible HTML.
+
+The consuming project must load Splide before `frontend-assets` initializes the slider. Fade transition mode uses Splide `type: "fade"`; when loop is enabled in the backend, the generated Splide options use `rewind: true` instead of `type: "loop"`.
 
 
 ## Teaser Grid
@@ -170,7 +190,7 @@ All elements preserve Contao `cssID` support through the shared `AbstractWrapped
 
 The `iconboxIcon` value is escaped in the template. Use it for icon class names, labels or short markers. SVG or HTML icon markup is intentionally not rendered raw in this version.
 
-The `vtxm_slider` element outputs Splide-compatible markup and data attributes only. Styling and JavaScript are expected through `frontend-assets`, especially `css/vtxm-components.css`, `js/vtxm-components.js`, and vendor Splide assets or a local Splide build.
+The `vtxm_slider` element outputs Splide-compatible markup and data attributes only. Styling and JavaScript are expected through `frontend-assets`, especially `css/vtxm-components.css`, `js/vtxm-components.js`, and vendor Splide assets or a local Splide build loaded by the consuming project.
 
 
 ## HTML Hooks
@@ -254,6 +274,8 @@ Slider hooks:
 - `.vtxm-slider__slide`
 - `.vtxm-slider__item`
 - `.vtxm-slider__media`
+- `.vtxm-slider__image`
+- `.vtxm-slider__overlay`
 - `.vtxm-slider__content`
 - `.vtxm-slider__eyebrow`
 - `.vtxm-slider__headline`
@@ -267,6 +289,15 @@ Slider hooks:
 - `.slider--gap-small`
 - `.slider--gap-medium`
 - `.slider--gap-large`
+- `.slider--transition-slide`
+- `.slider--transition-fade`
+- `.slider--image-none`
+- `.slider--image-slow-zoom`
+- `.slider--text-none`
+- `.slider--text-fade-up`
+- `.slider--overlay-none`
+- `.slider--overlay-dark`
+- `.slider--overlay-light`
 - `[data-vtxm-slider]`
 
 Slider styling and JavaScript initialization are expected through `frontend-assets`, especially `css/vtxm-components.css`, `js/vtxm-components.js`, and vendor Splide assets or a local Splide build.

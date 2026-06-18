@@ -84,6 +84,10 @@ $GLOBALS['TL_LANG']['tl_content']['sliderPagination'] = ['Pagination anzeigen', 
 $GLOBALS['TL_LANG']['tl_content']['sliderLoop'] = ['Endlosschleife', 'Slider nach dem letzten Slide wieder von vorne starten.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderPerPage'] = ['Slides pro Ansicht', 'Anzahl der sichtbaren Slides auf großen Bildschirmen.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderGap'] = ['Abstand', 'Abstand zwischen den Slides.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderTransition'] = ['Übergang', 'Wählen Sie den Übergang der Slides.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderImageEffect'] = ['Bildeffekt', 'Wählen Sie einen optionalen Bildeffekt für den gesamten Slider.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderTextAnimation'] = ['Textanimation', 'Wählen Sie eine optionale Textanimation für den gesamten Slider.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderOverlay'] = ['Überlagerung', 'Wählen Sie eine optionale Überlagerung für den gesamten Slider.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItems'] = ['Slides', 'Legen Sie die Slides mit Bild, Text und optionalem Link an.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsImage'] = ['Bild', 'Slide-Bild.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsAlt'] = ['Alt-Text', 'Alternativtext für das Bild.'];
@@ -184,6 +188,27 @@ $GLOBALS['TL_LANG']['tl_content']['sliderGapOptions'] = [
     'small' => 'Klein',
     'medium' => 'Mittel',
     'large' => 'Groß',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderTransitionOptions'] = [
+    'slide' => 'Schieben',
+    'fade' => 'Überblenden',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderImageEffectOptions'] = [
+    'none' => 'Kein Effekt',
+    'slow-zoom' => 'Langsamer Zoom',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderTextAnimationOptions'] = [
+    'none' => 'Keine Animation',
+    'fade-up' => 'Von unten einblenden',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderOverlayOptions'] = [
+    'none' => 'Keine Überlagerung',
+    'dark' => 'Dunkel',
+    'light' => 'Hell',
 ];
 
 $GLOBALS['TL_LANG']['tl_content']['teaserGridStyleOptions'] = [
