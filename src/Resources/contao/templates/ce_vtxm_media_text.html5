@@ -8,33 +8,44 @@ $classes = trim($this->elementClass.' media-text--'.$this->mediaTextLayout.' med
 
 <div<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>">
   <div class="media-text__inner">
-    <?php if ($this->mediaTextImage): ?>
+    <?php if ($this->mediaTextHasImage): ?>
       <figure class="media-text__media">
-        <img src="<?= StringUtil::specialchars($this->mediaTextImage) ?>" alt="<?= StringUtil::specialchars($this->mediaTextAlt) ?>">
+        <?php if ($this->mediaTextFullsize): ?>
+          <a class="media-text__link" href="<?= StringUtil::specialchars($this->mediaTextOriginalImage) ?>" data-lightbox="media-text">
+        <?php endif; ?>
+
+        <img class="media-text__image" src="<?= StringUtil::specialchars($this->mediaTextImage) ?>" alt="<?= StringUtil::specialchars($this->mediaTextAlt) ?>"<?php if ($this->mediaTextImageWidth): ?> width="<?= StringUtil::specialchars((string) $this->mediaTextImageWidth) ?>"<?php endif; ?><?php if ($this->mediaTextImageHeight): ?> height="<?= StringUtil::specialchars((string) $this->mediaTextImageHeight) ?>"<?php endif; ?>>
+
+        <?php if ($this->mediaTextFullsize): ?>
+          </a>
+        <?php endif; ?>
+
         <?php if ($this->mediaTextCaption): ?>
-          <figcaption class="media-text__caption"><?= StringUtil::specialchars($this->mediaTextCaption) ?></figcaption>
+          <figcaption class="media-text__caption"><?= nl2br(StringUtil::specialchars($this->mediaTextCaption)) ?></figcaption>
         <?php endif; ?>
       </figure>
     <?php endif; ?>
 
-    <div class="media-text__content">
-      <?php if ($this->mediaTextEyebrow): ?>
-        <p class="media-text__eyebrow"><?= StringUtil::specialchars($this->mediaTextEyebrow) ?></p>
-      <?php endif; ?>
+    <?php if ($this->mediaTextHasContent): ?>
+      <div class="media-text__content">
+        <?php if ($this->mediaTextEyebrow): ?>
+          <p class="media-text__eyebrow"><?= StringUtil::specialchars($this->mediaTextEyebrow) ?></p>
+        <?php endif; ?>
 
-      <?php if ($this->headlineText): ?>
-        <<?= $this->headlineUnit ?> class="media-text__headline"><?= StringUtil::specialchars($this->headlineText) ?></<?= $this->headlineUnit ?>>
-      <?php endif; ?>
+        <?php if ($this->headlineText): ?>
+          <<?= $this->headlineUnit ?> class="media-text__headline"><?= StringUtil::specialchars($this->headlineText) ?></<?= $this->headlineUnit ?>>
+        <?php endif; ?>
 
-      <?php if ($this->mediaTextText): ?>
-        <div class="media-text__text"><?= $this->mediaTextText ?></div>
-      <?php endif; ?>
+        <?php if ($this->mediaTextText): ?>
+          <div class="media-text__text"><?= $this->mediaTextText ?></div>
+        <?php endif; ?>
 
-      <?php if ($this->mediaTextUrl): ?>
-        <p class="media-text__action">
-          <a href="<?= StringUtil::specialchars($this->mediaTextUrl) ?>"<?php if ($this->mediaTextTarget): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>><?= StringUtil::specialchars($this->mediaTextLinkTitle) ?></a>
-        </p>
-      <?php endif; ?>
-    </div>
+        <?php if ($this->mediaTextUrl): ?>
+          <p class="media-text__action">
+            <a href="<?= StringUtil::specialchars($this->mediaTextUrl) ?>"<?php if ($this->mediaTextTarget): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>><?= StringUtil::specialchars($this->mediaTextLinkTitle) ?></a>
+          </p>
+        <?php endif; ?>
+      </div>
+    <?php endif; ?>
   </div>
 </div>

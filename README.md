@@ -15,6 +15,7 @@ Content elements included:
 - Media Text
 - Link List
 - Slider
+- Teaser Grid
 - Members Grid
 - Live Teaser
 - Quote Teaser
@@ -40,6 +41,7 @@ The bundle registers these content elements in the `vtxm` category:
 - `vtxm_media_text`
 - `vtxm_link_list`
 - `vtxm_slider`
+- `vtxm_teaser_grid`
 - `vtxm_members_grid`
 - `vtxm_live_teaser`
 - `vtxm_quote_teaser`
@@ -59,7 +61,8 @@ Typical use cases:
 - `vtxm_iconbox` for service boxes, benefits or compact feature blocks
 - `vtxm_media_text` for image/media plus text blocks, biographies, project stories and editorial image/text sections; supports image-left, image-right, image-top, image-bottom, float-left and float-right layouts plus default, editorial, card and minimal styles
 - `vtxm_link_list` for structured links, social links, streaming platforms, downloads, press kits, booking links and external resources; supports default, buttons, icons and minimal styles plus left, center and right alignment
-- `vtxm_slider` for structured Splide-compatible hero sliders, image sliders, quotes and card sliders; supports hero, images, cards and quotes styles plus autoplay, arrows, pagination, loop, perPage and gap settings
+- `vtxm_slider` for structured Splide-compatible hero sliders, image sliders, background-video heroes, quotes and card sliders; supports hero, images, cards and quotes styles plus autoplay, arrows, pagination, loop, perPage, gap, transition, image effect, text animation, overlay, width, height, pattern and scroll-fade settings
+- `vtxm_teaser_grid` for reusable teaser cards with image, title, text, badge and optional link; supports default, cards, editorial and minimal styles plus 2, 3 or 4 columns and small, medium or large gaps
 - `vtxm_members_grid` for team / band member layouts
 - `vtxm_live_teaser` for concerts, events or live announcements
 - `vtxm_quote_teaser` for quotes, reviews or press snippets
@@ -103,8 +106,155 @@ These elements use MultiColumnWizard fields in the Contao backend:
 - `vtxm_factsbox`
 - `vtxm_link_list`
 - `vtxm_slider`
+- `vtxm_teaser_grid`
 
 Editors can manage entries in structured rows instead of writing JSON manually.
+
+
+## Media Text
+
+`vtxm_media_text` renders one optional image/media block next to editorial content. It is intended for image/text sections, biographies, project stories and compact editorial blocks.
+
+Available layouts:
+
+- `image-top`
+- `image-left`
+- `image-right`
+- `image-bottom`
+- `float-left`
+- `float-right`
+
+Available styles:
+
+- `default`
+- `editorial`
+- `card`
+- `minimal`
+
+The image is selected through the Contao `singleSRC` file picker. Stored UUIDs are resolved through Contao's file model and only valid image files with configured image extensions are rendered. Invalid UUIDs, folders, missing files and files outside the configured image types do not render broken image markup.
+
+The explicit alt text field is used first. If it is empty, the element tries to use the selected file metadata alt text for the current frontend language. It does not derive alt text from filenames or captions.
+
+The Contao `size` field is normalized and exposed to the template. Width and height attributes are emitted when reliable values are available: configured size dimensions are used when present; otherwise natural local image dimensions are used when they can be read safely. SVG files can render, but SVG dimensions are not inferred by this bundle. The element keeps the original image path and does not generate resized image files or cache paths.
+
+When `fullsize` is enabled and a valid image exists, the image is wrapped in `.media-text__link` with `data-lightbox="media-text"` and an `href` to the original image path. This only exposes a Contao-compatible lightbox hook; no lightbox JavaScript or CSS is included here.
+
+Captions are escaped and rendered inside the figure only when set. Multiline captions keep safe line breaks. The text field keeps Contao editor-managed rich text output. The optional action link is rendered only for a safe URL and uses `rel="noopener noreferrer"` when opened in a new window.
+
+Existing Media Text records remain compatible. Visual layout, responsive styling, card/editorial/minimal presentation, hover states and any lightbox behavior belong in `frontend-assets` or project CSS/JavaScript, not in this bundle.
+
+
+## Slider
+
+`vtxm_slider` outputs Splide-compatible markup and configuration for structured hero, image, card, quote and decorative background-video sliders. It does not include Splide, Splide Premium files, CSS, JavaScript, scroll listeners, video lifecycle code or slider initialization.
+
+Available transitions:
+
+- `slide`
+- `fade`
+
+Optional instance-wide effects:
+
+- image effect: `none` or `slow-zoom`
+- text animation: `none` or `fade-up`
+- overlay: `none`, `dark` or `light`
+
+Display modes:
+
+- `standard`
+- `hero`
+
+Width hooks:
+
+- `contained`
+- `fullwidth`
+
+Hero height hooks:
+
+- `auto`
+- `compact`
+- `medium`
+- `large`
+- `viewport`
+- `custom`
+
+Custom height is normalized as a pixel value and emitted through a data attribute only. The template does not output inline height styles.
+
+Slide media types:
+
+- image slides
+- muted decorative background-video slides
+
+Video slides can define separate desktop and mobile video files plus an optional poster image. Rendered videos are decorative, muted, autoplaying, looping and inline. Video controls are intentionally not rendered. The desktop video is rendered as a fallback `<source>` so the slide can play before any optional frontend source switching runs.
+
+Pattern overlays:
+
+- `none`
+- `dots-fine`
+- `dots-coarse`
+- `lines-diagonal`
+- `lines-horizontal`
+
+Color overlays and pattern overlays are separate decorative layers. Styling for dark/light overlays, dotted patterns and striped patterns belongs in `frontend-assets` or project CSS.
+
+Scroll fade modes:
+
+- `none`
+- `fade`
+- `fade-background`
+
+The fade distance is normalized as pixels and emitted through a data attribute. `fade-background` exposes hooks so frontend-assets may fade the Hero into the theme or project background. Background colors belong in `frontend-assets` or project CSS, not in this bundle.
+
+Effects apply to the complete slider instance, not to individual slides. The visual implementation for transitions, image effects, text animation, overlays, patterns, Hero heights, full-width presentation, scroll fading, video source handling and reduced-motion behavior belongs in `frontend-assets` or project assets. This bundle only outputs stable classes, data attributes, image/video markup and Splide-compatible HTML.
+
+Selecting `perPage = 3` keeps using Splide `perPage` and can display three cards or teaser-style items simultaneously. No separate three-box implementation is included.
+
+The consuming project must load Splide before `frontend-assets` initializes the slider. Fade transition mode uses Splide `type: "fade"`; when loop is enabled in the backend, the generated Splide options use `rewind: true` instead of `type: "loop"`.
+
+Existing image-only sliders remain compatible. Missing media type values default to image.
+
+Reduced-motion handling belongs in `frontend-assets`. It should respect `prefers-reduced-motion`, avoid scroll-motion effects, avoid slow image zoom and text movement, and pause or avoid autoplaying decorative video where practical while retaining poster or static media visibility.
+
+
+## Teaser Grid
+
+`vtxm_teaser_grid` renders reusable teaser entries in a stable frontend structure. It is intended for project teasers, editorial cards, campaign links or compact overview grids.
+
+Available styles:
+
+- `default`
+- `cards`
+- `editorial`
+- `minimal`
+
+Column options:
+
+- `2`
+- `3`
+- `4`
+
+Gap options:
+
+- `small`
+- `medium`
+- `large`
+
+Item fields:
+
+- image
+- alt text
+- title
+- text
+- badge
+- link URL
+- link label
+- new-window target
+
+Images are selected through the Contao file picker and resolved from stored UUIDs. Invalid UUIDs, folders and missing files do not render an image. No image resizing, fullsize or lightbox behavior is included in this element.
+
+The badge and link are optional. Links are rendered only when both a URL and a visible label are provided. The entire teaser card is not clickable.
+
+This bundle does not include frontend CSS or JavaScript for Teaser Grid. Styling is expected through `frontend-assets` or project CSS.
 
 
 ## Notes
@@ -125,7 +275,7 @@ All elements preserve Contao `cssID` support through the shared `AbstractWrapped
 
 The `iconboxIcon` value is escaped in the template. Use it for icon class names, labels or short markers. SVG or HTML icon markup is intentionally not rendered raw in this version.
 
-The `vtxm_slider` element outputs Splide-compatible markup and data attributes only. Styling and JavaScript are expected through `frontend-assets`, especially `css/vtxm-components.css`, `js/vtxm-components.js`, and vendor Splide assets or a local Splide build.
+The `vtxm_slider` element outputs Splide-compatible markup and data attributes only. Styling and JavaScript are expected through `frontend-assets`, especially `css/vtxm-components.css`, `js/vtxm-components.js`, and vendor Splide assets or a local Splide build loaded by the consuming project.
 
 
 ## HTML Hooks
@@ -136,6 +286,7 @@ Root classes:
 - `.ce_vtxm_media_text`
 - `.ce_vtxm_link_list`
 - `.ce_vtxm_slider`
+- `.ce_vtxm_teaser_grid`
 - `.ce_vtxm_members_grid`
 - `.ce_vtxm_live_teaser`
 - `.ce_vtxm_quote_teaser`
@@ -162,6 +313,8 @@ Media Text hooks:
 
 - `.media-text__inner`
 - `.media-text__media`
+- `.media-text__link`
+- `.media-text__image`
 - `.media-text__caption`
 - `.media-text__content`
 - `.media-text__eyebrow`
@@ -208,6 +361,12 @@ Slider hooks:
 - `.vtxm-slider__slide`
 - `.vtxm-slider__item`
 - `.vtxm-slider__media`
+- `.vtxm-slider__media--image`
+- `.vtxm-slider__media--video`
+- `.vtxm-slider__image`
+- `.vtxm-slider__video`
+- `.vtxm-slider__overlay`
+- `.vtxm-slider__pattern`
 - `.vtxm-slider__content`
 - `.vtxm-slider__eyebrow`
 - `.vtxm-slider__headline`
@@ -221,9 +380,74 @@ Slider hooks:
 - `.slider--gap-small`
 - `.slider--gap-medium`
 - `.slider--gap-large`
+- `.slider--transition-slide`
+- `.slider--transition-fade`
+- `.slider--image-none`
+- `.slider--image-slow-zoom`
+- `.slider--text-none`
+- `.slider--text-fade-up`
+- `.slider--overlay-none`
+- `.slider--overlay-dark`
+- `.slider--overlay-light`
+- `.slider--mode-standard`
+- `.slider--mode-hero`
+- `.slider--width-contained`
+- `.slider--width-fullwidth`
+- `.slider--height-auto`
+- `.slider--height-compact`
+- `.slider--height-medium`
+- `.slider--height-large`
+- `.slider--height-viewport`
+- `.slider--height-custom`
+- `.slider--pattern-none`
+- `.slider--pattern-dots-fine`
+- `.slider--pattern-dots-coarse`
+- `.slider--pattern-lines-diagonal`
+- `.slider--pattern-lines-horizontal`
+- `.slider--scroll-none`
+- `.slider--scroll-fade`
+- `.slider--scroll-fade-background`
 - `[data-vtxm-slider]`
+- `[data-vtxm-slider-mode]`
+- `[data-vtxm-slider-width]`
+- `[data-vtxm-slider-height]`
+- `[data-vtxm-slider-custom-height]`
+- `[data-vtxm-slider-pattern]`
+- `[data-vtxm-slider-scroll-effect]`
+- `[data-vtxm-slider-scroll-distance]`
+- `[data-vtxm-video]`
+- `[data-vtxm-video-desktop]`
+- `[data-vtxm-video-mobile]`
 
 Slider styling and JavaScript initialization are expected through `frontend-assets`, especially `css/vtxm-components.css`, `js/vtxm-components.js`, and vendor Splide assets or a local Splide build.
+
+Teaser Grid hooks:
+
+- `.ce_vtxm_teaser_grid`
+- `.teaser-grid`
+- `.teaser-grid--default`
+- `.teaser-grid--cards`
+- `.teaser-grid--editorial`
+- `.teaser-grid--minimal`
+- `.teaser-grid--cols-2`
+- `.teaser-grid--cols-3`
+- `.teaser-grid--cols-4`
+- `.teaser-grid--gap-small`
+- `.teaser-grid--gap-medium`
+- `.teaser-grid--gap-large`
+- `.teaser-grid__headline`
+- `.teaser-grid__items`
+- `.teaser-grid__item`
+- `.teaser-grid__media`
+- `.teaser-grid__image`
+- `.teaser-grid__overlay`
+- `.teaser-grid__content`
+- `.teaser-grid__title`
+- `.teaser-grid__text`
+- `.teaser-grid__link`
+- `.teaser-grid__badge`
+
+Teaser Grid styling is expected through `frontend-assets`, especially `css/vtxm-components.css`, or project CSS.
 
 Additional hooks are available inside the individual templates.
 
@@ -242,6 +466,7 @@ Templates:
 - `ce_vtxm_media_text.html5`
 - `ce_vtxm_link_list.html5`
 - `ce_vtxm_slider.html5`
+- `ce_vtxm_teaser_grid.html5`
 - `ce_vtxm_members_grid.html5`
 - `ce_vtxm_live_teaser.html5`
 - `ce_vtxm_quote_teaser.html5`

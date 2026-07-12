@@ -5,6 +5,7 @@ $GLOBALS['TL_LANG']['CTE']['vtxm_iconbox'] = ['Iconbox', 'Reusable icon/text/lin
 $GLOBALS['TL_LANG']['CTE']['vtxm_media_text'] = ['Media Text', 'Displays media with complementary text content.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_link_list'] = ['Link List', 'Displays structured links as a list, buttons or icons.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_slider'] = ['Slider', 'Displays structured slides as hero, image, card or quote slider.'];
+$GLOBALS['TL_LANG']['CTE']['vtxm_teaser_grid'] = ['Teaser Grid', 'Displays reusable teaser cards with image, text, badge and optional link.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_members_grid'] = ['Members grid', 'Grid with four fixed member positions.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_live_teaser'] = ['Live teaser', 'Concert or live announcement block.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_quote_teaser'] = ['Quote teaser', 'Quote or review block.'];
@@ -19,6 +20,7 @@ $GLOBALS['TL_LANG']['tl_content']['media_text_legend'] = 'Media Text';
 $GLOBALS['TL_LANG']['tl_content']['link_list_legend'] = 'Link List';
 $GLOBALS['TL_LANG']['tl_content']['slider_legend'] = 'Slider';
 $GLOBALS['TL_LANG']['tl_content']['slider_settings_legend'] = 'Slider settings';
+$GLOBALS['TL_LANG']['tl_content']['teaser_grid_legend'] = 'Teaser Grid';
 $GLOBALS['TL_LANG']['tl_content']['members_legend'] = 'Members';
 $GLOBALS['TL_LANG']['tl_content']['live_legend'] = 'Live teaser';
 $GLOBALS['TL_LANG']['tl_content']['quote_legend'] = 'Quote';
@@ -82,8 +84,23 @@ $GLOBALS['TL_LANG']['tl_content']['sliderPagination'] = ['Show pagination', 'Sho
 $GLOBALS['TL_LANG']['tl_content']['sliderLoop'] = ['Loop', 'Restart the slider after the last slide.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderPerPage'] = ['Slides per page', 'Number of visible slides on large screens.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderGap'] = ['Gap', 'Gap between slides.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderTransition'] = ['Transition', 'Choose the slide transition.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderImageEffect'] = ['Image effect', 'Choose an optional image effect for the complete slider.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderTextAnimation'] = ['Text animation', 'Choose an optional text animation for the complete slider.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderOverlay'] = ['Overlay', 'Choose an optional overlay for the complete slider.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderMode'] = ['Mode', 'Choose standard slider output or Hero media output.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderWidth'] = ['Width', 'Choose whether the slider stays contained or exposes full-width hooks.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderHeight'] = ['Height', 'Choose the Hero height preset.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderCustomHeight'] = ['Custom height in pixels', 'Enter the custom Hero height in pixels.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderPattern'] = ['Pattern', 'Choose an optional decorative pattern overlay.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderScrollEffect'] = ['Scroll effect', 'Choose whether frontend-assets may fade the Hero while scrolling.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderScrollDistance'] = ['Fade distance in pixels', 'Enter the scroll distance used by frontend-assets for the fade effect.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItems'] = ['Slides', 'Define slides with image, text and optional link.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsMediaType'] = ['Media type', 'Choose whether this slide uses an image or a decorative background video.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsImage'] = ['Image', 'Slide image.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsVideoDesktop'] = ['Desktop video', 'Video file for desktop and default playback.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsVideoMobile'] = ['Mobile video', 'Optional video file for mobile playback.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsVideoPoster'] = ['Poster image', 'Optional poster image for the video.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsAlt'] = ['Alt text', 'Alternative text for the image.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsEyebrow'] = ['Eyebrow', 'Small label above the headline.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsHeadline'] = ['Headline', 'Slide headline.'];
@@ -91,6 +108,19 @@ $GLOBALS['TL_LANG']['tl_content']['sliderItemsText'] = ['Text', 'Slide text.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsLinkLabel'] = ['Link label', 'Label for the link.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsLinkUrl'] = ['Link URL', 'Link target.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsTarget'] = ['New window', 'Open the link in a new window.'];
+
+$GLOBALS['TL_LANG']['tl_content']['teaserGridStyle'] = ['Display style', 'Choose the teaser grid display style.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridColumns'] = ['Columns', 'Choose the number of columns for large screens.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridGap'] = ['Gap', 'Choose the spacing between teaser items.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItems'] = ['Teasers', 'Define teaser entries with image, text, badge and optional link.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsImage'] = ['Image', 'Teaser image.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsAlt'] = ['Alt text', 'Alternative text for the image.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsTitle'] = ['Title', 'Teaser title.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsText'] = ['Text', 'Teaser text.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsBadge'] = ['Badge', 'Optional badge text.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsLinkUrl'] = ['Link URL', 'Optional link target.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsLinkLabel'] = ['Link label', 'Label for the optional link.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsTarget'] = ['New window', 'Open the link in a new window.'];
 
 $GLOBALS['TL_LANG']['tl_content']['tabsStyle'] = ['Style', 'Choose the tabs presentation style.'];
 $GLOBALS['TL_LANG']['tl_content']['tabsItems'] = ['Tab entries', 'Add the tab titles and content.'];
@@ -166,6 +196,84 @@ $GLOBALS['TL_LANG']['tl_content']['sliderPerPageOptions'] = [
 
 $GLOBALS['TL_LANG']['tl_content']['sliderGapOptions'] = [
     'none' => 'No gap',
+    'small' => 'Small',
+    'medium' => 'Medium',
+    'large' => 'Large',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderTransitionOptions'] = [
+    'slide' => 'Slide',
+    'fade' => 'Fade',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderImageEffectOptions'] = [
+    'none' => 'No effect',
+    'slow-zoom' => 'Slow zoom',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderTextAnimationOptions'] = [
+    'none' => 'None',
+    'fade-up' => 'Fade up',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderOverlayOptions'] = [
+    'none' => 'No overlay',
+    'dark' => 'Dark',
+    'light' => 'Light',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderModeOptions'] = [
+    'standard' => 'Standard',
+    'hero' => 'Hero',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderWidthOptions'] = [
+    'contained' => 'Contained',
+    'fullwidth' => 'Full width',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderHeightOptions'] = [
+    'auto' => 'Automatic',
+    'compact' => 'Compact',
+    'medium' => 'Medium',
+    'large' => 'Large',
+    'viewport' => 'Viewport height',
+    'custom' => 'Custom height',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderPatternOptions'] = [
+    'none' => 'None',
+    'dots-fine' => 'Fine dots',
+    'dots-coarse' => 'Coarse dots',
+    'lines-diagonal' => 'Diagonal lines',
+    'lines-horizontal' => 'Horizontal lines',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderScrollEffectOptions'] = [
+    'none' => 'None',
+    'fade' => 'Fade out',
+    'fade-background' => 'Fade into page background',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsMediaTypeOptions'] = [
+    'image' => 'Image',
+    'video' => 'Video',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teaserGridStyleOptions'] = [
+    'default' => 'Default',
+    'cards' => 'Cards',
+    'editorial' => 'Editorial',
+    'minimal' => 'Minimal',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teaserGridColumnsOptions'] = [
+    '2' => '2 columns',
+    '3' => '3 columns',
+    '4' => '4 columns',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teaserGridGapOptions'] = [
     'small' => 'Small',
     'medium' => 'Medium',
     'large' => 'Large',

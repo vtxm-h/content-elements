@@ -5,6 +5,7 @@ $GLOBALS['TL_LANG']['CTE']['vtxm_iconbox'] = ['Iconbox', 'Wiederverwendbarer Ico
 $GLOBALS['TL_LANG']['CTE']['vtxm_media_text'] = ['Media Text', 'Zeigt ein Medium mit ergänzendem Textinhalt an.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_link_list'] = ['Linkliste', 'Zeigt strukturierte Links als Liste, Buttons oder Icons an.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_slider'] = ['Slider', 'Zeigt strukturierte Slides als Hero-, Bild-, Karten- oder Zitat-Slider an.'];
+$GLOBALS['TL_LANG']['CTE']['vtxm_teaser_grid'] = ['Teaser Grid', 'Zeigt wiederverwendbare Teaser-Karten mit Bild, Text, Badge und optionalem Link an.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_members_grid'] = ['Members Grid', 'Grid mit vier festen Mitgliederpositionen.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_live_teaser'] = ['Live Teaser', 'Konzert- oder Live-Ankündigungsblock.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_quote_teaser'] = ['Quote Teaser', 'Zitat- oder Review-Block.'];
@@ -19,6 +20,7 @@ $GLOBALS['TL_LANG']['tl_content']['media_text_legend'] = 'Media Text';
 $GLOBALS['TL_LANG']['tl_content']['link_list_legend'] = 'Linkliste';
 $GLOBALS['TL_LANG']['tl_content']['slider_legend'] = 'Slider';
 $GLOBALS['TL_LANG']['tl_content']['slider_settings_legend'] = 'Slider-Einstellungen';
+$GLOBALS['TL_LANG']['tl_content']['teaser_grid_legend'] = 'Teaser Grid';
 $GLOBALS['TL_LANG']['tl_content']['members_legend'] = 'Mitglieder';
 $GLOBALS['TL_LANG']['tl_content']['live_legend'] = 'Live Teaser';
 $GLOBALS['TL_LANG']['tl_content']['quote_legend'] = 'Zitat';
@@ -82,8 +84,23 @@ $GLOBALS['TL_LANG']['tl_content']['sliderPagination'] = ['Pagination anzeigen', 
 $GLOBALS['TL_LANG']['tl_content']['sliderLoop'] = ['Endlosschleife', 'Slider nach dem letzten Slide wieder von vorne starten.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderPerPage'] = ['Slides pro Ansicht', 'Anzahl der sichtbaren Slides auf großen Bildschirmen.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderGap'] = ['Abstand', 'Abstand zwischen den Slides.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderTransition'] = ['Übergang', 'Wählen Sie den Übergang der Slides.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderImageEffect'] = ['Bildeffekt', 'Wählen Sie einen optionalen Bildeffekt für den gesamten Slider.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderTextAnimation'] = ['Textanimation', 'Wählen Sie eine optionale Textanimation für den gesamten Slider.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderOverlay'] = ['Überlagerung', 'Wählen Sie eine optionale Überlagerung für den gesamten Slider.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderMode'] = ['Darstellung', 'Wählen Sie die Standard-Ausgabe oder die Hero-Media-Ausgabe.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderWidth'] = ['Breite', 'Wählen Sie, ob der Slider im Inhaltsbereich bleibt oder Hooks für volle Breite ausgibt.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderHeight'] = ['Höhe', 'Wählen Sie die Höhe des Hero-Sliders.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderCustomHeight'] = ['Eigene Höhe in Pixeln', 'Geben Sie die eigene Hero-Höhe in Pixeln ein.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderPattern'] = ['Muster', 'Wählen Sie ein optionales dekoratives Muster.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderScrollEffect'] = ['Scroll-Effekt', 'Wählen Sie, ob frontend-assets den Hero beim Scrollen ausblenden darf.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderScrollDistance'] = ['Fade-Distanz in Pixeln', 'Geben Sie die Scroll-Distanz für den Fade-Effekt ein.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItems'] = ['Slides', 'Legen Sie die Slides mit Bild, Text und optionalem Link an.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsMediaType'] = ['Medientyp', 'Wählen Sie, ob dieser Slide ein Bild oder ein dekoratives Hintergrundvideo verwendet.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsImage'] = ['Bild', 'Slide-Bild.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsVideoDesktop'] = ['Desktop-Video', 'Videodatei für Desktop und Standard-Wiedergabe.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsVideoMobile'] = ['Mobil-Video', 'Optionale Videodatei für mobile Wiedergabe.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsVideoPoster'] = ['Posterbild', 'Optionales Posterbild für das Video.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsAlt'] = ['Alt-Text', 'Alternativtext für das Bild.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsEyebrow'] = ['Eyebrow', 'Kleine Oberzeile.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsHeadline'] = ['Überschrift', 'Slide-Überschrift.'];
@@ -91,6 +108,19 @@ $GLOBALS['TL_LANG']['tl_content']['sliderItemsText'] = ['Text', 'Slide-Text.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsLinkLabel'] = ['Link-Text', 'Beschriftung des Links.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsLinkUrl'] = ['Link-URL', 'Linkziel.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderItemsTarget'] = ['Neues Fenster', 'Link in einem neuen Fenster öffnen.'];
+
+$GLOBALS['TL_LANG']['tl_content']['teaserGridStyle'] = ['Darstellung', 'Wählen Sie die Darstellung des Teaser Grids.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridColumns'] = ['Spalten', 'Wählen Sie die Spaltenanzahl für große Bildschirme.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridGap'] = ['Abstand', 'Wählen Sie den Abstand zwischen den Teasern.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItems'] = ['Teaser', 'Legen Sie Teaser mit Bild, Text, Badge und optionalem Link an.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsImage'] = ['Bild', 'Teaser-Bild.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsAlt'] = ['Alt-Text', 'Alternativtext für das Bild.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsTitle'] = ['Titel', 'Teaser-Titel.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsText'] = ['Text', 'Teaser-Text.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsBadge'] = ['Badge', 'Optionaler Badge-Text.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsLinkUrl'] = ['Link-URL', 'Optionales Linkziel.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsLinkLabel'] = ['Link-Text', 'Beschriftung des optionalen Links.'];
+$GLOBALS['TL_LANG']['tl_content']['teaserGridItemsTarget'] = ['Neues Fenster', 'Link in einem neuen Fenster öffnen.'];
 
 $GLOBALS['TL_LANG']['tl_content']['tabsStyle'] = ['Stil', 'Wählen Sie die Darstellung der Tabs.'];
 $GLOBALS['TL_LANG']['tl_content']['tabsItems'] = ['Tab-Einträge', 'Fügen Sie die Tab-Titel und Inhalte hinzu.'];
@@ -166,6 +196,84 @@ $GLOBALS['TL_LANG']['tl_content']['sliderPerPageOptions'] = [
 
 $GLOBALS['TL_LANG']['tl_content']['sliderGapOptions'] = [
     'none' => 'Kein Abstand',
+    'small' => 'Klein',
+    'medium' => 'Mittel',
+    'large' => 'Groß',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderTransitionOptions'] = [
+    'slide' => 'Schieben',
+    'fade' => 'Überblenden',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderImageEffectOptions'] = [
+    'none' => 'Kein Effekt',
+    'slow-zoom' => 'Langsamer Zoom',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderTextAnimationOptions'] = [
+    'none' => 'Keine Animation',
+    'fade-up' => 'Von unten einblenden',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderOverlayOptions'] = [
+    'none' => 'Keine Überlagerung',
+    'dark' => 'Dunkel',
+    'light' => 'Hell',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderModeOptions'] = [
+    'standard' => 'Standard',
+    'hero' => 'Hero',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderWidthOptions'] = [
+    'contained' => 'Im Inhaltsbereich',
+    'fullwidth' => 'Volle Breite',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderHeightOptions'] = [
+    'auto' => 'Automatisch',
+    'compact' => 'Kompakt',
+    'medium' => 'Mittel',
+    'large' => 'Groß',
+    'viewport' => 'Bildschirmhöhe',
+    'custom' => 'Eigene Höhe',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderPatternOptions'] = [
+    'none' => 'Kein Muster',
+    'dots-fine' => 'Feine Punkte',
+    'dots-coarse' => 'Grobe Punkte',
+    'lines-diagonal' => 'Diagonale Linien',
+    'lines-horizontal' => 'Horizontale Linien',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderScrollEffectOptions'] = [
+    'none' => 'Kein Scroll-Effekt',
+    'fade' => 'Hero ausblenden',
+    'fade-background' => 'In den Seitenhintergrund überblenden',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderItemsMediaTypeOptions'] = [
+    'image' => 'Bild',
+    'video' => 'Video',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teaserGridStyleOptions'] = [
+    'default' => 'Standard',
+    'cards' => 'Karten',
+    'editorial' => 'Editorial',
+    'minimal' => 'Minimal',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teaserGridColumnsOptions'] = [
+    '2' => '2 Spalten',
+    '3' => '3 Spalten',
+    '4' => '4 Spalten',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teaserGridGapOptions'] = [
     'small' => 'Klein',
     'medium' => 'Mittel',
     'large' => 'Groß',
