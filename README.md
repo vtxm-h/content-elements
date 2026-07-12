@@ -23,6 +23,7 @@ Content elements included:
 - Tabs
 - Accordion
 - Timeline
+- Process Steps / Timeline
 - Factsbox
 
 The bundle is theme-agnostic:
@@ -49,6 +50,7 @@ The bundle registers these content elements in the `vtxm` category:
 - `vtxm_tabs`
 - `vtxm_accordion`
 - `vtxm_timeline`
+- `vtxm_process_steps`
 - `vtxm_factsbox`
 
 
@@ -70,6 +72,7 @@ Typical use cases:
 - `vtxm_tabs` for tabbed content groups
 - `vtxm_accordion` for FAQ-style expandable content
 - `vtxm_timeline` for history, milestones or chronological entries
+- `vtxm_process_steps` for process steps, project phases, how-it-works sections, milestones or reusable timelines; supports process and timeline variants, vertical and horizontal orientation, number, icon or dot markers, alignment hooks and optional reveal hooks
 - `vtxm_factsbox` for structured key-value facts, project facts, band facts, metadata or technical details; supports default, compact and card styles
 
 
@@ -107,6 +110,7 @@ These elements use MultiColumnWizard fields in the Contao backend:
 - `vtxm_link_list`
 - `vtxm_slider`
 - `vtxm_teaser_grid`
+- `vtxm_process_steps`
 
 Editors can manage entries in structured rows instead of writing JSON manually.
 
@@ -257,6 +261,69 @@ The badge and link are optional. Links are rendered only when both a URL and a v
 This bundle does not include frontend CSS or JavaScript for Teaser Grid. Styling is expected through `frontend-assets` or project CSS.
 
 
+## Process Steps / Timeline
+
+`vtxm_process_steps` renders ordered process steps, phases, milestones, how-it-works entries or timeline entries in stable server-rendered markup.
+
+Supported variants:
+
+- `process`
+- `timeline`
+
+Orientation hooks:
+
+- `vertical`
+- `horizontal`
+
+Marker styles:
+
+- `number`
+- `icon`
+- `dot`
+
+Alignment hooks:
+
+- `left`
+- `center`
+- `right`
+- `alternate`
+
+Reveal hooks:
+
+- `none`
+- `fade-up`
+
+Backend fields:
+
+- optional Contao headline
+- optional intro text
+- variant
+- orientation
+- marker style
+- alignment
+- reveal hook
+- repeatable entries
+- custom CSS ID and class through Contao `cssID`
+
+Item fields:
+
+- marker
+- date / eyebrow
+- title
+- text
+- icon
+- image
+- alt text
+- link URL
+- link label
+- new-window target
+- optional CSS class
+
+The entries are edited through MultiColumnWizard rows and keep their backend order in the frontend. Empty rows and rows without meaningful visible content are skipped. Number markers fall back to the 1-based entry number. Links are rendered only when both a safe URL and a visible label are present. Image UUIDs are resolved through Contao's file model and only valid existing image files are rendered. Explicit alt text is used first; when empty, file metadata alt text is used when available. Decorative images may render with an empty `alt` attribute.
+
+The output uses ordered-list semantics and remains fully usable without JavaScript. The optional reveal setting only emits classes and data attributes. Styling, horizontal layout behavior, marker visuals, reveal animation runtime and reduced-motion handling belong in `frontend-assets` or project CSS/JavaScript.
+
+
 ## Notes
 
 No styling or JavaScript behavior is included by design.
@@ -267,6 +334,7 @@ Use your project CSS and JavaScript to define:
 - grid behavior
 - colors
 - animations
+- process step and timeline styling
 - tab switching
 - accordion behavior
 - slider initialization
@@ -294,6 +362,7 @@ Root classes:
 - `.ce_vtxm_tabs`
 - `.ce_vtxm_accordion`
 - `.ce_vtxm_timeline`
+- `.ce_vtxm_process_steps`
 - `.ce_vtxm_factsbox`
 
 Factsbox hooks:
@@ -449,6 +518,44 @@ Teaser Grid hooks:
 
 Teaser Grid styling is expected through `frontend-assets`, especially `css/vtxm-components.css`, or project CSS.
 
+Process Steps hooks:
+
+- `.ce_vtxm_process_steps`
+- `.process-steps`
+- `.process-steps__header`
+- `.process-steps__intro`
+- `.process-steps__items`
+- `.process-steps__item`
+- `.process-steps__marker`
+- `.process-steps__content`
+- `.process-steps__eyebrow`
+- `.process-steps__title`
+- `.process-steps__text`
+- `.process-steps__media`
+- `.process-steps__link`
+- `.process-steps--process`
+- `.process-steps--timeline`
+- `.process-steps--vertical`
+- `.process-steps--horizontal`
+- `.process-steps--marker-number`
+- `.process-steps--marker-icon`
+- `.process-steps--marker-dot`
+- `.process-steps--align-left`
+- `.process-steps--align-center`
+- `.process-steps--align-right`
+- `.process-steps--align-alternate`
+- `.process-steps--reveal-none`
+- `.process-steps--reveal-fade-up`
+- `[data-vtxm-process-steps]`
+- `[data-vtxm-process-steps-variant]`
+- `[data-vtxm-process-steps-orientation]`
+- `[data-vtxm-process-steps-marker]`
+- `[data-vtxm-process-steps-reveal]`
+- `[data-vtxm-process-step]`
+- `[data-vtxm-process-step-index]`
+
+Process Steps styling and optional reveal behavior are expected through `frontend-assets`, especially `css/vtxm-components.css` and `js/vtxm-components.js`, or project assets.
+
 Additional hooks are available inside the individual templates.
 
 
@@ -474,6 +581,7 @@ Templates:
 - `ce_vtxm_tabs.html5`
 - `ce_vtxm_accordion.html5`
 - `ce_vtxm_timeline.html5`
+- `ce_vtxm_process_steps.html5`
 - `ce_vtxm_factsbox.html5`
 
 
