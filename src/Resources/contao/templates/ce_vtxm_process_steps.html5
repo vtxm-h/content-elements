@@ -1,0 +1,70 @@
+<?php
+
+use Contao\StringUtil;
+
+if (!$this->processStepsHasContent) {
+    return;
+}
+
+$classes = trim($this->elementClass.' process-steps--'.$this->processStepsVariant.' process-steps--'.$this->processStepsOrientation.' process-steps--marker-'.$this->processStepsMarkerStyle.' process-steps--align-'.$this->processStepsAlign.' process-steps--reveal-'.$this->processStepsReveal);
+
+?>
+
+<section<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>" data-vtxm-process-steps data-vtxm-process-steps-variant="<?= StringUtil::specialchars($this->processStepsVariant) ?>" data-vtxm-process-steps-orientation="<?= StringUtil::specialchars($this->processStepsOrientation) ?>" data-vtxm-process-steps-marker="<?= StringUtil::specialchars($this->processStepsMarkerStyle) ?>" data-vtxm-process-steps-reveal="<?= StringUtil::specialchars($this->processStepsReveal) ?>">
+  <?php if ($this->processStepsHasHeader): ?>
+    <div class="process-steps__header">
+      <?php if ($this->headlineText): ?>
+        <<?= $this->headlineUnit ?> class="process-steps__headline"><?= StringUtil::specialchars($this->headlineText) ?></<?= $this->headlineUnit ?>>
+      <?php endif; ?>
+
+      <?php if ($this->processStepsIntro): ?>
+        <div class="process-steps__intro"><?= $this->processStepsIntro ?></div>
+      <?php endif; ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if (!empty($this->processStepsItems)): ?>
+    <ol class="process-steps__items">
+      <?php foreach ($this->processStepsItems as $item): ?>
+        <?php $itemClasses = trim('process-steps__item '.$item['cssClass']); ?>
+        <li class="<?= StringUtil::specialchars($itemClasses) ?>" data-vtxm-process-step data-vtxm-process-step-index="<?= StringUtil::specialchars((string) $item['index']) ?>">
+          <span class="process-steps__marker" aria-hidden="true">
+            <?php if ('number' === $this->processStepsMarkerStyle): ?>
+              <?= StringUtil::specialchars($item['marker']) ?>
+            <?php elseif ('icon' === $this->processStepsMarkerStyle && '' !== $item['icon']): ?>
+              <span class="process-steps__icon process-steps__icon--<?= StringUtil::specialchars($item['icon']) ?>"></span>
+            <?php elseif ('icon' === $this->processStepsMarkerStyle && '' !== $item['marker']): ?>
+              <?= StringUtil::specialchars($item['marker']) ?>
+            <?php endif; ?>
+          </span>
+
+          <div class="process-steps__content">
+            <?php if ('' !== $item['image']): ?>
+              <figure class="process-steps__media">
+                <img src="<?= StringUtil::specialchars($item['image']) ?>" alt="<?= StringUtil::specialchars($item['alt']) ?>" loading="lazy">
+              </figure>
+            <?php endif; ?>
+
+            <?php if ('' !== $item['eyebrow']): ?>
+              <p class="process-steps__eyebrow"><?= StringUtil::specialchars($item['eyebrow']) ?></p>
+            <?php endif; ?>
+
+            <?php if ('' !== $item['title']): ?>
+              <h3 class="process-steps__title"><?= StringUtil::specialchars($item['title']) ?></h3>
+            <?php endif; ?>
+
+            <?php if ('' !== $item['text']): ?>
+              <div class="process-steps__text"><?= nl2br(StringUtil::specialchars($item['text'])) ?></div>
+            <?php endif; ?>
+
+            <?php if ('' !== $item['linkUrl'] && '' !== $item['linkLabel']): ?>
+              <p class="process-steps__action">
+                <a class="process-steps__link" href="<?= StringUtil::specialchars($item['linkUrl']) ?>"<?php if ($item['target']): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>><?= StringUtil::specialchars($item['linkLabel']) ?></a>
+              </p>
+            <?php endif; ?>
+          </div>
+        </li>
+      <?php endforeach; ?>
+    </ol>
+  <?php endif; ?>
+</section>
