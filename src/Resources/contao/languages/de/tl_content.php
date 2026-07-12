@@ -13,6 +13,7 @@ $GLOBALS['TL_LANG']['CTE']['vtxm_announcement'] = ['Announcement', 'Ankündigung
 $GLOBALS['TL_LANG']['CTE']['vtxm_tabs'] = ['Tabs', 'Einfaches Tabs-Element.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_accordion'] = ['Accordion', 'Einfaches Accordion-Element.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_timeline'] = ['Timeline', 'Einfacher Zeitstrahl-Block.'];
+$GLOBALS['TL_LANG']['CTE']['vtxm_process_steps'] = ['Prozessschritte / Timeline', 'Zeigt Prozessschritte, Phasen, Meilensteine oder Timeline-Einträge an.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_factsbox'] = ['Factsbox', 'Zeigt strukturierte Fakten als Label-Wert-Paare an.'];
 
 $GLOBALS['TL_LANG']['tl_content']['iconbox_legend'] = 'Iconbox-Einstellungen';
@@ -28,6 +29,8 @@ $GLOBALS['TL_LANG']['tl_content']['announcement_legend'] = 'Announcement';
 $GLOBALS['TL_LANG']['tl_content']['tabs_legend'] = 'Tabs';
 $GLOBALS['TL_LANG']['tl_content']['accordion_legend'] = 'Accordion';
 $GLOBALS['TL_LANG']['tl_content']['timeline_legend'] = 'Timeline';
+$GLOBALS['TL_LANG']['tl_content']['process_steps_legend'] = 'Prozessschritte';
+$GLOBALS['TL_LANG']['tl_content']['process_steps_display_legend'] = 'Darstellung';
 $GLOBALS['TL_LANG']['tl_content']['factsbox_legend'] = 'Factsbox';
 
 $GLOBALS['TL_LANG']['tl_content']['iconboxStyle'] = ['Stil', 'Wählen Sie die Darstellung der Iconbox.'];
@@ -134,6 +137,24 @@ $GLOBALS['TL_LANG']['tl_content']['timelineTitle'] = ['Timeline-Titel', 'Optiona
 $GLOBALS['TL_LANG']['tl_content']['timelineItems'] = ['Timeline-Einträge', 'Fügen Sie die Timeline-Jahre und Texte hinzu.'];
 $GLOBALS['TL_LANG']['tl_content']['timelineItemsYear'] = ['Jahr', 'Timeline-Jahr oder Label.'];
 $GLOBALS['TL_LANG']['tl_content']['timelineItemsText'] = ['Text', 'Timeline-Text.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsVariant'] = ['Variante', 'Wählen Sie, ob das Element für Prozessschritte oder Timeline-Einträge verwendet wird.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsOrientation'] = ['Ausrichtung', 'Wählen Sie vertikale oder horizontale Ausgabe-Hooks.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsMarkerStyle'] = ['Marker-Stil', 'Wählen Sie, ob die Einträge Nummern, Icons oder Punkte als Marker verwenden.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsAlign'] = ['Anordnung', 'Wählen Sie die Hooks für die Inhaltsanordnung.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsReveal'] = ['Reveal-Hook', 'Wählen Sie, ob frontend-assets die Einträge mit einem Reveal-Effekt erweitern darf.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsIntro'] = ['Introtext', 'Optionaler Text oberhalb der Einträge.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsItems'] = ['Einträge', 'Legen Sie Prozessschritte, Phasen, Meilensteine oder Timeline-Einträge an.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsItemsMarker'] = ['Marker', 'Optionaler Marker-Text. Nummernmarker fallen auf die Eintragsnummer zurück.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsItemsEyebrow'] = ['Datum / Eyebrow', 'Optionales Datum, Phasenlabel oder kleine Oberzeile.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsItemsTitle'] = ['Titel', 'Titel des Eintrags.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsItemsText'] = ['Text', 'Text des Eintrags.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsItemsIcon'] = ['Icon', 'Optionaler Icon-Marker, zum Beispiel ein Klassenname oder kurzes Token.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsItemsImage'] = ['Bild', 'Optionales Bild des Eintrags.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsItemsAlt'] = ['Alt-Text', 'Alternativtext für das Bild. Für dekorative Bilder oder Datei-Metadaten-Fallback leer lassen.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsItemsLinkUrl'] = ['Link-URL', 'Optionales Linkziel.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsItemsLinkLabel'] = ['Link-Text', 'Beschriftung des optionalen Links.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsItemsTarget'] = ['Neues Fenster', 'Link in einem neuen Fenster öffnen.'];
+$GLOBALS['TL_LANG']['tl_content']['processStepsItemsCssClass'] = ['CSS-Klasse', 'Optionale zusätzliche CSS-Klasse für diesen Eintrag.'];
 $GLOBALS['TL_LANG']['tl_content']['factsboxStyle'] = ['Darstellung', 'Wählen Sie die Darstellung der Factsbox.'];
 $GLOBALS['TL_LANG']['tl_content']['factsboxItems'] = ['Fakten', 'Legen Sie die Fakten als Label-Wert-Paare an.'];
 $GLOBALS['TL_LANG']['tl_content']['factsboxItemsLabel'] = ['Label', 'Bezeichnung des Fakts.'];
@@ -282,6 +303,34 @@ $GLOBALS['TL_LANG']['tl_content']['teaserGridGapOptions'] = [
 $GLOBALS['TL_LANG']['tl_content']['simpleStyleOptions'] = [
     'default' => 'Standard',
     'minimal' => 'Minimal',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['processStepsVariantOptions'] = [
+    'process' => 'Prozess',
+    'timeline' => 'Timeline',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['processStepsOrientationOptions'] = [
+    'vertical' => 'Vertikal',
+    'horizontal' => 'Horizontal',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['processStepsMarkerStyleOptions'] = [
+    'number' => 'Nummer',
+    'icon' => 'Icon',
+    'dot' => 'Punkt',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['processStepsAlignOptions'] = [
+    'left' => 'Links',
+    'center' => 'Zentriert',
+    'right' => 'Rechts',
+    'alternate' => 'Abwechselnd',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['processStepsRevealOptions'] = [
+    'none' => 'Keine Animation',
+    'fade-up' => 'Von unten einblenden',
 ];
 
 $GLOBALS['TL_LANG']['tl_content']['factsboxStyleOptions'] = [

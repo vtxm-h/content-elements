@@ -14,6 +14,7 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_teaser_grid'] = '{type_legend
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_tabs'] = '{type_legend},type,headline;{tabs_legend},tabsStyle,tabsItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_accordion'] = '{type_legend},type,headline;{accordion_legend},accordionStyle,accordionItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_timeline'] = '{type_legend},type,headline;{timeline_legend},timelineTitle,timelineItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_process_steps'] = '{type_legend},type,headline;{process_steps_legend},processStepsIntro,processStepsItems;{process_steps_display_legend},processStepsVariant,processStepsOrientation,processStepsMarkerStyle,processStepsAlign,processStepsReveal;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_factsbox'] = '{type_legend},type,headline;{factsbox_legend},factsboxStyle,factsboxItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'sliderHeight';
@@ -711,6 +712,134 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['timelineItems'] = [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['timelineItemsText'],
                 'inputType' => 'textarea',
                 'eval' => ['style' => 'width:480px;height:70px'],
+            ],
+        ],
+        'tl_class' => 'clr',
+    ],
+    'sql' => 'blob NULL',
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['processStepsVariant'] = [
+    'exclude' => true,
+    'default' => 'process',
+    'inputType' => 'select',
+    'options' => ['process', 'timeline'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['processStepsVariantOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'process'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['processStepsOrientation'] = [
+    'exclude' => true,
+    'default' => 'vertical',
+    'inputType' => 'select',
+    'options' => ['vertical', 'horizontal'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['processStepsOrientationOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'vertical'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['processStepsMarkerStyle'] = [
+    'exclude' => true,
+    'default' => 'number',
+    'inputType' => 'select',
+    'options' => ['number', 'icon', 'dot'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['processStepsMarkerStyleOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'number'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['processStepsAlign'] = [
+    'exclude' => true,
+    'default' => 'left',
+    'inputType' => 'select',
+    'options' => ['left', 'center', 'right', 'alternate'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['processStepsAlignOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'left'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['processStepsReveal'] = [
+    'exclude' => true,
+    'default' => 'none',
+    'inputType' => 'select',
+    'options' => ['none', 'fade-up'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['processStepsRevealOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(32) NOT NULL default 'none'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['processStepsIntro'] = [
+    'exclude' => true,
+    'inputType' => 'textarea',
+    'eval' => ['rte' => 'tinyMCE', 'tl_class' => 'clr'],
+    'sql' => 'text NULL',
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['processStepsItems'] = [
+    'exclude' => true,
+    'inputType' => 'multiColumnWizard',
+    'eval' => [
+        'columnFields' => [
+            'marker' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['processStepsItemsMarker'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 64, 'style' => 'width:120px'],
+            ],
+            'eyebrow' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['processStepsItemsEyebrow'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 128, 'style' => 'width:160px'],
+            ],
+            'title' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['processStepsItemsTitle'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 255, 'style' => 'width:220px'],
+            ],
+            'text' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['processStepsItemsText'],
+                'inputType' => 'textarea',
+                'eval' => ['allowHtml' => false, 'style' => 'width:260px;height:70px'],
+            ],
+            'icon' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['processStepsItemsIcon'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 128, 'style' => 'width:140px'],
+            ],
+            'image' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['processStepsItemsImage'],
+                'inputType' => 'fileTree',
+                'eval' => [
+                    'filesOnly' => true,
+                    'fieldType' => 'radio',
+                    'extensions' => Config::get('validImageTypes'),
+                    'style' => 'width:260px',
+                ],
+            ],
+            'alt' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['processStepsItemsAlt'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 255, 'style' => 'width:180px'],
+            ],
+            'linkUrl' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['processStepsItemsLinkUrl'],
+                'inputType' => 'text',
+                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'dcaPicker' => true, 'style' => 'width:240px'],
+            ],
+            'linkLabel' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['processStepsItemsLinkLabel'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 128, 'style' => 'width:160px'],
+            ],
+            'target' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['processStepsItemsTarget'],
+                'inputType' => 'checkbox',
+                'eval' => ['style' => 'width:80px'],
+            ],
+            'cssClass' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['processStepsItemsCssClass'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 255, 'style' => 'width:180px'],
             ],
         ],
         'tl_class' => 'clr',
