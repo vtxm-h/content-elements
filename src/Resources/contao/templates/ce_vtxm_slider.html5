@@ -2,13 +2,68 @@
 
 use Contao\StringUtil;
 
+$isStaticRenderMode = 'static' === $this->sliderRenderMode;
+$staticItem = $this->sliderStaticItem;
 $classes = trim($this->elementClass.' slider--'.$this->sliderStyle.' slider--gap-'.$this->sliderGap.' slider--transition-'.$this->sliderTransition.' slider--image-'.$this->sliderImageEffect.' slider--text-'.$this->sliderTextAnimation.' slider--overlay-'.$this->sliderOverlay.' slider--mode-'.$this->sliderMode.' slider--width-'.$this->sliderWidth.' slider--height-'.$this->sliderHeight.' slider--pattern-'.$this->sliderPattern.' slider--scroll-'.$this->sliderScrollEffect);
-$ariaLabel = $this->headlineText ?: 'Slider';
+
+if ($isStaticRenderMode) {
+    $classes = trim($classes.' vtxm-slider--render-static vtxm-slider--content-align-'.$this->sliderContentAlign.' vtxm-slider--content-position-'.$this->sliderContentPosition.' vtxm-slider--media-position-'.$this->sliderMediaPosition);
+}
+
+$ariaLabel = $this->headlineText ?: ($isStaticRenderMode ? ((\is_array($staticItem) && '' !== $staticItem['headline']) ? $staticItem['headline'] : 'Hero') : 'Slider');
 
 ?>
 
-<section<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>" aria-label="<?= StringUtil::specialchars($ariaLabel) ?>" data-vtxm-slider-mode="<?= StringUtil::specialchars($this->sliderMode) ?>" data-vtxm-slider-width="<?= StringUtil::specialchars($this->sliderWidth) ?>" data-vtxm-slider-height="<?= StringUtil::specialchars($this->sliderHeight) ?>" data-vtxm-slider-custom-height="<?= StringUtil::specialchars((string) $this->sliderCustomHeight) ?>" data-vtxm-slider-pattern="<?= StringUtil::specialchars($this->sliderPattern) ?>" data-vtxm-slider-scroll-effect="<?= StringUtil::specialchars($this->sliderScrollEffect) ?>" data-vtxm-slider-scroll-distance="<?= StringUtil::specialchars((string) $this->sliderScrollDistance) ?>">
-  <?php if (!empty($this->sliderItems)): ?>
+<?php if (!$isStaticRenderMode || $this->sliderHasStaticItem): ?>
+<section<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>" aria-label="<?= StringUtil::specialchars($ariaLabel) ?>"<?php if ($isStaticRenderMode): ?> data-vtxm-slider-render-mode="static"<?php endif; ?> data-vtxm-slider-mode="<?= StringUtil::specialchars($this->sliderMode) ?>" data-vtxm-slider-width="<?= StringUtil::specialchars($this->sliderWidth) ?>" data-vtxm-slider-height="<?= StringUtil::specialchars($this->sliderHeight) ?>" data-vtxm-slider-custom-height="<?= StringUtil::specialchars((string) $this->sliderCustomHeight) ?>" data-vtxm-slider-pattern="<?= StringUtil::specialchars($this->sliderPattern) ?>" data-vtxm-slider-scroll-effect="<?= StringUtil::specialchars($this->sliderScrollEffect) ?>" data-vtxm-slider-scroll-distance="<?= StringUtil::specialchars((string) $this->sliderScrollDistance) ?>">
+  <?php if ($isStaticRenderMode): ?>
+    <?php $item = $staticItem; ?>
+    <article class="vtxm-static-hero">
+      <?php if ('video' === $item['mediaType'] && '' !== $item['videoDesktop']): ?>
+        <figure class="vtxm-static-hero__media vtxm-static-hero__media--video vtxm-slider__media vtxm-slider__media--video">
+          <video class="vtxm-static-hero__video vtxm-slider__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"<?php if ('' !== $item['videoPoster']): ?> poster="<?= StringUtil::specialchars($item['videoPoster']) ?>"<?php endif; ?> data-vtxm-video data-vtxm-video-desktop="<?= StringUtil::specialchars($item['videoDesktop']) ?>" data-vtxm-video-mobile="<?= StringUtil::specialchars($item['videoMobile']) ?>">
+            <source src="<?= StringUtil::specialchars($item['videoDesktop']) ?>"<?php if ('' !== $item['videoMimeType']): ?> type="<?= StringUtil::specialchars($item['videoMimeType']) ?>"<?php endif; ?>>
+          </video>
+        </figure>
+      <?php elseif ('' !== $item['image']): ?>
+        <figure class="vtxm-static-hero__media vtxm-static-hero__media--image vtxm-slider__media vtxm-slider__media--image">
+          <div class="vtxm-static-hero__image vtxm-slider__image">
+            <img src="<?= StringUtil::specialchars($item['image']) ?>" alt="<?= StringUtil::specialchars($item['alt']) ?>">
+          </div>
+        </figure>
+      <?php endif; ?>
+
+      <?php if ($this->sliderHasOverlay): ?>
+        <div class="vtxm-static-hero__overlay vtxm-slider__overlay" aria-hidden="true"></div>
+      <?php endif; ?>
+
+      <?php if ($this->sliderHasPattern): ?>
+        <div class="vtxm-static-hero__pattern vtxm-slider__pattern" aria-hidden="true"></div>
+      <?php endif; ?>
+
+      <?php if ($item['hasContent']): ?>
+        <div class="vtxm-static-hero__content vtxm-slider__content">
+          <?php if ('' !== $item['eyebrow']): ?>
+            <p class="vtxm-static-hero__eyebrow vtxm-slider__eyebrow"><?= StringUtil::specialchars($item['eyebrow']) ?></p>
+          <?php endif; ?>
+
+          <?php if ('' !== $item['headline']): ?>
+            <<?= $this->headlineUnit ?> class="vtxm-static-hero__headline vtxm-slider__headline"><?= StringUtil::specialchars($item['headline']) ?></<?= $this->headlineUnit ?>>
+          <?php endif; ?>
+
+          <?php if ('' !== $item['text']): ?>
+            <div class="vtxm-static-hero__text vtxm-slider__text"><?= nl2br(StringUtil::specialchars($item['text'])) ?></div>
+          <?php endif; ?>
+
+          <?php if ('' !== $item['linkUrl'] && '' !== $item['linkLabel']): ?>
+            <p class="vtxm-static-hero__action vtxm-slider__action">
+              <a class="vtxm-static-hero__link" href="<?= StringUtil::specialchars($item['linkUrl']) ?>"<?php if ($item['target']): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>><?= StringUtil::specialchars($item['linkLabel']) ?></a>
+            </p>
+          <?php endif; ?>
+        </div>
+      <?php endif; ?>
+    </article>
+  <?php elseif (!empty($this->sliderItems)): ?>
     <div class="splide" data-vtxm-slider data-options="<?= StringUtil::specialchars($this->sliderOptions) ?>">
       <div class="splide__track">
         <ul class="splide__list">
@@ -66,3 +121,4 @@ $ariaLabel = $this->headlineText ?: 'Slider';
     </div>
   <?php endif; ?>
 </section>
+<?php endif; ?>
