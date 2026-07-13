@@ -47,8 +47,19 @@ $classes = trim($this->elementClass.' team-grid--style-'.$this->teamGridStyle.' 
             <?php if (!empty($item['contacts'])): ?>
               <ul class="team-grid__contacts" aria-label="<?= StringUtil::specialchars('Contact'.('' !== $item['name'] ? ': '.$item['name'] : '')) ?>">
                 <?php foreach ($item['contacts'] as $contact): ?>
+                  <?php
+
+                    $contactAriaLabel = $contact['ariaLabel'];
+
+                    if ('email' === $contact['type'] || 'phone' === $contact['type']) {
+                        $contactAriaLabel = '';
+                    } elseif ('website' === $contact['type'] && '' !== $contact['url']) {
+                        $contactAriaLabel = trim($contactAriaLabel.' '.$contact['url']);
+                    }
+
+                  ?>
                   <li>
-                    <a class="team-grid__contact team-grid__contact--<?= StringUtil::specialchars($contact['type']) ?>" href="<?= StringUtil::specialchars($contact['url']) ?>" aria-label="<?= StringUtil::specialchars($contact['ariaLabel']) ?>"><?= StringUtil::specialchars($contact['label']) ?></a>
+                    <a class="team-grid__contact team-grid__contact--<?= StringUtil::specialchars($contact['type']) ?>" href="<?= StringUtil::specialchars($contact['url']) ?>"<?php if ('' !== $contactAriaLabel): ?> aria-label="<?= StringUtil::specialchars($contactAriaLabel) ?>"<?php endif; ?>><?= StringUtil::specialchars($contact['label']) ?></a>
                   </li>
                 <?php endforeach; ?>
               </ul>
