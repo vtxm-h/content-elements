@@ -80,6 +80,7 @@ $GLOBALS['TL_LANG']['tl_content']['linkListItemsDescription'] = ['Description', 
 $GLOBALS['TL_LANG']['tl_content']['linkListItemsTarget'] = ['New window', 'Open the link in a new window.'];
 
 $GLOBALS['TL_LANG']['tl_content']['sliderStyle'] = ['Display style', 'Choose the slider display style.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderRenderMode'] = ['Render mode', 'Choose Slider for Splide-compatible carousel markup or Static Hero for one no-JavaScript hero. Static Hero uses only the first usable item.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderAutoplay'] = ['Autoplay', 'Change slides automatically.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderInterval'] = ['Interval', 'Autoplay interval in milliseconds.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderArrows'] = ['Show arrows', 'Show arrow navigation.'];
@@ -94,6 +95,9 @@ $GLOBALS['TL_LANG']['tl_content']['sliderOverlay'] = ['Overlay', 'Choose an opti
 $GLOBALS['TL_LANG']['tl_content']['sliderMode'] = ['Mode', 'Choose standard slider output or Hero media output.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderWidth'] = ['Width', 'Choose whether the slider stays contained or exposes full-width hooks.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderHeight'] = ['Height', 'Choose the Hero height preset.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderContentAlign'] = ['Content alignment', 'Choose the Static Hero content alignment.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderContentPosition'] = ['Content position', 'Choose the Static Hero content position.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderMediaPosition'] = ['Media position', 'Choose the predefined Static Hero media position.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderCustomHeight'] = ['Custom height in pixels', 'Enter the custom Hero height in pixels.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderPattern'] = ['Pattern', 'Choose an optional decorative pattern overlay.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderScrollEffect'] = ['Scroll effect', 'Choose whether frontend-assets may fade the Hero while scrolling.'];
@@ -208,6 +212,11 @@ $GLOBALS['TL_LANG']['tl_content']['sliderStyleOptions'] = [
     'quotes' => 'Quotes',
 ];
 
+$GLOBALS['TL_LANG']['tl_content']['sliderRenderModeOptions'] = [
+    'slider' => 'Slider',
+    'static' => 'Static Hero',
+];
+
 $GLOBALS['TL_LANG']['tl_content']['sliderPerPageOptions'] = [
     '1' => '1',
     '2' => '2',
@@ -260,6 +269,30 @@ $GLOBALS['TL_LANG']['tl_content']['sliderHeightOptions'] = [
     'large' => 'Large',
     'viewport' => 'Viewport height',
     'custom' => 'Custom height',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderContentAlignOptions'] = [
+    'left' => 'Left',
+    'center' => 'Centered',
+    'right' => 'Right',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderContentPositionOptions'] = [
+    'top' => 'Top',
+    'center' => 'Center',
+    'bottom' => 'Bottom',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderMediaPositionOptions'] = [
+    'left-top' => 'Left top',
+    'center-top' => 'Center top',
+    'right-top' => 'Right top',
+    'left-center' => 'Left center',
+    'center-center' => 'Center center',
+    'right-center' => 'Right center',
+    'left-bottom' => 'Left bottom',
+    'center-bottom' => 'Center bottom',
+    'right-bottom' => 'Right bottom',
 ];
 
 $GLOBALS['TL_LANG']['tl_content']['sliderPatternOptions'] = [
