@@ -11,6 +11,7 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_media_text'] = '{type_legend}
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_link_list'] = '{type_legend},type,headline;{link_list_legend},linkListStyle,linkListAlign,linkListItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_slider'] = '{type_legend},type,headline;{slider_legend},sliderStyle,sliderItems;{slider_settings_legend:hide},sliderRenderMode,sliderAutoplay,sliderInterval,sliderArrows,sliderPagination,sliderLoop,sliderPerPage,sliderGap,sliderTransition,sliderImageEffect,sliderTextAnimation,sliderOverlay,sliderMode,sliderWidth,sliderHeight,sliderContentAlign,sliderContentPosition,sliderMediaPosition,sliderPattern,sliderScrollEffect;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_teaser_grid'] = '{type_legend},type,headline;{teaser_grid_legend},teaserGridStyle,teaserGridColumns,teaserGridGap,teaserGridItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_team_grid'] = '{type_legend},type,headline;{team_grid_legend},teamGridStyle,teamGridLayout,teamGridColumns,teamGridGap,teamGridImageRatio,teamGridAlign,teamGridReveal,teamGridItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_tabs'] = '{type_legend},type,headline;{tabs_legend},tabsStyle,tabsItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_accordion'] = '{type_legend},type,headline;{accordion_legend},accordionStyle,accordionItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_timeline'] = '{type_legend},type,headline;{timeline_legend},timelineTitle,timelineItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
@@ -667,6 +668,192 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['teaserGridItems'] = [
         'tl_class' => 'clr',
     ],
     'sql' => 'blob NULL',
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['teamGridStyle'] = [
+    'exclude' => true,
+    'default' => 'cards',
+    'inputType' => 'select',
+    'options' => ['cards', 'minimal', 'list'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['teamGridStyleOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(32) NOT NULL default 'cards'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['teamGridLayout'] = [
+    'exclude' => true,
+    'default' => 'grid',
+    'inputType' => 'select',
+    'options' => ['grid', 'list'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['teamGridLayoutOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'grid'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['teamGridColumns'] = [
+    'exclude' => true,
+    'default' => '3',
+    'inputType' => 'select',
+    'options' => ['2', '3', '4'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['teamGridColumnsOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(8) NOT NULL default '3'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['teamGridGap'] = [
+    'exclude' => true,
+    'default' => 'medium',
+    'inputType' => 'select',
+    'options' => ['small', 'medium', 'large'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['teamGridGapOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'medium'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['teamGridImageRatio'] = [
+    'exclude' => true,
+    'default' => 'portrait',
+    'inputType' => 'select',
+    'options' => ['portrait', 'square', 'landscape', 'natural'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['teamGridImageRatioOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'portrait'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['teamGridAlign'] = [
+    'exclude' => true,
+    'default' => 'left',
+    'inputType' => 'select',
+    'options' => ['left', 'center'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['teamGridAlignOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'left'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['teamGridReveal'] = [
+    'exclude' => true,
+    'default' => 'none',
+    'inputType' => 'select',
+    'options' => ['none', 'fade-up'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['teamGridRevealOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'none'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['teamGridItems'] = [
+    'exclude' => true,
+    'inputType' => 'multiColumnWizard',
+    'eval' => [
+        'columnFields' => [
+            'image' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsImage'],
+                'inputType' => 'fileTree',
+                'eval' => [
+                    'filesOnly' => true,
+                    'fieldType' => 'radio',
+                    'extensions' => Config::get('validImageTypes'),
+                    'style' => 'width:260px',
+                ],
+            ],
+            'alt' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsAlt'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 255, 'style' => 'width:180px'],
+            ],
+            'name' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsName'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 255, 'style' => 'width:220px'],
+            ],
+            'role' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsRole'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 255, 'style' => 'width:220px'],
+            ],
+            'biography' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsBiography'],
+                'inputType' => 'textarea',
+                'eval' => ['allowHtml' => false, 'style' => 'width:300px;height:80px'],
+            ],
+            'email' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsEmail'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 255, 'rgxp' => 'email', 'style' => 'width:220px'],
+            ],
+            'phone' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsPhone'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 64, 'style' => 'width:180px'],
+            ],
+            'website' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsWebsite'],
+                'inputType' => 'text',
+                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'dcaPicker' => true, 'style' => 'width:240px'],
+            ],
+            'linkedinUrl' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLinkedinUrl'],
+                'inputType' => 'text',
+                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'style' => 'width:240px'],
+            ],
+            'instagramUrl' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsInstagramUrl'],
+                'inputType' => 'text',
+                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'style' => 'width:240px'],
+            ],
+            'mastodonUrl' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsMastodonUrl'],
+                'inputType' => 'text',
+                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'style' => 'width:240px'],
+            ],
+            'blueskyUrl' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsBlueskyUrl'],
+                'inputType' => 'text',
+                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'style' => 'width:240px'],
+            ],
+            'githubUrl' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsGithubUrl'],
+                'inputType' => 'text',
+                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'style' => 'width:240px'],
+            ],
+            'ctaUrl' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsCtaUrl'],
+                'inputType' => 'text',
+                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'dcaPicker' => true, 'style' => 'width:240px'],
+            ],
+            'ctaLabel' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsCtaLabel'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 128, 'style' => 'width:180px'],
+            ],
+            'ctaTarget' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsCtaTarget'],
+                'inputType' => 'checkbox',
+                'eval' => ['style' => 'width:80px'],
+            ],
+            'genericLink1Label' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsGenericLink1Label'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 128, 'style' => 'width:180px'],
+            ],
+            'genericLink1Url' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsGenericLink1Url'],
+                'inputType' => 'text',
+                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'style' => 'width:240px'],
+            ],
+            'genericLink2Label' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsGenericLink2Label'],
+                'inputType' => 'text',
+                'eval' => ['maxlength' => 128, 'style' => 'width:180px'],
+            ],
+            'genericLink2Url' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsGenericLink2Url'],
+                'inputType' => 'text',
+                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'style' => 'width:240px'],
+            ],
+        ],
+        'tl_class' => 'clr',
+    ],
+    'sql' => 'mediumblob NULL',
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tabsStyle'] = [

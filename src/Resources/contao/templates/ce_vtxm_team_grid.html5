@@ -1,0 +1,90 @@
+<?php
+
+use Contao\StringUtil;
+
+if (!$this->teamGridHasItems) {
+    return;
+}
+
+$hasReveal = 'fade-up' === $this->teamGridReveal;
+$mediaClass = $this->teamGridHasMedia ? 'team-grid--has-media' : 'team-grid--no-media';
+$classes = trim($this->elementClass.' team-grid--style-'.$this->teamGridStyle.' team-grid--layout-'.$this->teamGridLayout.' team-grid--columns-'.$this->teamGridColumns.' team-grid--gap-'.$this->teamGridGap.' team-grid--ratio-'.$this->teamGridImageRatio.' team-grid--align-'.$this->teamGridAlign.' team-grid--reveal-'.$this->teamGridReveal.' '.$mediaClass.($hasReveal ? ' vtxm-reveal-group' : ''));
+
+?>
+
+<section<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>" data-vtxm-team-grid data-vtxm-team-grid-style="<?= StringUtil::specialchars($this->teamGridStyle) ?>" data-vtxm-team-grid-layout="<?= StringUtil::specialchars($this->teamGridLayout) ?>" data-vtxm-team-grid-columns="<?= StringUtil::specialchars($this->teamGridColumns) ?>" data-vtxm-team-grid-gap="<?= StringUtil::specialchars($this->teamGridGap) ?>" data-vtxm-team-grid-ratio="<?= StringUtil::specialchars($this->teamGridImageRatio) ?>" data-vtxm-team-grid-align="<?= StringUtil::specialchars($this->teamGridAlign) ?>"<?php if ($hasReveal): ?> data-vtxm-reveal-type="fade-up" data-vtxm-reveal-target=".team-grid__list > .team-grid__item" data-vtxm-reveal-stagger="90"<?php endif; ?>>
+  <?php if ($this->teamGridHasHeader): ?>
+    <div class="team-grid__header">
+      <<?= $this->headlineUnit ?> class="team-grid__headline"><?= StringUtil::specialchars($this->headlineText) ?></<?= $this->headlineUnit ?>>
+    </div>
+  <?php endif; ?>
+
+  <ul class="team-grid__list">
+    <?php foreach ($this->teamGridItems as $item): ?>
+      <li class="team-grid__item<?php if ($hasReveal): ?> vtxm-reveal-item<?php endif; ?>" data-vtxm-team-grid-item data-vtxm-team-grid-item-index="<?= StringUtil::specialchars((string) $item['index']) ?>">
+        <article class="team-grid__card">
+          <?php if ('' !== $item['image']): ?>
+            <figure class="team-grid__media">
+              <img class="team-grid__image" src="<?= StringUtil::specialchars($item['image']) ?>" alt="<?= StringUtil::specialchars($item['alt']) ?>" loading="lazy">
+            </figure>
+          <?php else: ?>
+            <span class="team-grid__media-placeholder" aria-hidden="true"></span>
+          <?php endif; ?>
+
+          <div class="team-grid__content">
+            <?php if ('' !== $item['name']): ?>
+              <<?= $this->teamGridItemHeadlineUnit ?> class="team-grid__name"><?= StringUtil::specialchars($item['name']) ?></<?= $this->teamGridItemHeadlineUnit ?>>
+            <?php endif; ?>
+
+            <?php if ('' !== $item['role']): ?>
+              <p class="team-grid__role"><?= StringUtil::specialchars($item['role']) ?></p>
+            <?php endif; ?>
+
+            <?php if ('' !== $item['biography']): ?>
+              <div class="team-grid__biography"><?= nl2br(StringUtil::specialchars($item['biography'])) ?></div>
+            <?php endif; ?>
+
+            <?php if (!empty($item['contacts'])): ?>
+              <ul class="team-grid__contacts" aria-label="<?= StringUtil::specialchars('Contact'.('' !== $item['name'] ? ': '.$item['name'] : '')) ?>">
+                <?php foreach ($item['contacts'] as $contact): ?>
+                  <?php
+
+                    $contactAriaLabel = $contact['ariaLabel'];
+
+                    if ('email' === $contact['type'] || 'phone' === $contact['type']) {
+                        $contactAriaLabel = '';
+                    } elseif ('website' === $contact['type'] && '' !== $contact['url']) {
+                        $contactAriaLabel = trim($contactAriaLabel.' '.$contact['url']);
+                    }
+
+                  ?>
+                  <li>
+                    <a class="team-grid__contact team-grid__contact--<?= StringUtil::specialchars($contact['type']) ?>" href="<?= StringUtil::specialchars($contact['url']) ?>"<?php if ('' !== $contactAriaLabel): ?> aria-label="<?= StringUtil::specialchars($contactAriaLabel) ?>"<?php endif; ?>><?= StringUtil::specialchars($contact['label']) ?></a>
+                  </li>
+                <?php endforeach; ?>
+              </ul>
+            <?php endif; ?>
+
+            <?php if (!empty($item['socials'])): ?>
+              <ul class="team-grid__socials" aria-label="<?= StringUtil::specialchars('Profiles'.('' !== $item['name'] ? ': '.$item['name'] : '')) ?>">
+                <?php foreach ($item['socials'] as $social): ?>
+                  <li>
+                    <a class="team-grid__social team-grid__social--<?= StringUtil::specialchars($social['type']) ?>" href="<?= StringUtil::specialchars($social['url']) ?>" aria-label="<?= StringUtil::specialchars($social['ariaLabel']) ?>">
+                      <span class="team-grid__social-label"><?= StringUtil::specialchars($social['label']) ?></span>
+                    </a>
+                  </li>
+                <?php endforeach; ?>
+              </ul>
+            <?php endif; ?>
+
+            <?php if (\is_array($item['action'])): ?>
+              <p class="team-grid__action">
+                <a class="team-grid__link" href="<?= StringUtil::specialchars($item['action']['url']) ?>"<?php if ($item['action']['target']): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?> aria-label="<?= StringUtil::specialchars($item['action']['ariaLabel']) ?>"><?= StringUtil::specialchars($item['action']['label']) ?></a>
+              </p>
+            <?php endif; ?>
+          </div>
+        </article>
+      </li>
+    <?php endforeach; ?>
+  </ul>
+</section>

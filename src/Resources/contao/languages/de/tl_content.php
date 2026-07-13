@@ -6,6 +6,7 @@ $GLOBALS['TL_LANG']['CTE']['vtxm_media_text'] = ['Media Text', 'Zeigt ein Medium
 $GLOBALS['TL_LANG']['CTE']['vtxm_link_list'] = ['Linkliste', 'Zeigt strukturierte Links als Liste, Buttons oder Icons an.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_slider'] = ['Slider', 'Zeigt strukturierte Slides als Hero-, Bild-, Karten- oder Zitat-Slider an.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_teaser_grid'] = ['Teaser Grid', 'Zeigt wiederverwendbare Teaser-Karten mit Bild, Text, Badge und optionalem Link an.'];
+$GLOBALS['TL_LANG']['CTE']['vtxm_team_grid'] = ['Team Grid', 'Zeigt wiederholbare Teamprofile mit Bild, Rolle, Biografie, Kontaktlinks, Social Links und einer primären Aktion an.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_members_grid'] = ['Members Grid', 'Grid mit vier festen Mitgliederpositionen.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_live_teaser'] = ['Live Teaser', 'Konzert- oder Live-Ankündigungsblock.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_quote_teaser'] = ['Quote Teaser', 'Zitat- oder Review-Block.'];
@@ -22,6 +23,7 @@ $GLOBALS['TL_LANG']['tl_content']['link_list_legend'] = 'Linkliste';
 $GLOBALS['TL_LANG']['tl_content']['slider_legend'] = 'Slider';
 $GLOBALS['TL_LANG']['tl_content']['slider_settings_legend'] = 'Slider-Einstellungen';
 $GLOBALS['TL_LANG']['tl_content']['teaser_grid_legend'] = 'Teaser Grid';
+$GLOBALS['TL_LANG']['tl_content']['team_grid_legend'] = 'Team Grid';
 $GLOBALS['TL_LANG']['tl_content']['members_legend'] = 'Mitglieder';
 $GLOBALS['TL_LANG']['tl_content']['live_legend'] = 'Live Teaser';
 $GLOBALS['TL_LANG']['tl_content']['quote_legend'] = 'Zitat';
@@ -128,6 +130,35 @@ $GLOBALS['TL_LANG']['tl_content']['teaserGridItemsBadge'] = ['Badge', 'Optionale
 $GLOBALS['TL_LANG']['tl_content']['teaserGridItemsLinkUrl'] = ['Link-URL', 'Optionales Linkziel.'];
 $GLOBALS['TL_LANG']['tl_content']['teaserGridItemsLinkLabel'] = ['Link-Text', 'Beschriftung des optionalen Links.'];
 $GLOBALS['TL_LANG']['tl_content']['teaserGridItemsTarget'] = ['Neues Fenster', 'Link in einem neuen Fenster öffnen.'];
+
+$GLOBALS['TL_LANG']['tl_content']['teamGridStyle'] = ['Darstellung', 'Wählen Sie die Darstellung der Teamprofile.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridLayout'] = ['Layout', 'Wählen Sie Grid- oder Listen-Ausgabe-Hooks.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridColumns'] = ['Spalten', 'Wählen Sie die Spaltenanzahl für große Bildschirme, wenn das Grid-Layout genutzt wird.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridGap'] = ['Abstand', 'Wählen Sie den Abstand zwischen den Teamprofilen.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridImageRatio'] = ['Bildverhältnis', 'Wählen Sie den Hook für das Bildverhältnis. Natürlich behält das Verhältnis des gewählten Bildes bei.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridAlign'] = ['Ausrichtung', 'Wählen Sie den Hook für die Inhaltsausrichtung.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridReveal'] = ['Reveal-Hook', 'Wählen Sie, ob frontend-assets die Teamprofile mit dem generischen Reveal-Effekt erweitern darf. Inhalte bleiben ohne JavaScript sichtbar.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItems'] = ['Teamprofile', 'Legen Sie wiederholbare Personen an. Leere Zeilen werden ignoriert; eine Zeile ist nutzbar, wenn sie einen Namen oder Rolle, Biografie, gültiges Medium, Kontakt-/Social-Link oder primäre Aktion enthält.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsImage'] = ['Bild', 'Optionales Profilbild. Fehlende oder ungültige Bilder erzeugen kein Medien-Element.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsAlt'] = ['Alt-Text', 'Alternativtext für das Bild. Nur für dekorative Bilder leer lassen; der Name wird nicht automatisch als Alt-Text genutzt.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsName'] = ['Name', 'Name der Person.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsRole'] = ['Rolle', 'Rolle, Titel oder Zuständigkeit.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsBiography'] = ['Biografie', 'Kurze Biografie als Klartext. Zeilenumbrüche bleiben erhalten.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsEmail'] = ['E-Mail', 'E-Mail-Adresse. Wird bei gültiger Adresse als mailto-Link ausgegeben.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsPhone'] = ['Telefon', 'Telefonnummer. Wird bei nutzbarer Nummer als tel-Link ausgegeben.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsWebsite'] = ['Website', 'Persönliche Website oder Profil-URL.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLinkedinUrl'] = ['LinkedIn-URL', 'LinkedIn-Profil-URL.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsInstagramUrl'] = ['Instagram-URL', 'Instagram-Profil-URL.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsMastodonUrl'] = ['Mastodon-URL', 'Mastodon-Profil-URL.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsBlueskyUrl'] = ['Bluesky-URL', 'Bluesky-Profil-URL.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsGithubUrl'] = ['GitHub-URL', 'GitHub-Profil-URL.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsCtaUrl'] = ['Primäre Aktions-URL', 'Ziel der primären Handlungsaufforderung. Wird nur zusammen mit einem Label ausgegeben.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsCtaLabel'] = ['Primärer Aktionstext', 'Sichtbare Beschriftung der primären Handlungsaufforderung.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsCtaTarget'] = ['Neues Fenster', 'Primäre Aktion in einem neuen Fenster öffnen.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsGenericLink1Label'] = ['Generischer Social Link 1 Label', 'Explizites Label für einen zusätzlichen Social- oder Profil-Link.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsGenericLink1Url'] = ['Generischer Social Link 1 URL', 'URL für den ersten zusätzlichen Social- oder Profil-Link.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsGenericLink2Label'] = ['Generischer Social Link 2 Label', 'Explizites Label für einen zweiten zusätzlichen Social- oder Profil-Link.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsGenericLink2Url'] = ['Generischer Social Link 2 URL', 'URL für den zweiten zusätzlichen Social- oder Profil-Link.'];
 
 $GLOBALS['TL_LANG']['tl_content']['tabsStyle'] = ['Stil', 'Wählen Sie die Darstellung der Tabs.'];
 $GLOBALS['TL_LANG']['tl_content']['tabsItems'] = ['Tab-Einträge', 'Fügen Sie die Tab-Titel und Inhalte hinzu.'];
@@ -331,6 +362,46 @@ $GLOBALS['TL_LANG']['tl_content']['teaserGridGapOptions'] = [
     'small' => 'Klein',
     'medium' => 'Mittel',
     'large' => 'Groß',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teamGridStyleOptions'] = [
+    'cards' => 'Karten',
+    'minimal' => 'Minimal',
+    'list' => 'Liste',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teamGridLayoutOptions'] = [
+    'grid' => 'Grid',
+    'list' => 'Liste',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teamGridColumnsOptions'] = [
+    '2' => '2 Spalten',
+    '3' => '3 Spalten',
+    '4' => '4 Spalten',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teamGridGapOptions'] = [
+    'small' => 'Klein',
+    'medium' => 'Mittel',
+    'large' => 'Groß',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teamGridImageRatioOptions'] = [
+    'portrait' => 'Porträt',
+    'square' => 'Quadratisch',
+    'landscape' => 'Querformat',
+    'natural' => 'Natürlich',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teamGridAlignOptions'] = [
+    'left' => 'Links',
+    'center' => 'Zentriert',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['teamGridRevealOptions'] = [
+    'none' => 'Keine Animation',
+    'fade-up' => 'Von unten einblenden',
 ];
 
 $GLOBALS['TL_LANG']['tl_content']['simpleStyleOptions'] = [
