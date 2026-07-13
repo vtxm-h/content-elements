@@ -10,6 +10,7 @@ use Contao\StringUtil;
 
 class SliderElement extends AbstractWrappedContentElement
 {
+    private const RENDER_MODE_VALUES = ['slider', 'static'];
     private const TRANSITION_VALUES = ['slide', 'fade'];
     private const IMAGE_EFFECT_VALUES = ['none', 'slow-zoom'];
     private const TEXT_ANIMATION_VALUES = ['none', 'fade-up'];
@@ -17,6 +18,9 @@ class SliderElement extends AbstractWrappedContentElement
     private const MODE_VALUES = ['standard', 'hero'];
     private const WIDTH_VALUES = ['contained', 'fullwidth'];
     private const HEIGHT_VALUES = ['auto', 'compact', 'medium', 'large', 'viewport', 'custom'];
+    private const CONTENT_ALIGN_VALUES = ['left', 'center', 'right'];
+    private const CONTENT_POSITION_VALUES = ['top', 'center', 'bottom'];
+    private const MEDIA_POSITION_VALUES = ['left-top', 'center-top', 'right-top', 'left-center', 'center-center', 'right-center', 'left-bottom', 'center-bottom', 'right-bottom'];
     private const PATTERN_VALUES = ['none', 'dots-fine', 'dots-coarse', 'lines-diagonal', 'lines-horizontal'];
     private const SCROLL_EFFECT_VALUES = ['none', 'fade', 'fade-background'];
     private const MEDIA_TYPE_VALUES = ['image', 'video'];
@@ -41,6 +45,7 @@ class SliderElement extends AbstractWrappedContentElement
         $this->assignWrapper('ce_vtxm_slider vtxm-slider');
         $this->assignHeadline();
 
+        $renderMode = $this->normalizeOption((string) ($this->sliderRenderMode ?: 'slider'), self::RENDER_MODE_VALUES, 'slider');
         $style = $this->normalizeOption((string) ($this->sliderStyle ?: 'hero'), ['hero', 'images', 'cards', 'quotes'], 'hero');
         $gap = $this->normalizeOption((string) ($this->sliderGap ?: 'medium'), ['none', 'small', 'medium', 'large'], 'medium');
         $transition = $this->normalizeOption((string) ($this->sliderTransition ?: 'slide'), self::TRANSITION_VALUES, 'slide');
@@ -50,6 +55,9 @@ class SliderElement extends AbstractWrappedContentElement
         $mode = $this->normalizeOption((string) ($this->sliderMode ?: 'standard'), self::MODE_VALUES, 'standard');
         $width = $this->normalizeOption((string) ($this->sliderWidth ?: 'contained'), self::WIDTH_VALUES, 'contained');
         $height = $this->normalizeOption((string) ($this->sliderHeight ?: 'auto'), self::HEIGHT_VALUES, 'auto');
+        $contentAlign = $this->normalizeOption((string) ($this->sliderContentAlign ?: 'left'), self::CONTENT_ALIGN_VALUES, 'left');
+        $contentPosition = $this->normalizeOption((string) ($this->sliderContentPosition ?: 'bottom'), self::CONTENT_POSITION_VALUES, 'bottom');
+        $mediaPosition = $this->normalizeOption((string) ($this->sliderMediaPosition ?: 'center-center'), self::MEDIA_POSITION_VALUES, 'center-center');
         $customHeight = $this->normalizeInteger($this->sliderCustomHeight, 160, 1600, 640);
         $pattern = $this->normalizeOption((string) ($this->sliderPattern ?: 'none'), self::PATTERN_VALUES, 'none');
         $scrollEffect = $this->normalizeOption((string) ($this->sliderScrollEffect ?: 'none'), self::SCROLL_EFFECT_VALUES, 'none');
@@ -76,6 +84,10 @@ class SliderElement extends AbstractWrappedContentElement
             $options['rewind'] = $loop;
         }
 
+        $items = $this->normalizeItems(StringUtil::deserialize($this->sliderItems, true));
+        $staticItem = 'static' === $renderMode ? $this->firstUsableStaticItem($items) : null;
+
+        $this->Template->sliderRenderMode = $renderMode;
         $this->Template->sliderStyle = $style;
         $this->Template->sliderGap = $gap;
         $this->Template->sliderTransition = $transition;
@@ -86,19 +98,24 @@ class SliderElement extends AbstractWrappedContentElement
         $this->Template->sliderMode = $mode;
         $this->Template->sliderWidth = $width;
         $this->Template->sliderHeight = $height;
+        $this->Template->sliderContentAlign = $contentAlign;
+        $this->Template->sliderContentPosition = $contentPosition;
+        $this->Template->sliderMediaPosition = $mediaPosition;
         $this->Template->sliderCustomHeight = $customHeight;
         $this->Template->sliderPattern = $pattern;
         $this->Template->sliderHasPattern = 'none' !== $pattern;
         $this->Template->sliderScrollEffect = $scrollEffect;
         $this->Template->sliderScrollDistance = $scrollDistance;
-        $this->Template->sliderItems = $this->normalizeItems(StringUtil::deserialize($this->sliderItems, true));
+        $this->Template->sliderItems = $items;
+        $this->Template->sliderStaticItem = $staticItem;
+        $this->Template->sliderHasStaticItem = null !== $staticItem;
         $this->Template->sliderOptions = $this->encodeOptions($options);
     }
 
     /**
      * @param mixed $items
      *
-     * @return list<array{mediaType: string, image: string, alt: string, videoDesktop: string, videoMobile: string, videoPoster: string, videoMimeType: string, eyebrow: string, headline: string, text: string, linkLabel: string, linkUrl: string, target: bool, hasContent: bool}>
+     * @return list<array{mediaType: string, image: string, alt: string, videoDesktop: string, videoMobile: string, videoPoster: string, videoMimeType: string, eyebrow: string, headline: string, text: string, linkLabel: string, linkUrl: string, target: bool, hasAction: bool, hasMedia: bool, hasVisibleText: bool, hasContent: bool}>
      */
     private function normalizeItems($items): array
     {
@@ -124,7 +141,8 @@ class SliderElement extends AbstractWrappedContentElement
             $linkLabel = trim((string) ($item['linkLabel'] ?? ''));
             $linkUrl = $this->normalizeUrl(trim((string) ($item['linkUrl'] ?? '')));
             $hasAction = '' !== $linkLabel && '' !== $linkUrl;
-            $hasContent = '' !== $eyebrow || '' !== $headline || '' !== $text || $hasAction;
+            $hasVisibleText = '' !== $eyebrow || '' !== $headline || '' !== $text;
+            $hasContent = $hasVisibleText || $hasAction;
 
             if ('' === $videoDesktop && '' !== $videoMobile) {
                 $videoDesktop = $videoMobile;
@@ -138,7 +156,9 @@ class SliderElement extends AbstractWrappedContentElement
                 $mediaType = 'image';
             }
 
-            if ('' === $image && 'video' !== $mediaType && !$hasContent) {
+            $hasMedia = ('video' === $mediaType && '' !== $videoDesktop) || ('video' !== $mediaType && '' !== $image);
+
+            if (!$hasMedia && !$hasContent) {
                 continue;
             }
 
@@ -156,11 +176,30 @@ class SliderElement extends AbstractWrappedContentElement
                 'linkLabel' => $linkLabel,
                 'linkUrl' => $linkUrl,
                 'target' => $this->checkboxValue($item['target'] ?? null),
+                'hasAction' => $hasAction,
+                'hasMedia' => $hasMedia,
+                'hasVisibleText' => $hasVisibleText,
                 'hasContent' => $hasContent,
             ];
         }
 
         return $normalized;
+    }
+
+    /**
+     * @param list<array{mediaType: string, image: string, alt: string, videoDesktop: string, videoMobile: string, videoPoster: string, videoMimeType: string, eyebrow: string, headline: string, text: string, linkLabel: string, linkUrl: string, target: bool, hasAction: bool, hasMedia: bool, hasVisibleText: bool, hasContent: bool}> $items
+     *
+     * @return array{mediaType: string, image: string, alt: string, videoDesktop: string, videoMobile: string, videoPoster: string, videoMimeType: string, eyebrow: string, headline: string, text: string, linkLabel: string, linkUrl: string, target: bool, hasAction: bool, hasMedia: bool, hasVisibleText: bool, hasContent: bool}|null
+     */
+    private function firstUsableStaticItem(array $items): ?array
+    {
+        foreach ($items as $item) {
+            if ($item['hasVisibleText'] || $item['hasMedia'] || $item['hasAction']) {
+                return $item;
+            }
+        }
+
+        return null;
     }
 
     /**

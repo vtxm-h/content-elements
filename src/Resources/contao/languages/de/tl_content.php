@@ -80,6 +80,7 @@ $GLOBALS['TL_LANG']['tl_content']['linkListItemsDescription'] = ['Beschreibung',
 $GLOBALS['TL_LANG']['tl_content']['linkListItemsTarget'] = ['Neues Fenster', 'Link in einem neuen Fenster öffnen.'];
 
 $GLOBALS['TL_LANG']['tl_content']['sliderStyle'] = ['Darstellung', 'Wählen Sie die Darstellung des Sliders.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderRenderMode'] = ['Ausgabemodus', 'Wählen Sie Slider für Splide-kompatibles Karussell-Markup oder Statischer Hero für einen Hero ohne JavaScript. Statischer Hero nutzt nur den ersten verwendbaren Eintrag.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderAutoplay'] = ['Autoplay', 'Slides automatisch wechseln.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderInterval'] = ['Intervall', 'Autoplay-Intervall in Millisekunden.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderArrows'] = ['Pfeile anzeigen', 'Navigation mit Pfeilen anzeigen.'];
@@ -94,6 +95,9 @@ $GLOBALS['TL_LANG']['tl_content']['sliderOverlay'] = ['Überlagerung', 'Wählen 
 $GLOBALS['TL_LANG']['tl_content']['sliderMode'] = ['Darstellung', 'Wählen Sie die Standard-Ausgabe oder die Hero-Media-Ausgabe.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderWidth'] = ['Breite', 'Wählen Sie, ob der Slider im Inhaltsbereich bleibt oder Hooks für volle Breite ausgibt.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderHeight'] = ['Höhe', 'Wählen Sie die Höhe des Hero-Sliders.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderContentAlign'] = ['Inhaltsausrichtung', 'Wählen Sie die Inhaltsausrichtung für den Statischen Hero.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderContentPosition'] = ['Inhaltsposition', 'Wählen Sie die Inhaltsposition für den Statischen Hero.'];
+$GLOBALS['TL_LANG']['tl_content']['sliderMediaPosition'] = ['Medienposition', 'Wählen Sie die vordefinierte Medienposition für den Statischen Hero.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderCustomHeight'] = ['Eigene Höhe in Pixeln', 'Geben Sie die eigene Hero-Höhe in Pixeln ein.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderPattern'] = ['Muster', 'Wählen Sie ein optionales dekoratives Muster.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderScrollEffect'] = ['Scroll-Effekt', 'Wählen Sie, ob frontend-assets den Hero beim Scrollen ausblenden darf.'];
@@ -208,6 +212,11 @@ $GLOBALS['TL_LANG']['tl_content']['sliderStyleOptions'] = [
     'quotes' => 'Zitate',
 ];
 
+$GLOBALS['TL_LANG']['tl_content']['sliderRenderModeOptions'] = [
+    'slider' => 'Slider',
+    'static' => 'Statischer Hero',
+];
+
 $GLOBALS['TL_LANG']['tl_content']['sliderPerPageOptions'] = [
     '1' => '1',
     '2' => '2',
@@ -260,6 +269,30 @@ $GLOBALS['TL_LANG']['tl_content']['sliderHeightOptions'] = [
     'large' => 'Groß',
     'viewport' => 'Bildschirmhöhe',
     'custom' => 'Eigene Höhe',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderContentAlignOptions'] = [
+    'left' => 'Links',
+    'center' => 'Zentriert',
+    'right' => 'Rechts',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderContentPositionOptions'] = [
+    'top' => 'Oben',
+    'center' => 'Mitte',
+    'bottom' => 'Unten',
+];
+
+$GLOBALS['TL_LANG']['tl_content']['sliderMediaPositionOptions'] = [
+    'left-top' => 'Links oben',
+    'center-top' => 'Zentriert oben',
+    'right-top' => 'Rechts oben',
+    'left-center' => 'Links mittig',
+    'center-center' => 'Zentriert mittig',
+    'right-center' => 'Rechts mittig',
+    'left-bottom' => 'Links unten',
+    'center-bottom' => 'Zentriert unten',
+    'right-bottom' => 'Rechts unten',
 ];
 
 $GLOBALS['TL_LANG']['tl_content']['sliderPatternOptions'] = [

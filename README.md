@@ -63,7 +63,7 @@ Typical use cases:
 - `vtxm_iconbox` for service boxes, benefits or compact feature blocks
 - `vtxm_media_text` for image/media plus text blocks, biographies, project stories and editorial image/text sections; supports image-left, image-right, image-top, image-bottom, float-left and float-right layouts plus default, editorial, card and minimal styles
 - `vtxm_link_list` for structured links, social links, streaming platforms, downloads, press kits, booking links and external resources; supports default, buttons, icons and minimal styles plus left, center and right alignment
-- `vtxm_slider` for structured Splide-compatible hero sliders, image sliders, background-video heroes, quotes and card sliders; supports hero, images, cards and quotes styles plus autoplay, arrows, pagination, loop, perPage, gap, transition, image effect, text animation, overlay, width, height, pattern and scroll-fade settings
+- `vtxm_slider` for structured Splide-compatible hero sliders, image sliders, background-video heroes, quotes, card sliders and no-JavaScript Static Hero output; supports hero, images, cards and quotes styles plus render mode, autoplay, arrows, pagination, loop, perPage, gap, transition, image effect, text animation, overlay, width, height, pattern, alignment and scroll-fade settings
 - `vtxm_teaser_grid` for reusable teaser cards with image, title, text, badge and optional link; supports default, cards, editorial and minimal styles plus 2, 3 or 4 columns and small, medium or large gaps
 - `vtxm_members_grid` for team / band member layouts
 - `vtxm_live_teaser` for concerts, events or live announcements
@@ -150,7 +150,16 @@ Existing Media Text records remain compatible. Visual layout, responsive styling
 
 ## Slider
 
-`vtxm_slider` outputs Splide-compatible markup and configuration for structured hero, image, card, quote and decorative background-video sliders. It does not include Splide, Splide Premium files, CSS, JavaScript, scroll listeners, video lifecycle code or slider initialization.
+`vtxm_slider` outputs structured hero, image, card, quote and decorative background-video content in one of two render modes. It does not include Splide, Splide Premium files, CSS, JavaScript, scroll listeners, video lifecycle code or slider initialization.
+
+Render modes:
+
+- `slider`: existing Splide-compatible carousel markup and configuration for multi-item sliders
+- `static`: Static Hero output for one editorial or media hero that must remain usable without JavaScript
+
+Static Hero mode reuses the existing slider items and renders only the first usable normalized item. A usable item contains visible text, usable image or video media, or one valid CTA. Empty or invalid rows are skipped before the first usable item is selected.
+
+Static Hero output intentionally does not render Splide markup, carousel controls, pagination or the `[data-vtxm-slider]` initialization hook. It emits `data-vtxm-slider-render-mode="static"` and stable Static Hero classes instead. The selected image, text and CTA are visible without JavaScript. Decorative videos keep the existing video hooks for optional source switching and reduced-motion handling, but the desktop video source remains present as the no-JavaScript fallback.
 
 Available transitions:
 
@@ -209,13 +218,21 @@ Scroll fade modes:
 
 The fade distance is normalized as pixels and emitted through a data attribute. `fade-background` exposes hooks so frontend-assets may fade the Hero into the theme or project background. Background colors belong in `frontend-assets` or project CSS, not in this bundle.
 
-Effects apply to the complete slider instance, not to individual slides. The visual implementation for transitions, image effects, text animation, overlays, patterns, Hero heights, full-width presentation, scroll fading, video source handling and reduced-motion behavior belongs in `frontend-assets` or project assets. This bundle only outputs stable classes, data attributes, image/video markup and Splide-compatible HTML.
+Static Hero alignment hooks:
+
+- content alignment: `left`, `center`, `right`
+- content position: `top`, `center`, `bottom`
+- media position: `left-top`, `center-top`, `right-top`, `left-center`, `center-center`, `right-center`, `left-bottom`, `center-bottom`, `right-bottom`
+
+Static Hero mode reuses the existing overlay, pattern, width, height, custom-height and scroll-fade hooks. It supports the same image media and decorative background-video media as slider items. Version 1 renders one existing CTA only. Multiple CTAs, foreground video controls, transcripts, arbitrary focal coordinates, responsive art direction, overlay intensity fields, new reveal systems, project-specific visual themes and migrations from another element are intentionally deferred.
+
+Effects apply to the complete slider instance, not to individual slides. The visual implementation for transitions, image effects, text animation, overlays, patterns, Hero heights, full-width presentation, scroll fading, video source handling and reduced-motion behavior belongs in `frontend-assets` or project assets. This bundle only outputs stable classes, data attributes, image/video markup, Splide-compatible slider HTML and no-Splide Static Hero HTML.
 
 Selecting `perPage = 3` keeps using Splide `perPage` and can display three cards or teaser-style items simultaneously. No separate three-box implementation is included.
 
 The consuming project must load Splide before `frontend-assets` initializes the slider. Fade transition mode uses Splide `type: "fade"`; when loop is enabled in the backend, the generated Splide options use `rewind: true` instead of `type: "loop"`.
 
-Existing image-only sliders remain compatible. Missing media type values default to image.
+Existing image-only sliders remain compatible. Missing media type values default to image. The Static Hero item headline uses the configured Contao headline unit. Explicit image alt text is preserved, and an empty alt text remains valid for decorative images. Decorative videos are rendered muted, inline, looping and hidden from assistive technologies. Links render only when both a safe URL and a visible label are available; new-window links use `rel="noopener noreferrer"`.
 
 Reduced-motion handling belongs in `frontend-assets`. It should respect `prefers-reduced-motion`, avoid scroll-motion effects, avoid slow image zoom and text movement, and pause or avoid autoplaying decorative video where practical while retaining poster or static media visibility.
 
@@ -343,7 +360,7 @@ All elements preserve Contao `cssID` support through the shared `AbstractWrapped
 
 The `iconboxIcon` value is escaped in the template. Use it for icon class names, labels or short markers. SVG or HTML icon markup is intentionally not rendered raw in this version.
 
-The `vtxm_slider` element outputs Splide-compatible markup and data attributes only. Styling and JavaScript are expected through `frontend-assets`, especially `css/vtxm-components.css`, `js/vtxm-components.js`, and vendor Splide assets or a local Splide build loaded by the consuming project.
+The `vtxm_slider` element outputs Splide-compatible markup and data attributes in `slider` render mode, or no-Splide Static Hero markup in `static` render mode. Styling and JavaScript are expected through `frontend-assets`, especially `css/vtxm-components.css`, `js/vtxm-components.js`, and vendor Splide assets or a local Splide build loaded by the consuming project.
 
 
 ## HTML Hooks
@@ -441,6 +458,36 @@ Slider hooks:
 - `.vtxm-slider__headline`
 - `.vtxm-slider__text`
 - `.vtxm-slider__action`
+- `.vtxm-slider--render-static`
+- `.vtxm-slider--content-align-left`
+- `.vtxm-slider--content-align-center`
+- `.vtxm-slider--content-align-right`
+- `.vtxm-slider--content-position-top`
+- `.vtxm-slider--content-position-center`
+- `.vtxm-slider--content-position-bottom`
+- `.vtxm-slider--media-position-left-top`
+- `.vtxm-slider--media-position-center-top`
+- `.vtxm-slider--media-position-right-top`
+- `.vtxm-slider--media-position-left-center`
+- `.vtxm-slider--media-position-center-center`
+- `.vtxm-slider--media-position-right-center`
+- `.vtxm-slider--media-position-left-bottom`
+- `.vtxm-slider--media-position-center-bottom`
+- `.vtxm-slider--media-position-right-bottom`
+- `.vtxm-static-hero`
+- `.vtxm-static-hero__media`
+- `.vtxm-static-hero__media--image`
+- `.vtxm-static-hero__media--video`
+- `.vtxm-static-hero__image`
+- `.vtxm-static-hero__video`
+- `.vtxm-static-hero__overlay`
+- `.vtxm-static-hero__pattern`
+- `.vtxm-static-hero__content`
+- `.vtxm-static-hero__eyebrow`
+- `.vtxm-static-hero__headline`
+- `.vtxm-static-hero__text`
+- `.vtxm-static-hero__action`
+- `.vtxm-static-hero__link`
 - `.slider--hero`
 - `.slider--images`
 - `.slider--cards`
@@ -477,6 +524,7 @@ Slider hooks:
 - `.slider--scroll-fade`
 - `.slider--scroll-fade-background`
 - `[data-vtxm-slider]`
+- `[data-vtxm-slider-render-mode]`
 - `[data-vtxm-slider-mode]`
 - `[data-vtxm-slider-width]`
 - `[data-vtxm-slider-height]`
@@ -488,7 +536,7 @@ Slider hooks:
 - `[data-vtxm-video-desktop]`
 - `[data-vtxm-video-mobile]`
 
-Slider styling and JavaScript initialization are expected through `frontend-assets`, especially `css/vtxm-components.css`, `js/vtxm-components.js`, and vendor Splide assets or a local Splide build.
+`[data-vtxm-slider]` is emitted only by the `slider` render mode. Static Hero mode emits `data-vtxm-slider-render-mode="static"` and remains usable without JavaScript. Slider styling, Static Hero styling and optional JavaScript enhancements are expected through `frontend-assets`, especially `css/vtxm-components.css`, `js/vtxm-components.js`, and vendor Splide assets or a local Splide build.
 
 Teaser Grid hooks:
 

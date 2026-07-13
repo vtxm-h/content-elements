@@ -9,7 +9,7 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_quote_teaser'] = '{type_legen
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_announcement'] = '{type_legend},type,headline;{announcement_legend},announcementEyebrow,announcementText,announcementLink,announcementLinkText,announcementStyle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_media_text'] = '{type_legend},type,headline;{media_legend},singleSRC,alt,size,fullsize,caption;{text_legend},mediaTextEyebrow,text;{link_legend:hide},url,linkTitle,target;{media_text_legend},mediaTextLayout,mediaTextStyle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_link_list'] = '{type_legend},type,headline;{link_list_legend},linkListStyle,linkListAlign,linkListItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
-$GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_slider'] = '{type_legend},type,headline;{slider_legend},sliderStyle,sliderItems;{slider_settings_legend:hide},sliderAutoplay,sliderInterval,sliderArrows,sliderPagination,sliderLoop,sliderPerPage,sliderGap,sliderTransition,sliderImageEffect,sliderTextAnimation,sliderOverlay,sliderMode,sliderWidth,sliderHeight,sliderPattern,sliderScrollEffect;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_slider'] = '{type_legend},type,headline;{slider_legend},sliderStyle,sliderItems;{slider_settings_legend:hide},sliderRenderMode,sliderAutoplay,sliderInterval,sliderArrows,sliderPagination,sliderLoop,sliderPerPage,sliderGap,sliderTransition,sliderImageEffect,sliderTextAnimation,sliderOverlay,sliderMode,sliderWidth,sliderHeight,sliderContentAlign,sliderContentPosition,sliderMediaPosition,sliderPattern,sliderScrollEffect;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_teaser_grid'] = '{type_legend},type,headline;{teaser_grid_legend},teaserGridStyle,teaserGridColumns,teaserGridGap,teaserGridItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_tabs'] = '{type_legend},type,headline;{tabs_legend},tabsStyle,tabsItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_accordion'] = '{type_legend},type,headline;{accordion_legend},accordionStyle,accordionItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
@@ -284,6 +284,16 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderStyle'] = [
     'sql' => "varchar(32) NOT NULL default ''",
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderRenderMode'] = [
+    'exclude' => true,
+    'default' => 'slider',
+    'inputType' => 'select',
+    'options' => ['slider', 'static'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['sliderRenderModeOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'slider'",
+];
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderAutoplay'] = [
     'exclude' => true,
     'inputType' => 'checkbox',
@@ -411,6 +421,36 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['sliderHeight'] = [
     'reference' => &$GLOBALS['TL_LANG']['tl_content']['sliderHeightOptions'],
     'eval' => ['chosen' => true, 'submitOnChange' => true, 'tl_class' => 'w50'],
     'sql' => "varchar(16) NOT NULL default 'auto'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderContentAlign'] = [
+    'exclude' => true,
+    'default' => 'left',
+    'inputType' => 'select',
+    'options' => ['left', 'center', 'right'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['sliderContentAlignOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'left'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderContentPosition'] = [
+    'exclude' => true,
+    'default' => 'bottom',
+    'inputType' => 'select',
+    'options' => ['top', 'center', 'bottom'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['sliderContentPositionOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(16) NOT NULL default 'bottom'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['sliderMediaPosition'] = [
+    'exclude' => true,
+    'default' => 'center-center',
+    'inputType' => 'select',
+    'options' => ['left-top', 'center-top', 'right-top', 'left-center', 'center-center', 'right-center', 'left-bottom', 'center-bottom', 'right-bottom'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_content']['sliderMediaPositionOptions'],
+    'eval' => ['chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(32) NOT NULL default 'center-center'",
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['sliderCustomHeight'] = [
