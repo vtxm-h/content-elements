@@ -853,7 +853,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['teamGridItems'] = [
         ],
         'tl_class' => 'clr',
     ],
-    'sql' => 'blob NULL',
+    'sql' => 'mediumblob NULL',
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tabsStyle'] = [
