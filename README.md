@@ -16,6 +16,7 @@ Content elements included:
 - Link List
 - Slider
 - Teaser Grid
+- Team Grid
 - Members Grid
 - Live Teaser
 - Quote Teaser
@@ -43,6 +44,7 @@ The bundle registers these content elements in the `vtxm` category:
 - `vtxm_link_list`
 - `vtxm_slider`
 - `vtxm_teaser_grid`
+- `vtxm_team_grid`
 - `vtxm_members_grid`
 - `vtxm_live_teaser`
 - `vtxm_quote_teaser`
@@ -65,7 +67,8 @@ Typical use cases:
 - `vtxm_link_list` for structured links, social links, streaming platforms, downloads, press kits, booking links and external resources; supports default, buttons, icons and minimal styles plus left, center and right alignment
 - `vtxm_slider` for structured Splide-compatible hero sliders, image sliders, background-video heroes, quotes, card sliders and no-JavaScript Static Hero output; supports hero, images, cards and quotes styles plus render mode, autoplay, arrows, pagination, loop, perPage, gap, transition, image effect, text animation, overlay, width, height, pattern, alignment and scroll-fade settings
 - `vtxm_teaser_grid` for reusable teaser cards with image, title, text, badge and optional link; supports default, cards, editorial and minimal styles plus 2, 3 or 4 columns and small, medium or large gaps
-- `vtxm_members_grid` for team / band member layouts
+- `vtxm_team_grid` for repeatable team/profile grids with image, role, biography, first-class contact links, social links, two generic profile links and one primary CTA
+- `vtxm_members_grid` for the existing fixed four-position team / band member layout
 - `vtxm_live_teaser` for concerts, events or live announcements
 - `vtxm_quote_teaser` for quotes, reviews or press snippets
 - `vtxm_announcement` for short announcements and callouts
@@ -110,6 +113,7 @@ These elements use MultiColumnWizard fields in the Contao backend:
 - `vtxm_link_list`
 - `vtxm_slider`
 - `vtxm_teaser_grid`
+- `vtxm_team_grid`
 - `vtxm_process_steps`
 
 Editors can manage entries in structured rows instead of writing JSON manually.
@@ -278,6 +282,87 @@ The badge and link are optional. Links are rendered only when both a URL and a v
 This bundle does not include frontend CSS or JavaScript for Teaser Grid. Styling is expected through `frontend-assets` or project CSS.
 
 
+## Team Grid
+
+`vtxm_team_grid` renders repeatable team, staff or profile entries in server-rendered markup. It is the reusable profile grid element for new team sections.
+
+Use `vtxm_team_grid` when editors need an arbitrary number of people with structured profile data. Use the legacy `vtxm_members_grid` only when the existing fixed four-position top/left/right/bottom member layout is required. Existing `vtxm_members_grid` records are not migrated and its rendering remains unchanged.
+
+Available styles:
+
+- `cards`
+- `minimal`
+- `list`
+
+Layouts:
+
+- `grid`
+- `list`
+
+Column options:
+
+- `2`
+- `3`
+- `4`
+
+Gap options:
+
+- `small`
+- `medium`
+- `large`
+
+Image ratio hooks:
+
+- `portrait`
+- `square`
+- `landscape`
+- `natural`
+
+Alignment hooks:
+
+- `left`
+- `center`
+
+Reveal hooks:
+
+- `none`
+- `fade-up`
+
+Person fields:
+
+- image
+- explicit image alt text
+- name
+- role
+- biography
+- email
+- phone
+- website
+- LinkedIn URL
+- Instagram URL
+- Mastodon URL
+- Bluesky URL
+- GitHub URL
+- primary CTA URL, label and new-window target
+- two generic social/profile links with explicit labels and URLs
+
+Rows are edited through MultiColumnWizard and keep their backend order in the frontend. Completely empty rows are skipped. A row is usable when it has a name, or at least one of role, biography, valid media, contact/social link or primary CTA.
+
+Images are selected through the Contao file picker and resolved from stored UUIDs. Invalid UUIDs, folders, missing files and files outside the configured image types do not render an image. Missing images render no media element and expose no-media hooks instead of a fake placeholder image.
+
+Explicit image alt text is preserved. Empty alt text remains empty and marks the image as decorative. The element does not derive alt text from the person name.
+
+The biography is rendered as escaped plain text with line breaks preserved. Contact links render only when valid: email becomes `mailto:`, phone becomes `tel:`, and website/social links accept safe web URLs. First-class social links use stable labels; generic links render only when both explicit label and safe URL are present. The primary CTA renders only when both a safe URL and visible label are present, and new-window CTAs use `rel="noopener noreferrer"`.
+
+The optional `fade-up` reveal setting emits the existing generic reveal-group hooks used by `frontend-assets`: `.vtxm-reveal-group`, `.vtxm-reveal-item`, `data-vtxm-reveal-type`, `data-vtxm-reveal-target` and `data-vtxm-reveal-stagger`. Content remains visible without JavaScript.
+
+The output uses list semantics, one article per person, a heading for each name, visible link text, accessible labels for contact/social/CTA links, decorative empty `alt` attributes when configured, keyboard-accessible native links and no modal or disclosure behavior.
+
+Styling, profile card presentation, icon visuals, reveal animation details and reduced-motion handling belong in `frontend-assets` or project CSS/JavaScript. This bundle only outputs stable markup, classes and data hooks.
+
+Deferred features for this element include frontend CSS, JavaScript, icon libraries, SVG icon bundles, modal profiles, detail pages, person database entities, categories, departments, filtering, sorting UI, arbitrary focal points, responsive art direction, automatic image placeholders, project-specific colors and migrations from `vtxm_members_grid`.
+
+
 ## Process Steps / Timeline
 
 `vtxm_process_steps` renders ordered process steps, phases, milestones, how-it-works entries or timeline entries in stable server-rendered markup.
@@ -372,6 +457,7 @@ Root classes:
 - `.ce_vtxm_link_list`
 - `.ce_vtxm_slider`
 - `.ce_vtxm_teaser_grid`
+- `.ce_vtxm_team_grid`
 - `.ce_vtxm_members_grid`
 - `.ce_vtxm_live_teaser`
 - `.ce_vtxm_quote_teaser`
@@ -566,6 +652,66 @@ Teaser Grid hooks:
 
 Teaser Grid styling is expected through `frontend-assets`, especially `css/vtxm-components.css`, or project CSS.
 
+Team Grid hooks:
+
+- `.ce_vtxm_team_grid`
+- `.team-grid`
+- `.team-grid__header`
+- `.team-grid__headline`
+- `.team-grid__list`
+- `.team-grid__item`
+- `.team-grid__card`
+- `.team-grid__media`
+- `.team-grid__image`
+- `.team-grid__media-placeholder`
+- `.team-grid__content`
+- `.team-grid__name`
+- `.team-grid__role`
+- `.team-grid__biography`
+- `.team-grid__contacts`
+- `.team-grid__contact`
+- `.team-grid__socials`
+- `.team-grid__social`
+- `.team-grid__social-label`
+- `.team-grid__action`
+- `.team-grid__link`
+- `.team-grid--style-cards`
+- `.team-grid--style-minimal`
+- `.team-grid--style-list`
+- `.team-grid--layout-grid`
+- `.team-grid--layout-list`
+- `.team-grid--columns-2`
+- `.team-grid--columns-3`
+- `.team-grid--columns-4`
+- `.team-grid--gap-small`
+- `.team-grid--gap-medium`
+- `.team-grid--gap-large`
+- `.team-grid--ratio-portrait`
+- `.team-grid--ratio-square`
+- `.team-grid--ratio-landscape`
+- `.team-grid--ratio-natural`
+- `.team-grid--align-left`
+- `.team-grid--align-center`
+- `.team-grid--has-media`
+- `.team-grid--no-media`
+- `.team-grid--reveal-none`
+- `.team-grid--reveal-fade-up`
+- `[data-vtxm-team-grid]`
+- `[data-vtxm-team-grid-item]`
+- `[data-vtxm-team-grid-style]`
+- `[data-vtxm-team-grid-layout]`
+- `[data-vtxm-team-grid-columns]`
+- `[data-vtxm-team-grid-gap]`
+- `[data-vtxm-team-grid-ratio]`
+- `[data-vtxm-team-grid-align]`
+- `[data-vtxm-reveal-type]`
+- `[data-vtxm-reveal-target]`
+- `[data-vtxm-reveal-stagger]`
+- `.vtxm-reveal-group`
+- `.vtxm-reveal-item`
+
+Team Grid styling and optional reveal behavior are expected through `frontend-assets`, especially `css/vtxm-components.css` and `js/vtxm-components.js`, or project assets.
+
 Process Steps hooks:
 
 - `.ce_vtxm_process_steps`
@@ -622,6 +768,7 @@ Templates:
 - `ce_vtxm_link_list.html5`
 - `ce_vtxm_slider.html5`
 - `ce_vtxm_teaser_grid.html5`
+- `ce_vtxm_team_grid.html5`
 - `ce_vtxm_members_grid.html5`
 - `ce_vtxm_live_teaser.html5`
 - `ce_vtxm_quote_teaser.html5`
