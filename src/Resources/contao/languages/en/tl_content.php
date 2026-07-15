@@ -3,7 +3,7 @@
 $GLOBALS['TL_LANG']['CTE']['vtxm'] = 'VTXM';
 $GLOBALS['TL_LANG']['CTE']['vtxm_iconbox'] = ['Iconbox', 'Reusable icon/text/link content block.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_media_text'] = ['Media Text', 'Displays media with complementary text content.'];
-$GLOBALS['TL_LANG']['CTE']['vtxm_link_list'] = ['Link List', 'Displays structured links as a list, buttons or icons.'];
+$GLOBALS['TL_LANG']['CTE']['vtxm_link_list'] = ['Link List', 'Displays structured links and Contact Links as a list, buttons or icons.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_slider'] = ['Slider', 'Displays structured slides as hero, image, card or quote slider.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_teaser_grid'] = ['Teaser Grid', 'Displays reusable teaser cards with image, text, badge and optional link.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_team_grid'] = ['Team Grid', 'Displays repeatable team profiles with image, role, biography, contact links, social links and one primary action.'];
@@ -72,14 +72,16 @@ $GLOBALS['TL_LANG']['tl_content']['mediaTextLayout'] = ['Media position', 'Choos
 $GLOBALS['TL_LANG']['tl_content']['mediaTextStyle'] = ['Display style', 'Choose the media text display style.'];
 $GLOBALS['TL_LANG']['tl_content']['mediaTextEyebrow'] = ['Eyebrow', 'Small label above the headline.'];
 
-$GLOBALS['TL_LANG']['tl_content']['linkListStyle'] = ['Display style', 'Choose the link list display style.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListStyle'] = ['Display style', 'Choose the link list display style. Edge variants emit markup hooks only; fixed positioning belongs in frontend-assets.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListAlign'] = ['Alignment', 'Choose the link list alignment.'];
-$GLOBALS['TL_LANG']['tl_content']['linkListItems'] = ['Links', 'Define links with label, URL, optional icon and description.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItems'] = ['Links', 'Define links or Contact Links with label, final destination URL, optional free icon marker and description.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListItemsLabel'] = ['Label', 'Link label.'];
-$GLOBALS['TL_LANG']['tl_content']['linkListItemsUrl'] = ['URL', 'Link target.'];
-$GLOBALS['TL_LANG']['tl_content']['linkListItemsIcon'] = ['Icon', 'Optional icon marker such as instagram, youtube, spotify or external.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItemsUrl'] = ['URL', 'Final link target such as https://example.com, mailto:info@example.com, tel:+491701234567 or https://wa.me/491701234567.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItemsIcon'] = ['Icon marker', 'Optional free-text icon marker such as instagram, youtube, mail, phone, whatsapp or external. No predefined platform list is maintained.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListItemsDescription'] = ['Description', 'Optional short description.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListItemsTarget'] = ['New window', 'Open the link in a new window.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItemsNofollow'] = ['nofollow', 'Add nofollow to this link\'s rel attribute.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItemsRelMe'] = ['rel="me"', 'Add rel="me" when the target profile should identify this site or person.'];
 
 $GLOBALS['TL_LANG']['tl_content']['sliderStyle'] = ['Display style', 'Choose the slider display style.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderRenderMode'] = ['Render mode', 'Choose Slider for Splide-compatible carousel markup or Static Hero for one no-JavaScript hero. Static Hero uses only the first usable item.'];
@@ -224,9 +226,11 @@ $GLOBALS['TL_LANG']['tl_content']['mediaTextStyleOptions'] = [
 ];
 
 $GLOBALS['TL_LANG']['tl_content']['linkListStyleOptions'] = [
-    'default' => 'Default',
+    'default' => 'Standard',
     'buttons' => 'Buttons',
-    'icons' => 'Icons',
+    'icons' => 'Icons only',
+    'edge-left' => 'Left page edge',
+    'edge-right' => 'Right page edge',
     'minimal' => 'Minimal',
 ];
 

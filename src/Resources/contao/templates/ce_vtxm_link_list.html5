@@ -2,12 +2,13 @@
 
 use Contao\StringUtil;
 
-$classes = trim($this->elementClass.' link-list--'.$this->linkListStyle.' link-list--align-'.$this->linkListAlign);
+$styleModifiers = \is_array($this->linkListStyleModifiers) ? implode(' ', $this->linkListStyleModifiers) : '';
+$classes = trim($this->elementClass.' '.$styleModifiers.' link-list--align-'.$this->linkListAlign);
 $ariaLabel = $this->headlineText ?: 'Links';
 
 ?>
 
-<nav<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>" aria-label="<?= StringUtil::specialchars($ariaLabel) ?>">
+<nav<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>" aria-label="<?= StringUtil::specialchars($ariaLabel) ?>" data-vtxm-link-list data-vtxm-link-list-style="<?= StringUtil::specialchars($this->linkListStyle) ?>" data-vtxm-link-list-align="<?= StringUtil::specialchars($this->linkListAlign) ?>"<?php if ($this->linkListIsEdge): ?> data-vtxm-link-list-edge="<?= StringUtil::specialchars($this->linkListStyle) ?>"<?php endif; ?>>
   <?php if ($this->headlineText): ?>
     <<?= $this->headlineUnit ?> class="link-list__headline"><?= StringUtil::specialchars($this->headlineText) ?></<?= $this->headlineUnit ?>>
   <?php endif; ?>
@@ -15,12 +16,23 @@ $ariaLabel = $this->headlineText ?: 'Links';
   <?php if (!empty($this->linkListItems)): ?>
     <ul class="link-list__items">
       <?php foreach ($this->linkListItems as $item): ?>
-        <li class="link-list__item">
-          <a class="link-list__link" href="<?= StringUtil::specialchars($item['url']) ?>"<?php if ($item['target']): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?> aria-label="<?= StringUtil::specialchars($item['label']) ?>">
+        <?php
+
+          $hasIcon = '' !== $item['icon'];
+          $itemClasses = 'link-list__item '.($hasIcon ? 'link-list__item--has-icon' : 'link-list__item--no-icon');
+          $linkClasses = 'link-list__link '.($hasIcon ? 'link-list__link--has-icon' : 'link-list__link--no-icon');
+
+        ?>
+        <li class="<?= StringUtil::specialchars($itemClasses) ?>" data-vtxm-link-list-item data-vtxm-link-list-item-index="<?= StringUtil::specialchars((string) $item['index']) ?>">
+          <a class="<?= StringUtil::specialchars($linkClasses) ?>" href="<?= StringUtil::specialchars($item['url']) ?>"<?php if ($item['target']): ?> target="_blank"<?php endif; ?><?php if ('' !== $item['rel']): ?> rel="<?= StringUtil::specialchars($item['rel']) ?>"<?php endif; ?><?php if ($hasIcon): ?> data-vtxm-link-list-icon="<?= StringUtil::specialchars($item['icon']) ?>"<?php endif; ?>>
             <?php if ('' !== $item['icon']): ?>
-              <span class="link-list__icon link-list__icon--<?= StringUtil::specialchars($item['icon']) ?>" aria-hidden="true"></span>
+              <span class="link-list__icon link-list__icon--<?= StringUtil::specialchars($item['icon']) ?>" aria-hidden="true" data-vtxm-link-list-icon="<?= StringUtil::specialchars($item['icon']) ?>"></span>
             <?php endif; ?>
-            <span class="link-list__label"><?= StringUtil::specialchars($item['label']) ?></span>
+            <?php if ($this->linkListIsIconOnly && !$hasIcon): ?>
+              <span class="link-list__label-fallback"><?= StringUtil::specialchars($item['label']) ?></span>
+            <?php else: ?>
+              <span class="link-list__label"><?= StringUtil::specialchars($item['label']) ?></span>
+            <?php endif; ?>
             <?php if ('' !== $item['description']): ?>
               <span class="link-list__description"><?= StringUtil::specialchars($item['description']) ?></span>
             <?php endif; ?>

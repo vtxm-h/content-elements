@@ -223,7 +223,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['linkListStyle'] = [
     'exclude' => true,
     'default' => 'default',
     'inputType' => 'select',
-    'options' => ['default', 'buttons', 'icons', 'minimal'],
+    'options' => ['default', 'icons', 'edge-left', 'edge-right', 'buttons', 'minimal'],
     'reference' => &$GLOBALS['TL_LANG']['tl_content']['linkListStyleOptions'],
     'eval' => ['chosen' => true, 'tl_class' => 'w50'],
     'sql' => "varchar(32) NOT NULL default ''",
@@ -252,20 +252,30 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['linkListItems'] = [
             'url' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['linkListItemsUrl'],
                 'inputType' => 'text',
-                'eval' => ['style' => 'width:280px', 'rgxp' => 'url'],
+                'eval' => ['style' => 'width:260px', 'decodeEntities' => true, 'maxlength' => 2048],
             ],
             'icon' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['linkListItemsIcon'],
                 'inputType' => 'text',
-                'eval' => ['style' => 'width:160px'],
+                'eval' => ['style' => 'width:140px'],
             ],
             'description' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['linkListItemsDescription'],
                 'inputType' => 'text',
-                'eval' => ['style' => 'width:260px'],
+                'eval' => ['style' => 'width:220px'],
             ],
             'target' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['linkListItemsTarget'],
+                'inputType' => 'checkbox',
+                'eval' => ['style' => 'width:80px'],
+            ],
+            'nofollow' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['linkListItemsNofollow'],
+                'inputType' => 'checkbox',
+                'eval' => ['style' => 'width:90px'],
+            ],
+            'relMe' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['linkListItemsRelMe'],
                 'inputType' => 'checkbox',
                 'eval' => ['style' => 'width:80px'],
             ],
