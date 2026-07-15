@@ -16,7 +16,7 @@ $ariaLabel = $this->headlineText ?: 'Links';
     <ul class="link-list__items">
       <?php foreach ($this->linkListItems as $item): ?>
         <li class="link-list__item">
-          <a class="link-list__link" href="<?= StringUtil::specialchars($item['url']) ?>"<?php if ($item['target']): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?> aria-label="<?= StringUtil::specialchars($item['label']) ?>">
+          <a class="link-list__link" href="<?= StringUtil::specialchars($item['url']) ?>"<?php if ($item['target']): ?> target="_blank"<?php endif; ?><?php if ('' !== $item['rel']): ?> rel="<?= StringUtil::specialchars($item['rel']) ?>"<?php endif; ?>>
             <?php if ('' !== $item['icon']): ?>
               <span class="link-list__icon link-list__icon--<?= StringUtil::specialchars($item['icon']) ?>" aria-hidden="true"></span>
             <?php endif; ?>

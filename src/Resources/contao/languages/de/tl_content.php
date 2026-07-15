@@ -3,7 +3,7 @@
 $GLOBALS['TL_LANG']['CTE']['vtxm'] = 'VTXM';
 $GLOBALS['TL_LANG']['CTE']['vtxm_iconbox'] = ['Iconbox', 'Wiederverwendbarer Icon-/Text-/Link-Block.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_media_text'] = ['Media Text', 'Zeigt ein Medium mit ergänzendem Textinhalt an.'];
-$GLOBALS['TL_LANG']['CTE']['vtxm_link_list'] = ['Linkliste', 'Zeigt strukturierte Links als Liste, Buttons oder Icons an.'];
+$GLOBALS['TL_LANG']['CTE']['vtxm_link_list'] = ['Linkliste', 'Zeigt strukturierte Links und Kontaktlinks als Liste, Buttons oder Icons an.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_slider'] = ['Slider', 'Zeigt strukturierte Slides als Hero-, Bild-, Karten- oder Zitat-Slider an.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_teaser_grid'] = ['Teaser Grid', 'Zeigt wiederverwendbare Teaser-Karten mit Bild, Text, Badge und optionalem Link an.'];
 $GLOBALS['TL_LANG']['CTE']['vtxm_team_grid'] = ['Team Grid', 'Zeigt wiederholbare Teamprofile mit Bild, Rolle, Biografie, Kontaktlinks, Social Links und einer primären Aktion an.'];
@@ -74,12 +74,14 @@ $GLOBALS['TL_LANG']['tl_content']['mediaTextEyebrow'] = ['Eyebrow', 'Kleine Ober
 
 $GLOBALS['TL_LANG']['tl_content']['linkListStyle'] = ['Darstellung', 'Wählen Sie die Darstellung der Linkliste.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListAlign'] = ['Ausrichtung', 'Wählen Sie die Ausrichtung der Linkliste.'];
-$GLOBALS['TL_LANG']['tl_content']['linkListItems'] = ['Links', 'Legen Sie die Links mit Label, URL, optionalem Icon und Beschreibung an.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItems'] = ['Links', 'Legen Sie Links oder Kontaktlinks mit Label, finaler Ziel-URL, optionalem freiem Icon-Marker und Beschreibung an.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListItemsLabel'] = ['Label', 'Link-Text.'];
-$GLOBALS['TL_LANG']['tl_content']['linkListItemsUrl'] = ['URL', 'Linkziel.'];
-$GLOBALS['TL_LANG']['tl_content']['linkListItemsIcon'] = ['Icon', 'Optionaler Icon-Marker wie instagram, youtube, spotify oder external.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItemsUrl'] = ['URL', 'Finales Linkziel wie https://example.com, mailto:info@example.com, tel:+491701234567 oder https://wa.me/491701234567.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItemsIcon'] = ['Icon-Marker', 'Optionaler freier Icon-Marker wie instagram, youtube, mail, phone, whatsapp oder external. Es wird keine feste Plattformliste gepflegt.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListItemsDescription'] = ['Beschreibung', 'Optionale kurze Beschreibung.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListItemsTarget'] = ['Neues Fenster', 'Link in einem neuen Fenster öffnen.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItemsNofollow'] = ['nofollow', 'Fügt diesem Link nofollow im rel-Attribut hinzu.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListItemsRelMe'] = ['rel="me"', 'Fügt rel="me" hinzu, wenn das Zielprofil diese Website oder Person verifizieren soll.'];
 
 $GLOBALS['TL_LANG']['tl_content']['sliderStyle'] = ['Darstellung', 'Wählen Sie die Darstellung des Sliders.'];
 $GLOBALS['TL_LANG']['tl_content']['sliderRenderMode'] = ['Ausgabemodus', 'Wählen Sie Slider für Splide-kompatibles Karussell-Markup oder Statischer Hero für einen Hero ohne JavaScript. Statischer Hero nutzt nur den ersten verwendbaren Eintrag.'];
