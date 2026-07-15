@@ -64,7 +64,7 @@ Typical use cases:
 
 - `vtxm_iconbox` for service boxes, benefits or compact feature blocks
 - `vtxm_media_text` for image/media plus text blocks, biographies, project stories and editorial image/text sections; supports image-left, image-right, image-top, image-bottom, float-left and float-right layouts plus default, editorial, card and minimal styles
-- `vtxm_link_list` for structured links, social links, streaming platforms, downloads, press kits, booking links and external resources; supports default, buttons, icons and minimal styles plus left, center and right alignment
+- `vtxm_link_list` for structured links and Contact Links such as websites, email, telephone, WhatsApp, profile links, streaming platforms, downloads, press kits, booking links and external resources; supports standard, icons-only, left/right edge, buttons and minimal styles plus left, center and right alignment
 - `vtxm_slider` for structured Splide-compatible hero sliders, image sliders, background-video heroes, quotes, card sliders and no-JavaScript Static Hero output; supports hero, images, cards and quotes styles plus render mode, autoplay, arrows, pagination, loop, perPage, gap, transition, image effect, text animation, overlay, width, height, pattern, alignment and scroll-fade settings
 - `vtxm_teaser_grid` for reusable teaser cards with image, title, text, badge and optional link; supports default, cards, editorial and minimal styles plus 2, 3 or 4 columns and small, medium or large gaps
 - `vtxm_team_grid` for repeatable team/profile grids with image, role, biography, first-class contact links, social links, two generic profile links and one primary CTA
@@ -150,6 +150,44 @@ When `fullsize` is enabled and a valid image exists, the image is wrapped in `.m
 Captions are escaped and rendered inside the figure only when set. Multiline captions keep safe line breaks. The text field keeps Contao editor-managed rich text output. The optional action link is rendered only for a safe URL and uses `rel="noopener noreferrer"` when opened in a new window.
 
 Existing Media Text records remain compatible. Visual layout, responsive styling, card/editorial/minimal presentation, hover states and any lightbox behavior belong in `frontend-assets` or project CSS/JavaScript, not in this bundle.
+
+
+## Link List / Contact Links
+
+`vtxm_link_list` remains the single reusable element type for structured links and Contact Links. No dedicated Social Links element is included.
+
+Contact Links can point to final editor-entered destinations such as:
+
+- website or profile URLs, for example `https://example.com`
+- email links, for example `mailto:info@example.com`
+- telephone links, for example `tel:+491701234567`
+- WhatsApp links, for example `https://wa.me/491701234567` or `https://wa.me/491701234567?text=Hello`
+
+Editors enter the final destination URL. The element does not generate WhatsApp URLs from phone numbers, does not normalize phone numbers and does not prepend `https://` to `mailto:` or `tel:` values. Query strings and fragments are preserved. Dangerous schemes such as `javascript:` are ignored by the renderer.
+
+The existing MultiColumnWizard row structure stays compatible. Existing rows with `label`, `url`, `icon`, `description` and `target` keep rendering. New row flags are optional:
+
+- `nofollow` adds `nofollow` to the link's `rel` tokens.
+- `relMe` adds `me` for profile verification via `rel="me"`.
+
+Rel values are generated centrally with stable token order. New-window links keep `noopener noreferrer`; optional `nofollow` and `me` are added without duplicates. Empty `rel` attributes are not emitted.
+
+Available display styles:
+
+- `default`: Standard link list output.
+- `icons`: Icons-only output. The legacy stored value is preserved and now also emits `.link-list--icons-only`.
+- `edge-left`: Contact Links hooks for a left page-edge presentation.
+- `edge-right`: Contact Links hooks for a right page-edge presentation.
+- `buttons`: Existing button-style output.
+- `minimal`: Existing minimal output.
+
+The free-text icon marker is preserved. It is normalized to a safe class suffix and exposed through stable classes and data hooks. No predefined platform select, fixed platform list, icon library, SVG injection or unsafe HTML is included.
+
+Icons-only output keeps labels in the DOM so they remain accessible. Labels are expected to be visually hidden by frontend CSS, not removed. If an icons-only row has no usable icon marker, the template emits a visible text fallback so the link is not blank.
+
+Edge variants only provide semantic server-rendered markup hooks in this bundle. Fixed positioning, slide-out presentation, hover/focus expansion and mobile or touch fallback belong in `frontend-assets` or project CSS. The frontend implementation must reveal labels for both hover and keyboard focus, for example with `:hover` and `:focus-within`. Edge positioning can overlap page content, so projects must be able to override or disable that positioning. No JavaScript is required by this bundle.
+
+Existing Link List records remain compatible. The element still emits native anchors, escapes `href` attributes, keeps visible or visually hidden label text as the accessible name and does not add `aria-label` when meaningful label text is already present.
 
 
 ## Slider
@@ -512,19 +550,36 @@ Link List hooks:
 - `.link-list__headline`
 - `.link-list__items`
 - `.link-list__item`
+- `.link-list__item--has-icon`
+- `.link-list__item--no-icon`
 - `.link-list__link`
+- `.link-list__link--has-icon`
+- `.link-list__link--no-icon`
 - `.link-list__icon`
 - `.link-list__label`
+- `.link-list__label-fallback`
 - `.link-list__description`
 - `.link-list--default`
 - `.link-list--buttons`
 - `.link-list--icons`
+- `.link-list--icons-only`
 - `.link-list--minimal`
+- `.link-list--edge`
+- `.link-list--edge-left`
+- `.link-list--edge-right`
+- `.link-list--expand-labels`
 - `.link-list--align-left`
 - `.link-list--align-center`
 - `.link-list--align-right`
+- `[data-vtxm-link-list]`
+- `[data-vtxm-link-list-style]`
+- `[data-vtxm-link-list-align]`
+- `[data-vtxm-link-list-edge]`
+- `[data-vtxm-link-list-item]`
+- `[data-vtxm-link-list-item-index]`
+- `[data-vtxm-link-list-icon]`
 
-Link List styling is expected through `frontend-assets`, especially `css/vtxm-components.css`.
+Link List styling is expected through `frontend-assets`, especially `css/vtxm-components.css`. Edge positioning and label expansion are not implemented in this bundle.
 
 Slider hooks:
 
