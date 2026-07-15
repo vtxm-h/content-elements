@@ -8,6 +8,9 @@ use Contao\StringUtil;
 
 class LinkListElement extends AbstractWrappedContentElement
 {
+    private const STYLE_VALUES = ['default', 'buttons', 'icons', 'icons-only', 'minimal', 'edge-left', 'edge-right'];
+    private const EDGE_STYLE_VALUES = ['edge-left', 'edge-right'];
+    private const ICON_ONLY_STYLE_VALUES = ['icons', 'icons-only'];
     private const REL_TOKEN_ORDER = ['noopener', 'noreferrer', 'nofollow', 'me'];
 
     protected $strTemplate = 'ce_vtxm_link_list';
@@ -17,7 +20,12 @@ class LinkListElement extends AbstractWrappedContentElement
         $this->assignWrapper('ce_vtxm_link_list');
         $this->assignHeadline();
 
-        $this->Template->linkListStyle = $this->normalizeOption((string) ($this->linkListStyle ?: 'default'), ['default', 'buttons', 'icons', 'minimal'], 'default');
+        $style = $this->normalizeOption((string) ($this->linkListStyle ?: 'default'), self::STYLE_VALUES, 'default');
+
+        $this->Template->linkListStyle = $style;
+        $this->Template->linkListStyleModifiers = $this->styleModifiers($style);
+        $this->Template->linkListIsIconOnly = $this->isIconOnlyStyle($style);
+        $this->Template->linkListIsEdge = $this->isEdgeStyle($style);
         $this->Template->linkListAlign = $this->normalizeOption((string) ($this->linkListAlign ?: 'left'), ['left', 'center', 'right'], 'left');
         $this->Template->linkListItems = $this->normalizeItems(StringUtil::deserialize($this->linkListItems, true));
     }
@@ -25,7 +33,7 @@ class LinkListElement extends AbstractWrappedContentElement
     /**
      * @param mixed $items
      *
-     * @return list<array{label: string, url: string, icon: string, description: string, target: bool, nofollow: bool, relMe: bool, rel: string}>
+     * @return list<array{index: int, label: string, url: string, icon: string, description: string, target: bool, nofollow: bool, relMe: bool, rel: string}>
      */
     private function normalizeItems($items): array
     {
@@ -60,6 +68,7 @@ class LinkListElement extends AbstractWrappedContentElement
             $relMe = $this->checkboxValue($item['relMe'] ?? null);
 
             $normalized[] = [
+                'index' => \count($normalized) + 1,
                 'label' => $label,
                 'url' => $url,
                 'icon' => $this->normalizeIcon((string) ($item['icon'] ?? '')),
@@ -72,6 +81,36 @@ class LinkListElement extends AbstractWrappedContentElement
         }
 
         return $normalized;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function styleModifiers(string $style): array
+    {
+        $modifiers = ['link-list--'.$style];
+
+        if ($this->isIconOnlyStyle($style)) {
+            $modifiers[] = 'link-list--icons';
+            $modifiers[] = 'link-list--icons-only';
+        }
+
+        if ($this->isEdgeStyle($style)) {
+            $modifiers[] = 'link-list--edge';
+            $modifiers[] = 'link-list--expand-labels';
+        }
+
+        return array_values(array_unique($modifiers));
+    }
+
+    private function isIconOnlyStyle(string $style): bool
+    {
+        return \in_array($style, self::ICON_ONLY_STYLE_VALUES, true);
+    }
+
+    private function isEdgeStyle(string $style): bool
+    {
+        return \in_array($style, self::EDGE_STYLE_VALUES, true);
     }
 
     private function normalizeUrl(string $url): string

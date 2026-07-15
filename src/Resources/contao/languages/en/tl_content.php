@@ -72,7 +72,7 @@ $GLOBALS['TL_LANG']['tl_content']['mediaTextLayout'] = ['Media position', 'Choos
 $GLOBALS['TL_LANG']['tl_content']['mediaTextStyle'] = ['Display style', 'Choose the media text display style.'];
 $GLOBALS['TL_LANG']['tl_content']['mediaTextEyebrow'] = ['Eyebrow', 'Small label above the headline.'];
 
-$GLOBALS['TL_LANG']['tl_content']['linkListStyle'] = ['Display style', 'Choose the link list display style.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListStyle'] = ['Display style', 'Choose the link list display style. Edge variants emit markup hooks only; fixed positioning belongs in frontend-assets.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListAlign'] = ['Alignment', 'Choose the link list alignment.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListItems'] = ['Links', 'Define links or Contact Links with label, final destination URL, optional free icon marker and description.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListItemsLabel'] = ['Label', 'Link label.'];
@@ -226,9 +226,11 @@ $GLOBALS['TL_LANG']['tl_content']['mediaTextStyleOptions'] = [
 ];
 
 $GLOBALS['TL_LANG']['tl_content']['linkListStyleOptions'] = [
-    'default' => 'Default',
+    'default' => 'Standard',
     'buttons' => 'Buttons',
-    'icons' => 'Icons',
+    'icons' => 'Icons only',
+    'edge-left' => 'Left page edge',
+    'edge-right' => 'Right page edge',
     'minimal' => 'Minimal',
 ];
 

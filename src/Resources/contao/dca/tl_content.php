@@ -223,7 +223,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['linkListStyle'] = [
     'exclude' => true,
     'default' => 'default',
     'inputType' => 'select',
-    'options' => ['default', 'buttons', 'icons', 'minimal'],
+    'options' => ['default', 'icons', 'edge-left', 'edge-right', 'buttons', 'minimal'],
     'reference' => &$GLOBALS['TL_LANG']['tl_content']['linkListStyleOptions'],
     'eval' => ['chosen' => true, 'tl_class' => 'w50'],
     'sql' => "varchar(32) NOT NULL default ''",

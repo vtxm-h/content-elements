@@ -72,7 +72,7 @@ $GLOBALS['TL_LANG']['tl_content']['mediaTextLayout'] = ['Medienposition', 'Wähl
 $GLOBALS['TL_LANG']['tl_content']['mediaTextStyle'] = ['Darstellung', 'Wählen Sie die Darstellung des Media-Text-Elements.'];
 $GLOBALS['TL_LANG']['tl_content']['mediaTextEyebrow'] = ['Eyebrow', 'Kleine Oberzeile über der Überschrift.'];
 
-$GLOBALS['TL_LANG']['tl_content']['linkListStyle'] = ['Darstellung', 'Wählen Sie die Darstellung der Linkliste.'];
+$GLOBALS['TL_LANG']['tl_content']['linkListStyle'] = ['Darstellung', 'Wählen Sie die Darstellung der Linkliste. Seitenrand-Varianten geben nur Markup-Hooks aus; feste Positionierung gehört in frontend-assets.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListAlign'] = ['Ausrichtung', 'Wählen Sie die Ausrichtung der Linkliste.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListItems'] = ['Links', 'Legen Sie Links oder Kontaktlinks mit Label, finaler Ziel-URL, optionalem freiem Icon-Marker und Beschreibung an.'];
 $GLOBALS['TL_LANG']['tl_content']['linkListItemsLabel'] = ['Label', 'Link-Text.'];
@@ -228,7 +228,9 @@ $GLOBALS['TL_LANG']['tl_content']['mediaTextStyleOptions'] = [
 $GLOBALS['TL_LANG']['tl_content']['linkListStyleOptions'] = [
     'default' => 'Standard',
     'buttons' => 'Buttons',
-    'icons' => 'Icons',
+    'icons' => 'Nur Icons',
+    'edge-left' => 'Seitenrand links',
+    'edge-right' => 'Seitenrand rechts',
     'minimal' => 'Minimal',
 ];
 
