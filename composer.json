@@ -14,6 +14,9 @@
       "Vendor\\ContentElementsBundle\\": "src/"
     }
   },
+  "scripts": {
+    "test": "@php tests/run.php"
+  },
   "extra": {
     "contao-manager-plugin": "Vendor\\ContentElementsBundle\\ContaoManager\\Plugin"
   }

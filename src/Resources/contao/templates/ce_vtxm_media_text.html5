@@ -2,11 +2,11 @@
 
 use Contao\StringUtil;
 
-$classes = trim($this->elementClass.' media-text--'.$this->mediaTextLayout.' media-text--'.$this->mediaTextStyle);
+$classes = trim($this->elementClass.' media-text media-text--'.$this->mediaTextLayout.' media-text--'.$this->mediaTextStyle);
 
 ?>
 
-<div<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>">
+<div<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>" data-vtxm-media-text>
   <div class="media-text__inner">
     <?php if ($this->mediaTextHasImage): ?>
       <figure class="media-text__media">

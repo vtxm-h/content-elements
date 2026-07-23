@@ -139,17 +139,28 @@ Available styles:
 - `card`
 - `minimal`
 
+The template emits `.media-text` and `[data-vtxm-media-text]` on the component root plus `.media-text__inner` around the media/content pair. These hooks define the Media Text layout boundary independently of VTXM Section elements. `frontend-assets` or project CSS must establish a modern formatting context on that boundary, preferably with `display: flow-root` on `.media-text` or `.media-text__inner`, so floated media in the `float-left` and `float-right` variants cannot affect following content elements. The remaining position variants can continue to use their existing grid or flex behavior.
+
 The image is selected through the Contao `singleSRC` file picker. Stored UUIDs are resolved through Contao's file model and only valid image files with configured image extensions are rendered. Invalid UUIDs, folders, missing files and files outside the configured image types do not render broken image markup.
 
 The explicit alt text field is used first. If it is empty, the element tries to use the selected file metadata alt text for the current frontend language. It does not derive alt text from filenames or captions.
 
 The Contao `size` field is normalized and exposed to the template. Width and height attributes are emitted when reliable values are available: configured size dimensions are used when present; otherwise natural local image dimensions are used when they can be read safely. SVG files can render, but SVG dimensions are not inferred by this bundle. The element keeps the original image path and does not generate resized image files or cache paths.
 
-When `fullsize` is enabled and a valid image exists, the image is wrapped in `.media-text__link` with `data-lightbox="media-text"` and an `href` to the original image path. This only exposes a Contao-compatible lightbox hook; no lightbox JavaScript or CSS is included here.
+The custom Media Text backend palette does not expose Contao's `fullsize` option (labelled “Großansicht/Neues Fenster” in German). The Contao core field and database value are not changed globally. Existing stored values remain compatible with the legacy renderer, but editors cannot enable or change this option through the Media Text palette. The separate editorial action fields `url`, `linkTitle` and `target` remain available.
 
 Captions are escaped and rendered inside the figure only when set. Multiline captions keep safe line breaks. The text field keeps Contao editor-managed rich text output. The optional action link is rendered only for a safe URL and uses `rel="noopener noreferrer"` when opened in a new window.
 
 Existing Media Text records remain compatible. Visual layout, responsive styling, card/editorial/minimal presentation, hover states and any lightbox behavior belong in `frontend-assets` or project CSS/JavaScript, not in this bundle.
+
+
+## Quote Teaser
+
+`vtxm_quote_teaser` renders one reusable quote card. It does not include a grid or card-arrangement system. To arrange multiple Quote Teasers, place the individual elements through `content-grid`.
+
+The component root exposes `.ce_vtxm_quote_teaser`, `.quote-teaser` and `[data-vtxm-quote-teaser]`. Quote text uses a semantic `blockquote` with `.quote-teaser__quote` and `.quote-teaser__text`. Optional attribution is rendered outside the quoted content in `.quote-teaser__attribution`; the author uses `.quote-teaser__author`, while the existing `quoteMeta` source metadata uses a semantic `cite` with `.quote-teaser__source`. The existing optional link retains `.quote-teaser__action` and adds `.quote-teaser__link`.
+
+Quote Teaser currently exposes no backend style or variant option. Frontend styling should therefore target the stable base hooks rather than assume a stored variant. Card borders, radii, shadows, spacing, accent lines, typography, equal-height behavior and responsive presentation belong in `frontend-assets` or project CSS and are not implemented in this bundle.
 
 
 ## Link List / Contact Links
@@ -521,6 +532,7 @@ Factsbox styling is expected through `frontend-assets`, especially `css/vtxm-com
 
 Media Text hooks:
 
+- `.media-text`
 - `.media-text__inner`
 - `.media-text__media`
 - `.media-text__link`
@@ -541,8 +553,25 @@ Media Text hooks:
 - `.media-text--editorial`
 - `.media-text--card`
 - `.media-text--minimal`
+- `[data-vtxm-media-text]`
 
 Media Text styling is expected through `frontend-assets`, especially `css/vtxm-components.css`.
+
+Quote Teaser hooks:
+
+- `.ce_vtxm_quote_teaser`
+- `.quote-teaser`
+- `.quote-teaser__headline`
+- `.quote-teaser__quote`
+- `.quote-teaser__text`
+- `.quote-teaser__attribution`
+- `.quote-teaser__author`
+- `.quote-teaser__source`
+- `.quote-teaser__action`
+- `.quote-teaser__link`
+- `[data-vtxm-quote-teaser]`
+
+Quote Teaser styling is expected through `frontend-assets` or project CSS. Multiple-card layout is handled by `content-grid`, not by Quote Teaser.
 
 Link List hooks:
 
