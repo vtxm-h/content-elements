@@ -2,27 +2,37 @@
 
 use Contao\StringUtil;
 
-$footer = trim($this->quoteAuthor.' '.$this->quoteMeta);
+$classes = trim($this->elementClass.' quote-teaser');
+$hasAttribution = '' !== trim($this->quoteAuthor.' '.$this->quoteMeta);
 
 ?>
 
-<section<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($this->elementClass) ?>">
+<section<?php if ($this->elementId): ?> id="<?= StringUtil::specialchars($this->elementId) ?>"<?php endif; ?> class="<?= StringUtil::specialchars($classes) ?>" data-vtxm-quote-teaser>
   <?php if ($this->headlineText): ?>
     <<?= $this->headlineUnit ?> class="quote-teaser__headline"><?= StringUtil::specialchars($this->headlineText) ?></<?= $this->headlineUnit ?>>
   <?php endif; ?>
 
   <?php if ($this->quoteText): ?>
     <blockquote class="quote-teaser__quote">
-      <p><?= nl2br(StringUtil::specialchars($this->quoteText)) ?></p>
-      <?php if ($footer): ?>
-        <footer><?= StringUtil::specialchars($footer) ?></footer>
-      <?php endif; ?>
+      <p class="quote-teaser__text"><?= nl2br(StringUtil::specialchars($this->quoteText)) ?></p>
     </blockquote>
+
+    <?php if ($hasAttribution): ?>
+      <footer class="quote-teaser__attribution">
+        <?php if ($this->quoteAuthor): ?>
+          <span class="quote-teaser__author"><?= StringUtil::specialchars($this->quoteAuthor) ?></span>
+        <?php endif; ?>
+
+        <?php if ($this->quoteMeta): ?>
+          <cite class="quote-teaser__source"><?= StringUtil::specialchars($this->quoteMeta) ?></cite>
+        <?php endif; ?>
+      </footer>
+    <?php endif; ?>
   <?php endif; ?>
 
   <?php if ($this->quoteLink && $this->quoteLinkText): ?>
     <p class="quote-teaser__action">
-      <a href="<?= StringUtil::specialchars($this->quoteLink) ?>"><?= StringUtil::specialchars($this->quoteLinkText) ?></a>
+      <a class="quote-teaser__link" href="<?= StringUtil::specialchars($this->quoteLink) ?>"><?= StringUtil::specialchars($this->quoteLinkText) ?></a>
     </p>
   <?php endif; ?>
 </section>
