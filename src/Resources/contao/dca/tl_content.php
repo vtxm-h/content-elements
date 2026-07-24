@@ -7,7 +7,7 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_members_grid'] = '{type_legen
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_live_teaser'] = '{type_legend},type,headline;{live_legend},liveDate,liveLocation,liveText,liveLink,liveLinkText;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_quote_teaser'] = '{type_legend},type,headline;{quote_legend},quoteText,quoteAuthor,quoteMeta,quoteLink,quoteLinkText;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_announcement'] = '{type_legend},type,headline;{announcement_legend},announcementEyebrow,announcementText,announcementLink,announcementLinkText,announcementStyle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
-$GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_media_text'] = '{type_legend},type,headline;{media_legend},singleSRC,alt,size,caption;{text_legend},mediaTextEyebrow,text;{link_legend:hide},url,linkTitle,target;{media_text_legend},mediaTextLayout,mediaTextStyle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_media_text'] = '{type_legend},type,headline;{media_legend},singleSRC,alt,size,caption;{text_legend},mediaTextEyebrow,text;{link_legend:hide},url,linkTitle;{media_text_legend},mediaTextLayout,mediaTextStyle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_link_list'] = '{type_legend},type,headline;{link_list_legend},linkListStyle,linkListAlign,linkListItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_slider'] = '{type_legend},type,headline;{slider_legend},sliderStyle,sliderItems;{slider_settings_legend:hide},sliderRenderMode,sliderAutoplay,sliderInterval,sliderArrows,sliderPagination,sliderLoop,sliderPerPage,sliderGap,sliderTransition,sliderImageEffect,sliderTextAnimation,sliderOverlay,sliderMode,sliderWidth,sliderHeight,sliderContentAlign,sliderContentPosition,sliderMediaPosition,sliderPattern,sliderScrollEffect;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_teaser_grid'] = '{type_legend},type,headline;{teaser_grid_legend},teaserGridStyle,teaserGridColumns,teaserGridGap,teaserGridItems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
@@ -215,7 +215,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['mediaTextStyle'] = [
 $GLOBALS['TL_DCA']['tl_content']['fields']['mediaTextEyebrow'] = [
     'exclude' => true,
     'inputType' => 'text',
-    'eval' => ['maxlength' => 255, 'tl_class' => 'w50'],
+    'eval' => ['maxlength' => 255, 'tl_class' => 'clr'],
     'sql' => "varchar(255) NOT NULL default ''",
 ];
 

@@ -127,7 +127,12 @@ namespace {
     }
 
     $root = dirname(__DIR__);
-    $GLOBALS['TL_DCA'] = ['tl_content' => ['palettes' => [], 'subpalettes' => [], 'fields' => []]];
+    $globalTargetField = [
+        'inputType' => 'checkbox',
+        'eval' => ['tl_class' => 'w50 m12'],
+        'sql' => "char(1) NOT NULL default ''",
+    ];
+    $GLOBALS['TL_DCA'] = ['tl_content' => ['palettes' => [], 'subpalettes' => [], 'fields' => ['target' => $globalTargetField]]];
     $GLOBALS['TL_LANG'] = ['tl_content' => []];
 
     require $root.'/src/Resources/contao/dca/tl_content.php';
@@ -136,10 +141,19 @@ namespace {
     $mediaFields = paletteFields($mediaPalette);
 
     assertTrueValue(!in_array('fullsize', $mediaFields, true), 'Media Text must not expose the Contao fullsize/new-window image option.');
+    assertTrueValue(!in_array('target', $mediaFields, true), 'Media Text must not expose the Contao new-window target option.');
 
-    foreach (['type', 'headline', 'singleSRC', 'alt', 'size', 'caption', 'mediaTextEyebrow', 'text', 'url', 'linkTitle', 'target', 'mediaTextLayout', 'mediaTextStyle', 'cssID'] as $requiredField) {
+    foreach (['type', 'headline', 'singleSRC', 'alt', 'size', 'caption', 'mediaTextEyebrow', 'text', 'url', 'linkTitle', 'mediaTextLayout', 'mediaTextStyle', 'cssID'] as $requiredField) {
         assertTrueValue(in_array($requiredField, $mediaFields, true), "Media Text must retain the {$requiredField} field.");
     }
+
+    $mediaTextEyebrowField = $GLOBALS['TL_DCA']['tl_content']['fields']['mediaTextEyebrow'];
+
+    assertSameValue('text', $mediaTextEyebrowField['inputType'], 'Media Text eyebrow must remain a normal editable text input.');
+    assertSameValue(255, $mediaTextEyebrowField['eval']['maxlength'], 'Media Text eyebrow must retain its text length limit.');
+    assertSameValue('clr', $mediaTextEyebrowField['eval']['tl_class'], 'Media Text eyebrow must clear the backend field layout instead of floating beside the rich-text editor.');
+    assertTrueValue(!isset($mediaTextEyebrowField['eval']['readonly']) && !isset($mediaTextEyebrowField['eval']['disabled']), 'Media Text eyebrow must not be configured as read-only or disabled.');
+    assertSameValue($globalTargetField, $GLOBALS['TL_DCA']['tl_content']['fields']['target'], 'Media Text configuration must not alter Contao\'s global target field.');
 
     $expectedUnrelatedPalettes = [
         'vtxm_iconbox' => '{type_legend},type,headline;{iconbox_legend},iconboxStyle,iconboxIcon,iconboxText,iconboxLink,iconboxLinkText;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop',
