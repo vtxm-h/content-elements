@@ -1,6 +1,10 @@
 <?php
 
 use Contao\Config;
+use Vendor\ContentElementsBundle\TeamGrid\TeamGridIconRegistry;
+use Vendor\ContentElementsBundle\TeamGrid\TeamGridProfileWidgetWrapper;
+
+$GLOBALS['TL_CSS']['vtxm_team_grid_backend'] = 'bundles/contentelements/css/team-grid-backend.css|static';
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_iconbox'] = '{type_legend},type,headline;{iconbox_legend},iconboxStyle,iconboxIcon,iconboxText,iconboxLink,iconboxLinkText;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['vtxm_members_grid'] = '{type_legend},type,headline;{members_legend},memberImageTop,memberNameTop,memberImageLeft,memberNameLeft,memberImageRight,memberNameRight,memberImageBottom,memberNameBottom;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
@@ -762,103 +766,99 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['teamGridItems'] = [
                     'filesOnly' => true,
                     'fieldType' => 'radio',
                     'extensions' => Config::get('validImageTypes'),
-                    'style' => 'width:260px',
+                    'columnPos' => 'profile',
+                    'tl_class' => 'team-grid-profile-field team-grid-profile-field--image',
                 ],
             ],
             'alt' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsAlt'],
                 'inputType' => 'text',
-                'eval' => ['maxlength' => 255, 'style' => 'width:180px'],
+                'eval' => ['maxlength' => 255, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--alt'],
             ],
             'name' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsName'],
                 'inputType' => 'text',
-                'eval' => ['maxlength' => 255, 'style' => 'width:220px'],
+                'eval' => ['maxlength' => 255, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--name'],
             ],
             'role' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsRole'],
                 'inputType' => 'text',
-                'eval' => ['maxlength' => 255, 'style' => 'width:220px'],
+                'eval' => ['maxlength' => 255, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--role'],
             ],
             'biography' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsBiography'],
                 'inputType' => 'textarea',
-                'eval' => ['allowHtml' => false, 'style' => 'width:300px;height:80px'],
+                'eval' => ['allowHtml' => false, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--biography'],
             ],
             'email' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsEmail'],
                 'inputType' => 'text',
-                'eval' => ['maxlength' => 255, 'rgxp' => 'email', 'style' => 'width:220px'],
+                'eval' => ['maxlength' => 255, 'rgxp' => 'email', 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--email'],
             ],
             'phone' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsPhone'],
                 'inputType' => 'text',
-                'eval' => ['maxlength' => 64, 'style' => 'width:180px'],
+                'eval' => ['maxlength' => 64, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--phone'],
             ],
             'website' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsWebsite'],
                 'inputType' => 'text',
-                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'dcaPicker' => true, 'style' => 'width:240px'],
+                'wizard' => [[TeamGridProfileWidgetWrapper::class, 'renderPagePicker']],
+                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--website'],
             ],
-            'linkedinUrl' => [
-                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLinkedinUrl'],
+            'link1Icon' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink1Icon'],
+                'inputType' => 'select',
+                'options' => TeamGridIconRegistry::keys(),
+                'reference' => &$GLOBALS['TL_LANG']['tl_content']['teamGridLinkIconOptions'],
+                'eval' => ['includeBlankOption' => true, 'chosen' => true, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--link-icon team-grid-profile-field--link-1-icon'],
+            ],
+            'link1Label' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink1Label'],
                 'inputType' => 'text',
-                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'style' => 'width:240px'],
+                'eval' => ['maxlength' => 128, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--link-label team-grid-profile-field--link-1-label'],
             ],
-            'instagramUrl' => [
-                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsInstagramUrl'],
+            'link1Url' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink1Url'],
                 'inputType' => 'text',
-                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'style' => 'width:240px'],
+                'wizard' => [[TeamGridProfileWidgetWrapper::class, 'renderPagePicker']],
+                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--link-url team-grid-profile-field--link-1-url'],
             ],
-            'mastodonUrl' => [
-                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsMastodonUrl'],
+            'link2Icon' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink2Icon'],
+                'inputType' => 'select',
+                'options' => TeamGridIconRegistry::keys(),
+                'reference' => &$GLOBALS['TL_LANG']['tl_content']['teamGridLinkIconOptions'],
+                'eval' => ['includeBlankOption' => true, 'chosen' => true, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--link-icon'],
+            ],
+            'link2Label' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink2Label'],
                 'inputType' => 'text',
-                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'style' => 'width:240px'],
+                'eval' => ['maxlength' => 128, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--link-label'],
             ],
-            'blueskyUrl' => [
-                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsBlueskyUrl'],
+            'link2Url' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink2Url'],
                 'inputType' => 'text',
-                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'style' => 'width:240px'],
+                'wizard' => [[TeamGridProfileWidgetWrapper::class, 'renderPagePicker']],
+                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--link-url'],
             ],
-            'githubUrl' => [
-                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsGithubUrl'],
+            'link3Icon' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink3Icon'],
+                'inputType' => 'select',
+                'options' => TeamGridIconRegistry::keys(),
+                'reference' => &$GLOBALS['TL_LANG']['tl_content']['teamGridLinkIconOptions'],
+                'eval' => ['includeBlankOption' => true, 'chosen' => true, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--link-icon'],
+            ],
+            'link3Label' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink3Label'],
                 'inputType' => 'text',
-                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'style' => 'width:240px'],
+                'eval' => ['maxlength' => 128, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--link-label'],
             ],
-            'ctaUrl' => [
-                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsCtaUrl'],
+            'link3Url' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink3Url'],
                 'inputType' => 'text',
-                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'dcaPicker' => true, 'style' => 'width:240px'],
-            ],
-            'ctaLabel' => [
-                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsCtaLabel'],
-                'inputType' => 'text',
-                'eval' => ['maxlength' => 128, 'style' => 'width:180px'],
-            ],
-            'ctaTarget' => [
-                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsCtaTarget'],
-                'inputType' => 'checkbox',
-                'eval' => ['style' => 'width:80px'],
-            ],
-            'genericLink1Label' => [
-                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsGenericLink1Label'],
-                'inputType' => 'text',
-                'eval' => ['maxlength' => 128, 'style' => 'width:180px'],
-            ],
-            'genericLink1Url' => [
-                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsGenericLink1Url'],
-                'inputType' => 'text',
-                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'style' => 'width:240px'],
-            ],
-            'genericLink2Label' => [
-                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsGenericLink2Label'],
-                'inputType' => 'text',
-                'eval' => ['maxlength' => 128, 'style' => 'width:180px'],
-            ],
-            'genericLink2Url' => [
-                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsGenericLink2Url'],
-                'inputType' => 'text',
-                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'style' => 'width:240px'],
+                'wizard' => [[TeamGridProfileWidgetWrapper::class, 'renderPagePicker']],
+                'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--link-url'],
             ],
         ],
         'tl_class' => 'clr',

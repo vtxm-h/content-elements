@@ -7,6 +7,7 @@ namespace Vendor\ContentElementsBundle\ContentElement;
 use Contao\Config;
 use Contao\FilesModel;
 use Contao\StringUtil;
+use Vendor\ContentElementsBundle\TeamGrid\TeamGridLinkNormalizer;
 
 class TeamGridElement extends AbstractWrappedContentElement
 {
@@ -17,14 +18,6 @@ class TeamGridElement extends AbstractWrappedContentElement
     private const IMAGE_RATIO_VALUES = ['portrait', 'square', 'landscape', 'natural'];
     private const ALIGN_VALUES = ['left', 'center'];
     private const REVEAL_VALUES = ['none', 'fade-up'];
-
-    private const SOCIAL_FIELDS = [
-        'linkedinUrl' => ['type' => 'linkedin', 'label' => 'LinkedIn'],
-        'instagramUrl' => ['type' => 'instagram', 'label' => 'Instagram'],
-        'mastodonUrl' => ['type' => 'mastodon', 'label' => 'Mastodon'],
-        'blueskyUrl' => ['type' => 'bluesky', 'label' => 'Bluesky'],
-        'githubUrl' => ['type' => 'github', 'label' => 'GitHub'],
-    ];
 
     protected $strTemplate = 'ce_vtxm_team_grid';
 
@@ -66,7 +59,7 @@ class TeamGridElement extends AbstractWrappedContentElement
     /**
      * @param mixed $items
      *
-     * @return list<array{index: int, image: string, alt: string, name: string, role: string, biography: string, contacts: list<array{type: string, label: string, url: string, ariaLabel: string, target: bool}>, socials: list<array{type: string, label: string, url: string, ariaLabel: string, target: bool}>, action: array{label: string, url: string, target: bool, ariaLabel: string}|null, hasMedia: bool}>
+     * @return list<array{index: int, image: string, alt: string, name: string, role: string, biography: string, contacts: list<array{type: string, label: string, url: string, ariaLabel: string}>, socials: list<array{type: string, icon: string, iconSvg: string, label: string, url: string, accessibleLabel: string}>, hasMedia: bool}>
      */
     private function normalizeItems($items): array
     {
@@ -86,8 +79,7 @@ class TeamGridElement extends AbstractWrappedContentElement
             $role = trim((string) ($item['role'] ?? ''));
             $biography = trim((string) ($item['biography'] ?? ''));
             $contacts = $this->normalizeContacts($item, $name);
-            $socials = $this->normalizeSocials($item, $name);
-            $action = $this->normalizeAction($item, $name);
+            $socials = $this->normalizeSocials($item);
 
             if (
                 '' === $name
@@ -96,7 +88,6 @@ class TeamGridElement extends AbstractWrappedContentElement
                 && '' === $image
                 && [] === $contacts
                 && [] === $socials
-                && null === $action
             ) {
                 continue;
             }
@@ -110,7 +101,6 @@ class TeamGridElement extends AbstractWrappedContentElement
                 'biography' => $biography,
                 'contacts' => $contacts,
                 'socials' => $socials,
-                'action' => $action,
                 'hasMedia' => '' !== $image,
             ];
         }
@@ -121,7 +111,7 @@ class TeamGridElement extends AbstractWrappedContentElement
     /**
      * @param array<string, mixed> $item
      *
-     * @return list<array{type: string, label: string, url: string, ariaLabel: string, target: bool}>
+     * @return list<array{type: string, label: string, url: string, ariaLabel: string}>
      */
     private function normalizeContacts(array $item, string $name): array
     {
@@ -134,7 +124,6 @@ class TeamGridElement extends AbstractWrappedContentElement
                 'label' => $email,
                 'url' => 'mailto:'.$email,
                 'ariaLabel' => $this->personLinkLabel('Email', $name),
-                'target' => false,
             ];
         }
 
@@ -146,7 +135,6 @@ class TeamGridElement extends AbstractWrappedContentElement
                 'label' => $phone['label'],
                 'url' => 'tel:'.$phone['href'],
                 'ariaLabel' => $this->personLinkLabel('Phone', $name),
-                'target' => false,
             ];
         }
 
@@ -158,7 +146,6 @@ class TeamGridElement extends AbstractWrappedContentElement
                 'label' => 'Website',
                 'url' => $website,
                 'ariaLabel' => $this->personLinkLabel('Website', $name),
-                'target' => false,
             ];
         }
 
@@ -168,70 +155,11 @@ class TeamGridElement extends AbstractWrappedContentElement
     /**
      * @param array<string, mixed> $item
      *
-     * @return list<array{type: string, label: string, url: string, ariaLabel: string, target: bool}>
+     * @return list<array{type: string, icon: string, iconSvg: string, label: string, url: string, accessibleLabel: string}>
      */
-    private function normalizeSocials(array $item, string $name): array
+    private function normalizeSocials(array $item): array
     {
-        $socials = [];
-
-        foreach (self::SOCIAL_FIELDS as $field => $meta) {
-            $url = $this->normalizeWebUrl(trim((string) ($item[$field] ?? '')));
-
-            if ('' === $url) {
-                continue;
-            }
-
-            $label = $meta['label'];
-
-            $socials[] = [
-                'type' => $meta['type'],
-                'label' => $label,
-                'url' => $url,
-                'ariaLabel' => $this->personLinkLabel($label, $name),
-                'target' => false,
-            ];
-        }
-
-        foreach ([1, 2] as $number) {
-            $label = trim((string) ($item['genericLink'.$number.'Label'] ?? ''));
-            $url = $this->normalizeWebUrl(trim((string) ($item['genericLink'.$number.'Url'] ?? '')));
-
-            if ('' === $label || '' === $url) {
-                continue;
-            }
-
-            $socials[] = [
-                'type' => 'generic-'.$number,
-                'label' => $label,
-                'url' => $url,
-                'ariaLabel' => $this->personLinkLabel($label, $name),
-                'target' => false,
-            ];
-        }
-
-        return $socials;
-    }
-
-    /**
-     * @param array<string, mixed> $item
-     *
-     * @return array{label: string, url: string, target: bool, ariaLabel: string}|null
-     */
-    private function normalizeAction(array $item, string $name): ?array
-    {
-        $url = $this->normalizeUrl(trim((string) ($item['ctaUrl'] ?? '')));
-        $label = trim((string) ($item['ctaLabel'] ?? ''));
-
-        if ('' === $url || '' === $label) {
-            return null;
-        }
-
-        return [
-            'label' => $label,
-            'url' => $url,
-            'target' => $this->checkboxValue($item['ctaTarget'] ?? null),
-            'ariaLabel' => $this->personLinkLabel($label, $name),
-        ];
+        return TeamGridLinkNormalizer::normalize($item);
     }
 
     /**
@@ -382,34 +310,7 @@ class TeamGridElement extends AbstractWrappedContentElement
 
     private function normalizeWebUrl(string $url): string
     {
-        $url = $this->normalizeUrl($url);
-
-        if ('' === $url) {
-            return '';
-        }
-
-        if (preg_match('/^[a-z][a-z0-9+.-]*:/i', $url) && !preg_match('/^https?:/i', $url)) {
-            return '';
-        }
-
-        return $url;
-    }
-
-    private function normalizeUrl(string $url): string
-    {
-        if ('' === $url) {
-            return '';
-        }
-
-        if ($this->hasUnsafeCharacters($url)) {
-            return '';
-        }
-
-        if (preg_match('/^[a-z][a-z0-9+.-]*:/i', $url) && !preg_match('/^(https?:|mailto:|tel:)/i', $url)) {
-            return '';
-        }
-
-        return $url;
+        return TeamGridLinkNormalizer::normalizeWebUrl($url);
     }
 
     private function personLinkLabel(string $label, string $name): string
@@ -467,13 +368,5 @@ class TeamGridElement extends AbstractWrappedContentElement
     private function hasUnsafeCharacters(string $value): bool
     {
         return 1 === preg_match('/[\x00-\x1F\x7F<>"\']/', $value);
-    }
-
-    /**
-     * @param mixed $value
-     */
-    private function checkboxValue($value): bool
-    {
-        return '1' === (string) $value || 1 === $value || true === $value;
     }
 }

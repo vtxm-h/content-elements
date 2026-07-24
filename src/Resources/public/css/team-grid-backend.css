@@ -1,0 +1,119 @@
+#ctrl_teamGridItems {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0 1rem;
+}
+
+#ctrl_teamGridItems > thead {
+    display: none;
+}
+
+#ctrl_teamGridItems > tbody > tr > td:not(.operations):not(.hidden) {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0.875rem 1rem;
+    min-width: 0;
+    padding: 1rem;
+    overflow: visible;
+    white-space: normal;
+    vertical-align: top;
+    background: var(--form-bg, #fff);
+    border: 1px solid var(--border, #ddd);
+    border-radius: 4px;
+}
+
+#ctrl_teamGridItems > tbody > tr > td.operations {
+    width: 44px;
+    padding: 1rem 0.25rem;
+    white-space: normal;
+    vertical-align: top;
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field {
+    float: none;
+    width: auto;
+    min-width: 0;
+    margin: 0;
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field label {
+    display: block;
+    margin-bottom: 0.25rem;
+    white-space: normal;
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field input,
+#ctrl_teamGridItems .widget.team-grid-profile-field select,
+#ctrl_teamGridItems .widget.team-grid-profile-field textarea {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field--image,
+#ctrl_teamGridItems .widget.team-grid-profile-field--alt,
+#ctrl_teamGridItems .widget.team-grid-profile-field--name,
+#ctrl_teamGridItems .widget.team-grid-profile-field--role,
+#ctrl_teamGridItems .widget.team-grid-profile-field--email,
+#ctrl_teamGridItems .widget.team-grid-profile-field--phone {
+    grid-column: span 6;
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field--biography,
+#ctrl_teamGridItems .widget.team-grid-profile-field--website {
+    grid-column: 1 / -1;
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field--biography textarea {
+    min-height: 9rem;
+    resize: vertical;
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon {
+    grid-column: span 3;
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field--link-label {
+    grid-column: span 4;
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field--link-url {
+    grid-column: span 5;
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field--email,
+#ctrl_teamGridItems .widget.team-grid-profile-field--phone,
+#ctrl_teamGridItems .widget.team-grid-profile-field--link-1-icon {
+    padding-top: 1rem;
+    border-top: 1px solid var(--border, #ddd);
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field--email {
+    grid-column: 1 / span 6;
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field--link-1-icon {
+    grid-column: 1 / span 3;
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field--link-1-label,
+#ctrl_teamGridItems .widget.team-grid-profile-field--link-1-url {
+    padding-top: 1rem;
+    border-top: 1px solid var(--border, #ddd);
+}
+
+#ctrl_teamGridItems .tl_listing_container {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+    #ctrl_teamGridItems > tbody > tr > td:not(.operations):not(.hidden) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    #ctrl_teamGridItems .widget.team-grid-profile-field {
+        grid-column: 1 / -1;
+    }
+}

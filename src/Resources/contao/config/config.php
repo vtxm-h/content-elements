@@ -15,6 +15,7 @@ use Vendor\ContentElementsBundle\ContentElement\TeamGridElement;
 use Vendor\ContentElementsBundle\ContentElement\TeaserGridElement;
 use Vendor\ContentElementsBundle\ContentElement\ContentTabs;
 use Vendor\ContentElementsBundle\ContentElement\ContentTimeline;
+use Vendor\ContentElementsBundle\TeamGrid\TeamGridProfileWidgetWrapper;
 
 $GLOBALS['TL_CTE']['vtxm']['vtxm_iconbox'] = ContentIconbox::class;
 $GLOBALS['TL_CTE']['vtxm']['vtxm_media_text'] = MediaTextElement::class;
@@ -31,3 +32,5 @@ $GLOBALS['TL_CTE']['vtxm']['vtxm_accordion'] = ContentAccordion::class;
 $GLOBALS['TL_CTE']['vtxm']['vtxm_timeline'] = ContentTimeline::class;
 $GLOBALS['TL_CTE']['vtxm']['vtxm_process_steps'] = ProcessStepsElement::class;
 $GLOBALS['TL_CTE']['vtxm']['vtxm_factsbox'] = FactsboxElement::class;
+
+$GLOBALS['TL_HOOKS']['parseWidget'][] = [TeamGridProfileWidgetWrapper::class, 'wrap'];

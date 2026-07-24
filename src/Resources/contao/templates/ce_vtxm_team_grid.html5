@@ -66,21 +66,20 @@ $classes = trim($this->elementClass.' team-grid--style-'.$this->teamGridStyle.' 
             <?php endif; ?>
 
             <?php if (!empty($item['socials'])): ?>
-              <ul class="team-grid__socials" aria-label="<?= StringUtil::specialchars('Profiles'.('' !== $item['name'] ? ': '.$item['name'] : '')) ?>">
+              <ul class="team-grid__socials" aria-label="<?= StringUtil::specialchars('Additional links'.('' !== $item['name'] ? ': '.$item['name'] : '')) ?>">
                 <?php foreach ($item['socials'] as $social): ?>
                   <li>
-                    <a class="team-grid__social team-grid__social--<?= StringUtil::specialchars($social['type']) ?>" href="<?= StringUtil::specialchars($social['url']) ?>" aria-label="<?= StringUtil::specialchars($social['ariaLabel']) ?>">
-                      <span class="team-grid__social-label"><?= StringUtil::specialchars($social['label']) ?></span>
+                    <a class="team-grid__social team-grid__social--<?= StringUtil::specialchars($social['type']) ?> <?= '' !== $social['iconSvg'] ? 'team-grid__social--has-icon' : 'team-grid__social--no-icon' ?> <?= '' !== $social['label'] ? 'team-grid__social--has-label' : 'team-grid__social--icon-only' ?>" href="<?= StringUtil::specialchars($social['url']) ?>"<?php if ('' !== $social['accessibleLabel']): ?> aria-label="<?= StringUtil::specialchars($social['accessibleLabel']) ?>"<?php endif; ?><?php if ('' !== $social['icon']): ?> data-vtxm-team-grid-link-icon="<?= StringUtil::specialchars($social['icon']) ?>"<?php endif; ?>>
+                      <?php if ('' !== $social['iconSvg']): ?>
+                        <span class="team-grid__social-icon" aria-hidden="true"><?= $social['iconSvg'] ?></span>
+                      <?php endif; ?>
+                      <?php if ('' !== $social['label']): ?>
+                        <span class="team-grid__social-label"><?= StringUtil::specialchars($social['label']) ?></span>
+                      <?php endif; ?>
                     </a>
                   </li>
                 <?php endforeach; ?>
               </ul>
-            <?php endif; ?>
-
-            <?php if (\is_array($item['action'])): ?>
-              <p class="team-grid__action">
-                <a class="team-grid__link" href="<?= StringUtil::specialchars($item['action']['url']) ?>"<?php if ($item['action']['target']): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?> aria-label="<?= StringUtil::specialchars($item['action']['ariaLabel']) ?>"><?= StringUtil::specialchars($item['action']['label']) ?></a>
-              </p>
             <?php endif; ?>
           </div>
         </article>
