@@ -67,7 +67,7 @@ Typical use cases:
 - `vtxm_link_list` for structured links and Contact Links such as websites, email, telephone, WhatsApp, profile links, streaming platforms, downloads, press kits, booking links and external resources; supports standard, icons-only, left/right edge, buttons and minimal styles plus left, center and right alignment
 - `vtxm_slider` for structured Splide-compatible hero sliders, image sliders, background-video heroes, quotes, card sliders and no-JavaScript Static Hero output; supports hero, images, cards and quotes styles plus render mode, autoplay, arrows, pagination, loop, perPage, gap, transition, image effect, text animation, overlay, width, height, pattern, alignment and scroll-fade settings
 - `vtxm_teaser_grid` for reusable teaser cards with image, title, text, badge and optional link; supports default, cards, editorial and minimal styles plus 2, 3 or 4 columns and small, medium or large gaps
-- `vtxm_team_grid` for repeatable team/profile grids with image, role, biography, first-class contact links, social links, two generic profile links and one primary CTA
+- `vtxm_team_grid` for repeatable team/profile grids with image, role, biography, contact details and three unified additional-link slots
 - `vtxm_members_grid` for the existing fixed four-position team / band member layout
 - `vtxm_live_teaser` for concerts, events or live announcements
 - `vtxm_quote_teaser` for quotes, reviews or press snippets
@@ -380,36 +380,48 @@ Reveal hooks:
 Person fields:
 
 - image
-- explicit image alt text
+- optional explicit image alt text
 - name
-- role
+- role/function
 - biography
+
+Contact fields:
+
 - email
 - phone
 - website
-- LinkedIn URL
-- Instagram URL
-- Mastodon URL
-- Bluesky URL
-- GitHub URL
-- primary CTA URL, label and new-window target
-- two generic social/profile links with explicit labels and URLs
 
-Rows are edited through MultiColumnWizard and keep their backend order in the frontend. Completely empty rows are skipped. A row is usable when it has a name, or at least one of role, biography, valid media, contact/social link or primary CTA.
+Additional-link fields:
+
+- Link 1: optional icon, optional visible label and URL
+- Link 2: optional icon, optional visible label and URL
+- Link 3: optional icon, optional visible label and URL
+
+Website remains a separate contact field. Profiles have exactly three additional-link slots.
+
+Rows are edited through MultiColumnWizard and keep their backend order in the frontend. Each row uses the widget's grouped-column behavior to present one responsive profile block instead of one oversized horizontal table row. Image and alternative text, name and role, full-width biography, contact fields and the three link slots stay within the normal backend content width. Native row operations and the image picker remain provided by MultiColumnWizard and Contao.
+
+Completely empty rows are skipped. A row is usable when it has a name, or at least one of role, biography, valid media, contact field or valid additional link.
 
 Images are selected through the Contao file picker and resolved from stored UUIDs. Invalid UUIDs, folders, missing files and files outside the configured image types do not render an image. Missing images render no media element and expose no-media hooks instead of a fake placeholder image.
 
-Explicit image alt text is preserved. Empty alt text remains empty and marks the image as decorative. The element does not derive alt text from the person name.
+Explicit image alternative text is preserved. It may remain empty when the portrait is decorative and the adjacent name already conveys the same information. The element never derives or fills alternative text from the person's name.
 
-The biography is rendered as escaped plain text with line breaks preserved. Contact links render only when valid: email becomes `mailto:`, phone becomes `tel:`, and website/social links accept safe web URLs. First-class social links use stable labels; generic links render only when both explicit label and safe URL are present. The primary CTA renders only when both a safe URL and visible label are present, and new-window CTAs use `rel="noopener noreferrer"`.
+The biography is rendered as escaped plain text with line breaks preserved. Contact links render only when valid: email becomes `mailto:`, phone becomes `tel:`, and website/additional links accept safe web URLs.
+
+Additional links support icon only, visible label only, or icon plus visible label. A URL without an icon or label, or an icon/label without a URL, produces no anchor. Icon-only links receive the platform name as their accessible link name. When visible text is present it supplies the accessible name and the local SVG is decorative. `external-link` requires a visible label and cannot render as an icon-only link. Unknown icon keys are ignored safely; if a visible label and safe URL remain, the link falls back to text-only output. Identical additional-link URLs are rendered only once. Unified links use normal browser navigation and never add `target="_blank"`.
+
+The curated icon keys are `instagram`, `linkedin`, `github`, `mastodon`, `bluesky`, `facebook`, `youtube`, `tiktok`, `x`, `website` and `external-link`, plus the editor's no-icon choice. SVG files are local, whitelisted and rendered inline without JavaScript. Sources and license details are recorded in [`ICON_SOURCES.md`](ICON_SOURCES.md).
+
+The Team Grid profile model was replaced before productive use. The former experimental fields are not read, mapped or retained. Existing experimental Team Grid records may need to be deleted and recreated with the fields above.
 
 The optional `fade-up` reveal setting emits the existing generic reveal-group hooks used by `frontend-assets`: `.vtxm-reveal-group`, `.vtxm-reveal-item`, `data-vtxm-reveal-type`, `data-vtxm-reveal-target` and `data-vtxm-reveal-stagger`. Content remains visible without JavaScript.
 
-The output uses list semantics, one article per person, a heading for each name, visible link text, accessible labels for contact/social/CTA links, decorative empty `alt` attributes when configured, keyboard-accessible native links and no modal or disclosure behavior.
+The output uses list semantics, one article per person, a heading for each name, accessible contact and additional links, decorative empty `alt` attributes when configured, keyboard-accessible native links and no modal or disclosure behavior.
 
-Styling, profile card presentation, icon visuals, reveal animation details and reduced-motion handling belong in `frontend-assets` or project CSS/JavaScript. This bundle only outputs stable markup, classes and data hooks.
+Styling, profile card presentation, reveal animation details and reduced-motion handling belong in `frontend-assets` or project CSS/JavaScript. This bundle only outputs stable markup, classes, data hooks and the curated local SVG shapes required by Team Grid links.
 
-Deferred features for this element include frontend CSS, JavaScript, icon libraries, SVG icon bundles, modal profiles, detail pages, person database entities, categories, departments, filtering, sorting UI, arbitrary focal points, responsive art direction, automatic image placeholders, project-specific colors and migrations from `vtxm_members_grid`.
+Deferred features for this element include frontend CSS, JavaScript, complete icon libraries, modal profiles, detail pages, person database entities, categories, departments, filtering, sorting UI, arbitrary focal points, responsive art direction, automatic image placeholders, project-specific colors and migrations from `vtxm_members_grid`.
 
 
 ## Process Steps / Timeline
@@ -756,9 +768,13 @@ Team Grid hooks:
 - `.team-grid__contact`
 - `.team-grid__socials`
 - `.team-grid__social`
+- `.team-grid__social--has-icon`
+- `.team-grid__social--no-icon`
+- `.team-grid__social--has-label`
+- `.team-grid__social--icon-only`
+- `.team-grid__social-icon`
+- `.team-grid__social-icon-svg`
 - `.team-grid__social-label`
-- `.team-grid__action`
-- `.team-grid__link`
 - `.team-grid--style-cards`
 - `.team-grid--style-minimal`
 - `.team-grid--style-list`
@@ -788,6 +804,7 @@ Team Grid hooks:
 - `[data-vtxm-team-grid-gap]`
 - `[data-vtxm-team-grid-ratio]`
 - `[data-vtxm-team-grid-align]`
+- `[data-vtxm-team-grid-link-icon]`
 - `[data-vtxm-reveal-type]`
 - `[data-vtxm-reveal-target]`
 - `[data-vtxm-reveal-stagger]`
