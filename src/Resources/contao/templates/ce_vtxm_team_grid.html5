@@ -40,10 +40,6 @@ $classes = trim($this->elementClass.' team-grid--style-'.$this->teamGridStyle.' 
               <p class="team-grid__role"><?= StringUtil::specialchars($item['role']) ?></p>
             <?php endif; ?>
 
-            <?php if ('' !== $item['biography']): ?>
-              <div class="team-grid__biography"><?= nl2br(StringUtil::specialchars($item['biography'])) ?></div>
-            <?php endif; ?>
-
             <?php if (!empty($item['contacts'])): ?>
               <ul class="team-grid__contacts" aria-label="<?= StringUtil::specialchars('Contact'.('' !== $item['name'] ? ': '.$item['name'] : '')) ?>">
                 <?php foreach ($item['contacts'] as $contact): ?>
@@ -63,6 +59,10 @@ $classes = trim($this->elementClass.' team-grid--style-'.$this->teamGridStyle.' 
                   </li>
                 <?php endforeach; ?>
               </ul>
+            <?php endif; ?>
+
+            <?php if ('' !== $item['biography']): ?>
+              <div class="team-grid__biography"><?= nl2br(StringUtil::specialchars($item['biography'])) ?></div>
             <?php endif; ?>
 
             <?php if (!empty($item['socials'])): ?>
