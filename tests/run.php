@@ -211,7 +211,7 @@ namespace {
     $teamField = $GLOBALS['TL_DCA']['tl_content']['fields']['teamGridItems'];
     $teamColumns = $teamField['eval']['columnFields'];
     $requiredVisibleTeamColumns = [
-        'image', 'alt', 'name', 'role', 'biography', 'email', 'phone', 'website',
+        'image', 'alt', 'name', 'role', 'biography', 'email', 'phone', 'website', 'openLinksInNewWindow',
         'link1Icon', 'link1Label', 'link1Url',
         'link2Icon', 'link2Label', 'link2Url',
         'link3Icon', 'link3Label', 'link3Url',
@@ -227,6 +227,7 @@ namespace {
         assertSameValue('select', $teamColumns['link'.$slot.'Icon']['inputType'], "Team Grid link {$slot} must contain an icon select.");
         assertSameValue('text', $teamColumns['link'.$slot.'Label']['inputType'], "Team Grid link {$slot} must contain a label input.");
         assertSameValue('text', $teamColumns['link'.$slot.'Url']['inputType'], "Team Grid link {$slot} must contain a URL input.");
+        assertTrueValue(false !== strpos($teamColumns['link'.$slot.'Icon']['eval']['tl_class'], 'team-grid-profile-field--link-icon'), "Team Grid link {$slot} icon select must retain the scoped width-styling class.");
         assertTrueValue(!isset($teamColumns['link'.$slot.'Url']['eval']['dcaPicker']), "Team Grid link {$slot} must keep picker markup inside its grouped widget.");
         assertSameValue(
             [[\Vendor\ContentElementsBundle\TeamGrid\TeamGridProfileWidgetWrapper::class, 'renderPagePicker']],
@@ -252,7 +253,15 @@ namespace {
     foreach ($removedTeamColumns as $removedTeamColumn) {
         assertTrueValue(!isset($teamColumns[$removedTeamColumn]), "Old Team Grid {$removedTeamColumn} must not be exposed.");
     }
-    assertSameValue($requiredVisibleTeamColumns, array_keys($teamColumns), 'Team Grid rows must contain exactly the seventeen visible profile fields.');
+    assertSameValue($requiredVisibleTeamColumns, array_keys($teamColumns), 'Team Grid rows must contain exactly the eighteen visible profile fields.');
+    assertSameValue('checkbox', $teamColumns['openLinksInNewWindow']['inputType'], 'Team Grid profiles must expose the new per-profile new-window checkbox.');
+    assertTrueValue(!isset($GLOBALS['TL_DCA']['tl_content']['fields']['openLinksInNewWindow']), 'The Team Grid new-window checkbox must remain inside repeatable profile data.');
+    assertTrueValue(!isset($teamColumns['openLinksInNewWindow']['eval']['mandatory']), 'The Team Grid new-window checkbox must stay optional.');
+    assertTrueValue(false !== strpos($teamColumns['openLinksInNewWindow']['eval']['tl_class'], 'team-grid-profile-field--open-links'), 'The Team Grid new-window checkbox must retain its scoped backend wrapper class.');
+    assertSameValue(3, count(array_filter(array_keys($teamColumns), static function (string $column): bool {
+        return 1 === preg_match('/^link[123]Icon$/', $column);
+    })), 'Team Grid must keep exactly three additional-link icon slots.');
+    assertTrueValue(!isset($teamColumns['link4Icon']) && !isset($teamColumns['link4Label']) && !isset($teamColumns['link4Url']), 'Team Grid must not expose a fourth additional-link slot.');
 
     assertSameValue('mediumblob NULL', $teamField['sql'], 'Team Grid must keep its existing top-level mediumblob storage type.');
     assertTrueValue(!isset($teamField['load_callback']), 'Team Grid must not use a compatibility load callback.');
@@ -267,8 +276,40 @@ namespace {
     assertContainsText('grid-template-columns', $backendCss, 'Team Grid backend CSS must use a responsive profile grid.');
     assertContainsText('min-height: 9rem', $backendCss, 'Team Grid biography must have a comfortable backend height.');
     assertContainsText('overflow: visible', $backendCss, 'Team Grid profile cells must not clip Chosen icon menus.');
+    assertContainsText('#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon .chosen-container', $backendCss, 'Team Grid icon Chosen containers must receive a scoped width rule.');
+    assertContainsText('width: 100% !important', $backendCss, 'Team Grid icon Chosen containers must override collapsed inline widths.');
+    assertContainsText('min-width: min(12rem, 100%)', $backendCss, 'Team Grid icon selects must keep a sensible responsive minimum width.');
+    assertContainsText('#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon .chosen-container .chosen-drop', $backendCss, 'Team Grid icon Chosen option lists must receive a scoped dropdown width rule.');
+    assertContainsText('width: max(100%, 16rem)', $backendCss, 'Team Grid icon Chosen option lists must remain wide enough for platform names.');
+    assertContainsText('#ctrl_teamGridItems .widget.team-grid-profile-field--open-links input[type="checkbox"]', $backendCss, 'Team Grid backend CSS must keep the new checkbox from inheriting full text-field width.');
     assertNotContainsText('overflow: hidden', $backendCss, 'Team Grid profile cells must keep Chosen icon menus reachable.');
     assertNotContainsText('body {', $backendCss, 'Team Grid backend CSS must not add a global body override.');
+    assertNotContainsText('.chosen-container {', $backendCss, 'Team Grid backend CSS must not affect unrelated Chosen widgets.');
+    assertNotContainsText('select {', $backendCss, 'Team Grid backend CSS must not add unrelated select rules.');
+
+    $teamFrontendCss = (string) file_get_contents($root.'/src/Resources/public/css/team-grid.css');
+    $teamElementSource = (string) file_get_contents($root.'/src/ContentElement/TeamGridElement.php');
+    assertContainsText('bundles/contentelements/css/team-grid.css|static', $teamElementSource, 'Team Grid must register its scoped frontend structural CSS.');
+    assertContainsText('.team-grid.team-grid--layout-grid .team-grid__list', $teamFrontendCss, 'Team Grid frontend CSS must scope equal-height row behavior to Team Grid grid output.');
+    assertContainsText('align-items: stretch', $teamFrontendCss, 'Team Grid grid rows must stretch children.');
+    assertContainsText('.team-grid.team-grid--layout-grid .team-grid__item', $teamFrontendCss, 'Team Grid items must participate in equal-height rows.');
+    assertContainsText('height: 100%', $teamFrontendCss, 'Team Grid cards/items must use percentage height rather than a fixed height.');
+    assertContainsText('display: flex', $teamFrontendCss, 'Team Grid cards and content must use a robust column layout.');
+    assertContainsText('flex-direction: column', $teamFrontendCss, 'Team Grid cards and content must retain column flow.');
+    assertContainsText('margin-top: auto', $teamFrontendCss, 'Team Grid lower link regions must be able to align toward the card bottom.');
+    assertContainsText('.team-grid .team-grid__social', $teamFrontendCss, 'Team Grid additional-link styles must stay scoped to Team Grid.');
+    assertContainsText('display: inline-flex', $teamFrontendCss, 'Team Grid additional links must use inline-flex alignment.');
+    assertContainsText('align-items: center', $teamFrontendCss, 'Team Grid additional-link icons and labels must be vertically centered.');
+    assertContainsText('gap: var(--vtxm-team-grid-link-gap, 0.375em)', $teamFrontendCss, 'Team Grid additional links must include a small em-based icon/label gap.');
+    assertContainsText('font-size: var(--vtxm-team-grid-contact-font-size, 1em)', $teamFrontendCss, 'Team Grid additional-link typography must intentionally match or inherit the contact link size.');
+    assertContainsText('flex: 0 0 auto', $teamFrontendCss, 'Team Grid additional-link icons must not shrink unexpectedly.');
+    assertContainsText('width: 1em', $teamFrontendCss, 'Team Grid additional-link SVG width must stay relative to text size.');
+    assertContainsText('height: 1em', $teamFrontendCss, 'Team Grid additional-link SVG height must stay relative to text size.');
+    assertContainsText('.team-grid .team-grid__social--icon-only', $teamFrontendCss, 'Team Grid icon-only links must remain centered.');
+    assertNotContainsText('min-height:', $teamFrontendCss, 'Team Grid frontend CSS must not use brittle fixed minimum card heights.');
+    assertNotContainsText('.media-text', $teamFrontendCss, 'Team Grid frontend CSS must not style Media Text.');
+    assertNotContainsText('.quote-teaser', $teamFrontendCss, 'Team Grid frontend CSS must not style Quote Teaser.');
+    assertNotContainsText('.factsbox', $teamFrontendCss, 'Team Grid frontend CSS must not style Factsbox.');
 
     assertTrueValue(
         in_array(
@@ -290,6 +331,14 @@ namespace {
         '<div class="widget team-grid-profile-field team-grid-profile-field--link-url team-grid-profile-field--link-1-url">',
         $wrappedTeamProfileWidget,
         'Grouped Team Grid fields must receive real per-field wrappers for the responsive grid.'
+    );
+    $teamIconWidget = new \Contao\Widget();
+    $teamIconWidget->id = 'teamGridItems_row0_link1Icon';
+    $teamIconWidget->tl_class = 'team-grid-profile-field team-grid-profile-field--link-icon team-grid-profile-field--link-1-icon';
+    assertContainsText(
+        '<div class="widget team-grid-profile-field team-grid-profile-field--link-icon team-grid-profile-field--link-1-icon">',
+        (new \Vendor\ContentElementsBundle\TeamGrid\TeamGridProfileWidgetWrapper())->wrap('<select><option></option></select>', $teamIconWidget),
+        'Grouped Team Grid icon selects must receive a scoped wrapper for Chosen width styling.'
     );
     assertTrueValue(!isset($teamColumns['website']['eval']['dcaPicker']), 'The Team Grid website picker must remain inside its grouped widget.');
     assertSameValue(
@@ -340,10 +389,12 @@ namespace {
     assertContainsText('Person — image', $englishTeamTranslations, 'English Team Grid translations must identify the person group.');
     assertContainsText('Contact — email', $englishTeamTranslations, 'English Team Grid translations must identify the contact group.');
     assertContainsText('Additional links — Link 1: icon', $englishTeamTranslations, 'English Team Grid translations must identify the additional-links group.');
+    assertContainsText('Open links in a new window', $englishTeamTranslations, 'English Team Grid translations must include the per-profile new-window checkbox.');
     assertContainsText('adjacent name already conveys the same information', $englishTeamTranslations, 'English Team Grid alt-text help must explain the decorative portrait case.');
     assertContainsText('Person — Bild', $germanTeamTranslations, 'German Team Grid translations must identify the person group.');
     assertContainsText('Kontakt — E-Mail', $germanTeamTranslations, 'German Team Grid translations must identify the contact group.');
     assertContainsText('Zusätzliche Links — Link 1: Icon', $germanTeamTranslations, 'German Team Grid translations must identify the additional-links group.');
+    assertContainsText('Links in neuem Fenster öffnen', $germanTeamTranslations, 'German Team Grid translations must include the per-profile new-window checkbox.');
     assertContainsText('direkt benachbarte Name dieselbe Information bereits vermittelt', $germanTeamTranslations, 'German Team Grid alt-text help must explain the decorative portrait case.');
 
     $oldProfileFields = [
@@ -397,6 +448,20 @@ namespace {
     assertSameValue('Instagram', $accessibleLinks[0]['accessibleLabel'], 'Icon-only links must derive a meaningful platform name.');
     assertSameValue('', $accessibleLinks[1]['accessibleLabel'], 'Visible link text must provide the accessible name without a redundant aria-label.');
     assertSameValue('', $accessibleLinks[2]['accessibleLabel'], 'Icon-plus-label links must use the visible label as their accessible name.');
+    assertSameValue([false, false, false], array_column($accessibleLinks, 'target'), 'Additional links must use normal navigation when the profile option is disabled.');
+    assertSameValue(['', '', ''], array_column($accessibleLinks, 'rel'), 'Additional links must not emit rel tokens when the profile option is disabled.');
+
+    $newWindowLinks = \Vendor\ContentElementsBundle\TeamGrid\TeamGridLinkNormalizer::normalize([
+        'link1Icon' => 'instagram',
+        'link1Url' => 'https://instagram.example/current',
+        'link2Label' => 'Documentation',
+        'link2Url' => 'https://docs.example/current',
+        'link3Icon' => 'github',
+        'link3Label' => 'Source code',
+        'link3Url' => 'https://github.example/current',
+    ], true);
+    assertSameValue([true, true, true], array_column($newWindowLinks, 'target'), 'Additional links 1-3 must receive target data when the profile option is enabled.');
+    assertSameValue(['noopener noreferrer', 'noopener noreferrer', 'noopener noreferrer'], array_column($newWindowLinks, 'rel'), 'Additional links 1-3 must receive rel data when the profile option is enabled.');
 
     $deduplicatedLinks = \Vendor\ContentElementsBundle\TeamGrid\TeamGridLinkNormalizer::normalize([
         'link1Label' => 'First',
@@ -446,8 +511,45 @@ namespace {
     assertContainsText('>Source code</span>', $teamOutput, 'An icon-plus-label Team Grid link must render its visible text.');
     assertContainsText('class="team-grid__social-icon-svg" width="1em" height="1em" aria-hidden="true" focusable="false"', $teamOutput, 'Team Grid SVG icons must be decorative to assistive technologies.');
     assertSameValue(3, substr_count($teamOutput, 'class="team-grid__social '), 'Each valid unified slot must render exactly one link.');
-    assertNotContainsText('target="_blank"', $teamOutput, 'Unified Team Grid links must use normal browser navigation.');
+    assertNotContainsText('target="_blank"', $teamOutput, 'Team Grid links must use normal browser navigation when the profile option is disabled.');
     assertNotContainsText('team-grid__action', $teamOutput, 'Team Grid must not render a primary-action compatibility block.');
+
+    $newWindowTeamTemplateValues = $teamTemplateValues;
+    $newWindowTeamTemplateValues['teamGridItems'][0]['contacts'] = [
+        [
+            'type' => 'email',
+            'label' => 'person@example.com',
+            'url' => 'mailto:person@example.com',
+            'ariaLabel' => 'Email: Current Person',
+            'target' => false,
+            'rel' => '',
+        ],
+        [
+            'type' => 'phone',
+            'label' => '+49 170 1234567',
+            'url' => 'tel:+491701234567',
+            'ariaLabel' => 'Phone: Current Person',
+            'target' => false,
+            'rel' => '',
+        ],
+        [
+            'type' => 'website',
+            'label' => 'Website',
+            'url' => 'https://person.example',
+            'ariaLabel' => 'Website: Current Person',
+            'target' => true,
+            'rel' => 'noopener noreferrer',
+        ],
+    ];
+    $newWindowTeamTemplateValues['teamGridItems'][0]['socials'] = $newWindowLinks;
+    $newWindowTeamOutput = renderTemplate($root.'/src/Resources/contao/templates/ce_vtxm_team_grid.html5', $newWindowTeamTemplateValues);
+    assertContainsText('href="mailto:person@example.com">person@example.com</a>', $newWindowTeamOutput, 'Team Grid email links must never inherit the profile new-window behavior.');
+    assertContainsText('href="tel:+491701234567">+49 170 1234567</a>', $newWindowTeamOutput, 'Team Grid telephone links must never inherit the profile new-window behavior.');
+    assertContainsText('href="https://person.example" aria-label="Website: Current Person https://person.example" target="_blank" rel="noopener noreferrer">Website</a>', $newWindowTeamOutput, 'Team Grid website links must receive target and rel when the profile option is enabled.');
+    assertSameValue(4, substr_count($newWindowTeamOutput, 'target="_blank" rel="noopener noreferrer"'), 'Team Grid website and three additional links must receive new-window attributes when enabled.');
+    assertContainsText('href="https://instagram.example/current" aria-label="Instagram" data-vtxm-team-grid-link-icon="instagram" target="_blank" rel="noopener noreferrer"', $newWindowTeamOutput, 'Team Grid icon-only additional links must remain accessible when opened in a new window.');
+    assertContainsText('href="https://docs.example/current" target="_blank" rel="noopener noreferrer"', $newWindowTeamOutput, 'Team Grid label-only additional links must open in a new window when enabled.');
+    assertContainsText('href="https://github.example/current" data-vtxm-team-grid-link-icon="github" target="_blank" rel="noopener noreferrer"', $newWindowTeamOutput, 'Team Grid icon-plus-label additional links must open in a new window when enabled.');
 
     $mediaOutput = renderTemplate($root.'/src/Resources/contao/templates/ce_vtxm_media_text.html5', [
         'elementId' => 'legacy-media-text',

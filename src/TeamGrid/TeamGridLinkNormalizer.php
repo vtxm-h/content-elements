@@ -9,9 +9,9 @@ final class TeamGridLinkNormalizer
     /**
      * @param array<string, mixed> $item
      *
-     * @return list<array{type: string, icon: string, iconSvg: string, label: string, url: string, accessibleLabel: string}>
+     * @return list<array{type: string, icon: string, iconSvg: string, label: string, url: string, accessibleLabel: string, target: bool, rel: string}>
      */
-    public static function normalize(array $item): array
+    public static function normalize(array $item, bool $openInNewWindow = false): array
     {
         $links = [];
         $seenUrls = [];
@@ -39,6 +39,8 @@ final class TeamGridLinkNormalizer
                 'label' => $label,
                 'url' => $url,
                 'accessibleLabel' => '' === $label ? TeamGridIconRegistry::label($icon) : '',
+                'target' => $openInNewWindow,
+                'rel' => $openInNewWindow ? 'noopener noreferrer' : '',
             ];
             $seenUrls[$url] = true;
         }

@@ -1,0 +1,65 @@
+.team-grid.team-grid--layout-grid .team-grid__list {
+    align-items: stretch;
+}
+
+.team-grid.team-grid--layout-grid .team-grid__item {
+    height: 100%;
+}
+
+.team-grid .team-grid__card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.team-grid .team-grid__content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+}
+
+.team-grid .team-grid__content > .team-grid__contacts {
+    margin-top: auto;
+}
+
+.team-grid .team-grid__content > :not(.team-grid__contacts) + .team-grid__socials,
+.team-grid .team-grid__content > .team-grid__socials:first-child {
+    margin-top: auto;
+}
+
+.team-grid .team-grid__contact,
+.team-grid .team-grid__social {
+    font-size: var(--vtxm-team-grid-contact-font-size, 1em);
+}
+
+.team-grid .team-grid__social {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--vtxm-team-grid-link-gap, 0.375em);
+    max-width: 100%;
+}
+
+.team-grid .team-grid__social--icon-only {
+    justify-content: center;
+}
+
+.team-grid .team-grid__social-icon {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    height: 1em;
+    line-height: 0;
+}
+
+.team-grid .team-grid__social-icon-svg {
+    display: block;
+    flex: 0 0 auto;
+    width: 1em;
+    height: 1em;
+}
+
+.team-grid .team-grid__social-label {
+    min-width: 0;
+}
