@@ -59,7 +59,7 @@ $classes = trim($this->elementClass.' team-grid--style-'.$this->teamGridStyle.' 
 
                   ?>
                   <li>
-                    <a class="team-grid__contact team-grid__contact--<?= StringUtil::specialchars($contact['type']) ?>" href="<?= StringUtil::specialchars($contact['url']) ?>"<?php if ('' !== $contactAriaLabel): ?> aria-label="<?= StringUtil::specialchars($contactAriaLabel) ?>"<?php endif; ?>><?= StringUtil::specialchars($contact['label']) ?></a>
+                    <a class="team-grid__contact team-grid__contact--<?= StringUtil::specialchars($contact['type']) ?>" href="<?= StringUtil::specialchars($contact['url']) ?>"<?php if ('' !== $contactAriaLabel): ?> aria-label="<?= StringUtil::specialchars($contactAriaLabel) ?>"<?php endif; ?><?php if (!empty($contact['target'])): ?> target="_blank"<?php endif; ?><?php if (!empty($contact['rel'])): ?> rel="<?= StringUtil::specialchars($contact['rel']) ?>"<?php endif; ?>><?= StringUtil::specialchars($contact['label']) ?></a>
                   </li>
                 <?php endforeach; ?>
               </ul>
@@ -69,7 +69,7 @@ $classes = trim($this->elementClass.' team-grid--style-'.$this->teamGridStyle.' 
               <ul class="team-grid__socials" aria-label="<?= StringUtil::specialchars('Additional links'.('' !== $item['name'] ? ': '.$item['name'] : '')) ?>">
                 <?php foreach ($item['socials'] as $social): ?>
                   <li>
-                    <a class="team-grid__social team-grid__social--<?= StringUtil::specialchars($social['type']) ?> <?= '' !== $social['iconSvg'] ? 'team-grid__social--has-icon' : 'team-grid__social--no-icon' ?> <?= '' !== $social['label'] ? 'team-grid__social--has-label' : 'team-grid__social--icon-only' ?>" href="<?= StringUtil::specialchars($social['url']) ?>"<?php if ('' !== $social['accessibleLabel']): ?> aria-label="<?= StringUtil::specialchars($social['accessibleLabel']) ?>"<?php endif; ?><?php if ('' !== $social['icon']): ?> data-vtxm-team-grid-link-icon="<?= StringUtil::specialchars($social['icon']) ?>"<?php endif; ?>>
+                    <a class="team-grid__social team-grid__social--<?= StringUtil::specialchars($social['type']) ?> <?= '' !== $social['iconSvg'] ? 'team-grid__social--has-icon' : 'team-grid__social--no-icon' ?> <?= '' !== $social['label'] ? 'team-grid__social--has-label' : 'team-grid__social--icon-only' ?>" href="<?= StringUtil::specialchars($social['url']) ?>"<?php if ('' !== $social['accessibleLabel']): ?> aria-label="<?= StringUtil::specialchars($social['accessibleLabel']) ?>"<?php endif; ?><?php if ('' !== $social['icon']): ?> data-vtxm-team-grid-link-icon="<?= StringUtil::specialchars($social['icon']) ?>"<?php endif; ?><?php if (!empty($social['target'])): ?> target="_blank"<?php endif; ?><?php if (!empty($social['rel'])): ?> rel="<?= StringUtil::specialchars($social['rel']) ?>"<?php endif; ?>>
                       <?php if ('' !== $social['iconSvg']): ?>
                         <span class="team-grid__social-icon" aria-hidden="true"><?= $social['iconSvg'] ?></span>
                       <?php endif; ?>

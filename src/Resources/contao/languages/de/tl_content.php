@@ -149,6 +149,7 @@ $GLOBALS['TL_LANG']['tl_content']['teamGridItemsBiography'] = ['Biografie', 'Kur
 $GLOBALS['TL_LANG']['tl_content']['teamGridItemsEmail'] = ['Kontakt — E-Mail', 'E-Mail-Adresse. Wird bei gültiger Adresse als mailto-Link ausgegeben.'];
 $GLOBALS['TL_LANG']['tl_content']['teamGridItemsPhone'] = ['Telefon', 'Telefonnummer. Wird bei nutzbarer Nummer als tel-Link ausgegeben.'];
 $GLOBALS['TL_LANG']['tl_content']['teamGridItemsWebsite'] = ['Website', 'Persönliche Website oder Profil-URL.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsOpenLinksInNewWindow'] = ['Links in neuem Fenster öffnen', 'Öffnet die Website und die zusätzlichen Links dieses Profils mit target="_blank" und rel="noopener noreferrer". E-Mail- und Telefon-Links bleiben unverändert.'];
 $GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink1Icon'] = ['Zusätzliche Links — Link 1: Icon', 'Optionales Plattform-Icon. Für einen reinen Textlink kein Icon auswählen.'];
 $GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink1Label'] = ['Link 1: Bezeichnung', 'Optionale sichtbare Bezeichnung. Bei Auswahl von Externer Link ist eine Bezeichnung erforderlich.'];
 $GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink1Url'] = ['Link 1: URL', 'Ein Link wird nur ausgegeben, wenn die URL und mindestens ein Icon oder eine Bezeichnung vorhanden sind.'];

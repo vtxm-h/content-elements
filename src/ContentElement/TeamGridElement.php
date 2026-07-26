@@ -23,6 +23,8 @@ class TeamGridElement extends AbstractWrappedContentElement
 
     protected function compile()
     {
+        $GLOBALS['TL_CSS']['vtxm_team_grid'] = 'bundles/contentelements/css/team-grid.css|static';
+
         $this->assignWrapper('ce_vtxm_team_grid team-grid');
         $this->assignHeadline();
 
@@ -59,7 +61,7 @@ class TeamGridElement extends AbstractWrappedContentElement
     /**
      * @param mixed $items
      *
-     * @return list<array{index: int, image: string, alt: string, name: string, role: string, biography: string, contacts: list<array{type: string, label: string, url: string, ariaLabel: string}>, socials: list<array{type: string, icon: string, iconSvg: string, label: string, url: string, accessibleLabel: string}>, hasMedia: bool}>
+     * @return list<array{index: int, image: string, alt: string, name: string, role: string, biography: string, contacts: list<array{type: string, label: string, url: string, ariaLabel: string, target: bool, rel: string}>, socials: list<array{type: string, icon: string, iconSvg: string, label: string, url: string, accessibleLabel: string, target: bool, rel: string}>, hasMedia: bool}>
      */
     private function normalizeItems($items): array
     {
@@ -78,8 +80,9 @@ class TeamGridElement extends AbstractWrappedContentElement
             $name = trim((string) ($item['name'] ?? ''));
             $role = trim((string) ($item['role'] ?? ''));
             $biography = trim((string) ($item['biography'] ?? ''));
-            $contacts = $this->normalizeContacts($item, $name);
-            $socials = $this->normalizeSocials($item);
+            $openLinksInNewWindow = $this->checkboxValue($item['openLinksInNewWindow'] ?? null);
+            $contacts = $this->normalizeContacts($item, $name, $openLinksInNewWindow);
+            $socials = $this->normalizeSocials($item, $openLinksInNewWindow);
 
             if (
                 '' === $name
@@ -111,9 +114,9 @@ class TeamGridElement extends AbstractWrappedContentElement
     /**
      * @param array<string, mixed> $item
      *
-     * @return list<array{type: string, label: string, url: string, ariaLabel: string}>
+     * @return list<array{type: string, label: string, url: string, ariaLabel: string, target: bool, rel: string}>
      */
-    private function normalizeContacts(array $item, string $name): array
+    private function normalizeContacts(array $item, string $name, bool $openLinksInNewWindow): array
     {
         $contacts = [];
         $email = $this->normalizeEmail((string) ($item['email'] ?? ''));
@@ -124,6 +127,8 @@ class TeamGridElement extends AbstractWrappedContentElement
                 'label' => $email,
                 'url' => 'mailto:'.$email,
                 'ariaLabel' => $this->personLinkLabel('Email', $name),
+                'target' => false,
+                'rel' => '',
             ];
         }
 
@@ -135,6 +140,8 @@ class TeamGridElement extends AbstractWrappedContentElement
                 'label' => $phone['label'],
                 'url' => 'tel:'.$phone['href'],
                 'ariaLabel' => $this->personLinkLabel('Phone', $name),
+                'target' => false,
+                'rel' => '',
             ];
         }
 
@@ -146,6 +153,8 @@ class TeamGridElement extends AbstractWrappedContentElement
                 'label' => 'Website',
                 'url' => $website,
                 'ariaLabel' => $this->personLinkLabel('Website', $name),
+                'target' => $openLinksInNewWindow,
+                'rel' => $openLinksInNewWindow ? 'noopener noreferrer' : '',
             ];
         }
 
@@ -155,11 +164,11 @@ class TeamGridElement extends AbstractWrappedContentElement
     /**
      * @param array<string, mixed> $item
      *
-     * @return list<array{type: string, icon: string, iconSvg: string, label: string, url: string, accessibleLabel: string}>
+     * @return list<array{type: string, icon: string, iconSvg: string, label: string, url: string, accessibleLabel: string, target: bool, rel: string}>
      */
-    private function normalizeSocials(array $item): array
+    private function normalizeSocials(array $item, bool $openLinksInNewWindow): array
     {
-        return TeamGridLinkNormalizer::normalize($item);
+        return TeamGridLinkNormalizer::normalize($item, $openLinksInNewWindow);
     }
 
     /**
@@ -311,6 +320,14 @@ class TeamGridElement extends AbstractWrappedContentElement
     private function normalizeWebUrl(string $url): string
     {
         return TeamGridLinkNormalizer::normalizeWebUrl($url);
+    }
+
+    /**
+     * @param mixed $value
+     */
+    private function checkboxValue($value): bool
+    {
+        return '1' === (string) $value || 1 === $value || true === $value;
     }
 
     private function personLinkLabel(string $label, string $name): string

@@ -806,6 +806,11 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['teamGridItems'] = [
                 'wizard' => [[TeamGridProfileWidgetWrapper::class, 'renderPagePicker']],
                 'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 2048, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--website'],
             ],
+            'openLinksInNewWindow' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsOpenLinksInNewWindow'],
+                'inputType' => 'checkbox',
+                'eval' => ['columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--open-links'],
+            ],
             'link1Icon' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink1Icon'],
                 'inputType' => 'select',

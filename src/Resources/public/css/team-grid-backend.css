@@ -61,7 +61,8 @@
 }
 
 #ctrl_teamGridItems .widget.team-grid-profile-field--biography,
-#ctrl_teamGridItems .widget.team-grid-profile-field--website {
+#ctrl_teamGridItems .widget.team-grid-profile-field--website,
+#ctrl_teamGridItems .widget.team-grid-profile-field--open-links {
     grid-column: 1 / -1;
 }
 
@@ -72,6 +73,27 @@
 
 #ctrl_teamGridItems .widget.team-grid-profile-field--link-icon {
     grid-column: span 3;
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon select,
+#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon .chosen-container,
+#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon .chosen-container-single,
+#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon .chosen-container-single .chosen-single {
+    box-sizing: border-box;
+    width: 100% !important;
+    min-width: min(12rem, 100%);
+    max-width: 100%;
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon .chosen-container .chosen-drop {
+    width: max(100%, 16rem);
+    min-width: min(16rem, calc(100vw - 3rem));
+    max-width: calc(100vw - 3rem);
+}
+
+#ctrl_teamGridItems .widget.team-grid-profile-field--open-links input[type="checkbox"] {
+    width: auto;
+    max-width: none;
 }
 
 #ctrl_teamGridItems .widget.team-grid-profile-field--link-label {

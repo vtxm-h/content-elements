@@ -29,7 +29,7 @@ Content elements included:
 
 The bundle is theme-agnostic:
 
-- no frontend CSS included
+- no shared visual frontend CSS included; Team Grid ships a small scoped structural CSS asset
 - no JavaScript included
 - stable template hooks
 - Contao `cssID` support preserved
@@ -391,13 +391,17 @@ Contact fields:
 - phone
 - website
 
+Profile link option:
+
+- open website and additional links in a new window
+
 Additional-link fields:
 
 - Link 1: optional icon, optional visible label and URL
 - Link 2: optional icon, optional visible label and URL
 - Link 3: optional icon, optional visible label and URL
 
-Website remains a separate contact field. Profiles have exactly three additional-link slots.
+Website remains a separate contact field. Profiles have exactly three additional-link slots. The optional per-profile `openLinksInNewWindow` checkbox applies only to the website and those three additional links.
 
 Rows are edited through MultiColumnWizard and keep their backend order in the frontend. Each row uses the widget's grouped-column behavior to present one responsive profile block instead of one oversized horizontal table row. Image and alternative text, name and role, full-width biography, contact fields and the three link slots stay within the normal backend content width. Native row operations and the image picker remain provided by MultiColumnWizard and Contao.
 
@@ -407,9 +411,9 @@ Images are selected through the Contao file picker and resolved from stored UUID
 
 Explicit image alternative text is preserved. It may remain empty when the portrait is decorative and the adjacent name already conveys the same information. The element never derives or fills alternative text from the person's name.
 
-The biography is rendered as escaped plain text with line breaks preserved. Contact links render only when valid: email becomes `mailto:`, phone becomes `tel:`, and website/additional links accept safe web URLs.
+The biography is rendered as escaped plain text with line breaks preserved. Contact links render only when valid: email becomes `mailto:`, phone becomes `tel:`, and website/additional links accept safe web URLs. When `openLinksInNewWindow` is enabled, the website and additional links receive `target="_blank"` and `rel="noopener noreferrer"`. Email and telephone links never receive this behavior. When disabled, links use normal browser navigation.
 
-Additional links support icon only, visible label only, or icon plus visible label. A URL without an icon or label, or an icon/label without a URL, produces no anchor. Icon-only links receive the platform name as their accessible link name. When visible text is present it supplies the accessible name and the local SVG is decorative. `external-link` requires a visible label and cannot render as an icon-only link. Unknown icon keys are ignored safely; if a visible label and safe URL remain, the link falls back to text-only output. Identical additional-link URLs are rendered only once. Unified links use normal browser navigation and never add `target="_blank"`.
+Additional links support icon only, visible label only, or icon plus visible label. A URL without an icon or label, or an icon/label without a URL, produces no anchor. Icon-only links receive the platform name as their accessible link name. When visible text is present it supplies the accessible name and the local SVG is decorative. `external-link` requires a visible label and cannot render as an icon-only link. Unknown icon keys are ignored safely; if a visible label and safe URL remain, the link falls back to text-only output. Identical additional-link URLs are rendered only once.
 
 The curated icon keys are `instagram`, `linkedin`, `github`, `mastodon`, `bluesky`, `facebook`, `youtube`, `tiktok`, `x`, `website` and `external-link`, plus the editor's no-icon choice. SVG files are local, whitelisted and rendered inline without JavaScript. Sources and license details are recorded in [`ICON_SOURCES.md`](ICON_SOURCES.md).
 
@@ -419,9 +423,9 @@ The optional `fade-up` reveal setting emits the existing generic reveal-group ho
 
 The output uses list semantics, one article per person, a heading for each name, accessible contact and additional links, decorative empty `alt` attributes when configured, keyboard-accessible native links and no modal or disclosure behavior.
 
-Styling, profile card presentation, reveal animation details and reduced-motion handling belong in `frontend-assets` or project CSS/JavaScript. This bundle only outputs stable markup, classes, data hooks and the curated local SVG shapes required by Team Grid links.
+The Team Grid element loads `team-grid.css`, which contains only scoped structural rules for equal-height cards and additional-link icon/text alignment. Broader styling, profile card presentation, reveal animation details and reduced-motion handling belong in `frontend-assets` or project CSS/JavaScript. The bundle otherwise outputs stable markup, classes, data hooks and the curated local SVG shapes required by Team Grid links.
 
-Deferred features for this element include frontend CSS, JavaScript, complete icon libraries, modal profiles, detail pages, person database entities, categories, departments, filtering, sorting UI, arbitrary focal points, responsive art direction, automatic image placeholders, project-specific colors and migrations from `vtxm_members_grid`.
+Deferred features for this element include JavaScript, complete icon libraries, modal profiles, detail pages, person database entities, categories, departments, filtering, sorting UI, arbitrary focal points, responsive art direction, automatic image placeholders, project-specific colors and migrations from `vtxm_members_grid`.
 
 
 ## Process Steps / Timeline
@@ -811,7 +815,7 @@ Team Grid hooks:
 - `.vtxm-reveal-group`
 - `.vtxm-reveal-item`
 
-Team Grid styling and optional reveal behavior are expected through `frontend-assets`, especially `css/vtxm-components.css` and `js/vtxm-components.js`, or project assets.
+Team Grid ships scoped structural CSS for equal-height cards and additional-link icon/text alignment. Broader Team Grid styling and optional reveal behavior are expected through `frontend-assets`, especially `css/vtxm-components.css` and `js/vtxm-components.js`, or project assets.
 
 Process Steps hooks:
 

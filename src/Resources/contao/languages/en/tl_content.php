@@ -149,6 +149,7 @@ $GLOBALS['TL_LANG']['tl_content']['teamGridItemsBiography'] = ['Biography', 'Sho
 $GLOBALS['TL_LANG']['tl_content']['teamGridItemsEmail'] = ['Contact — email', 'Email address. Rendered as a mailto link when valid.'];
 $GLOBALS['TL_LANG']['tl_content']['teamGridItemsPhone'] = ['Phone', 'Phone number. Rendered as a tel link when a usable number is present.'];
 $GLOBALS['TL_LANG']['tl_content']['teamGridItemsWebsite'] = ['Website', 'Personal or profile website URL.'];
+$GLOBALS['TL_LANG']['tl_content']['teamGridItemsOpenLinksInNewWindow'] = ['Open links in a new window', 'Apply target="_blank" and rel="noopener noreferrer" to this profile\'s website and additional links. Email and phone links are unchanged.'];
 $GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink1Icon'] = ['Additional links — Link 1: icon', 'Optional platform icon. Choose no icon for a text-only link.'];
 $GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink1Label'] = ['Link 1: label', 'Optional visible label. A label is required when External link is selected.'];
 $GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink1Url'] = ['Link 1: URL', 'A link is rendered only when the URL and at least an icon or label are present.'];
