@@ -296,12 +296,15 @@ namespace {
     assertContainsText('height: 100%', $teamFrontendCss, 'Team Grid cards/items must use percentage height rather than a fixed height.');
     assertContainsText('display: flex', $teamFrontendCss, 'Team Grid cards and content must use a robust column layout.');
     assertContainsText('flex-direction: column', $teamFrontendCss, 'Team Grid cards and content must retain column flow.');
-    assertContainsText('margin-top: auto', $teamFrontendCss, 'Team Grid lower link regions must be able to align toward the card bottom.');
+    assertContainsText('.team-grid .team-grid__content > .team-grid__socials', $teamFrontendCss, 'Only the Team Grid additional-links region should align toward the card bottom.');
+    assertContainsText('margin-top: auto', $teamFrontendCss, 'Team Grid additional links must be able to align toward the card bottom.');
+    assertNotContainsText(".team-grid .team-grid__content > .team-grid__contacts {\n    margin-top: auto;\n}", $teamFrontendCss, 'Team Grid contact links must stay grouped with the profile identity instead of being pushed to the card bottom.');
     assertContainsText('.team-grid .team-grid__social', $teamFrontendCss, 'Team Grid additional-link styles must stay scoped to Team Grid.');
     assertContainsText('display: inline-flex', $teamFrontendCss, 'Team Grid additional links must use inline-flex alignment.');
     assertContainsText('align-items: center', $teamFrontendCss, 'Team Grid additional-link icons and labels must be vertically centered.');
     assertContainsText('gap: var(--vtxm-team-grid-link-gap, 0.375em)', $teamFrontendCss, 'Team Grid additional links must include a small em-based icon/label gap.');
-    assertContainsText('font-size: var(--vtxm-team-grid-contact-font-size, 1em)', $teamFrontendCss, 'Team Grid additional-link typography must intentionally match or inherit the contact link size.');
+    assertContainsText('.team-grid .team-grid__role,', $teamFrontendCss, 'Team Grid role text must share the contact link font size without changing its subdued styling.');
+    assertContainsText('font-size: var(--vtxm-team-grid-contact-font-size, 1em)', $teamFrontendCss, 'Team Grid role, contact and additional-link typography must intentionally match or inherit the contact link size.');
     assertContainsText('flex: 0 0 auto', $teamFrontendCss, 'Team Grid additional-link icons must not shrink unexpectedly.');
     assertContainsText('width: 1em', $teamFrontendCss, 'Team Grid additional-link SVG width must stay relative to text size.');
     assertContainsText('height: 1em', $teamFrontendCss, 'Team Grid additional-link SVG height must stay relative to text size.');
@@ -543,6 +546,17 @@ namespace {
     ];
     $newWindowTeamTemplateValues['teamGridItems'][0]['socials'] = $newWindowLinks;
     $newWindowTeamOutput = renderTemplate($root.'/src/Resources/contao/templates/ce_vtxm_team_grid.html5', $newWindowTeamTemplateValues);
+    $teamRolePosition = strpos($newWindowTeamOutput, '<p class="team-grid__role">Engineer</p>');
+    $teamEmailPosition = strpos($newWindowTeamOutput, 'href="mailto:person@example.com"');
+    $teamBiographyPosition = strpos($newWindowTeamOutput, '<div class="team-grid__biography">Biography</div>');
+    assertTrueValue(
+        false !== $teamRolePosition
+        && false !== $teamEmailPosition
+        && false !== $teamBiographyPosition
+        && $teamRolePosition < $teamEmailPosition
+        && $teamEmailPosition < $teamBiographyPosition,
+        'Team Grid email links must render with the profile identity group before biography content.'
+    );
     assertContainsText('href="mailto:person@example.com">person@example.com</a>', $newWindowTeamOutput, 'Team Grid email links must never inherit the profile new-window behavior.');
     assertContainsText('href="tel:+491701234567">+49 170 1234567</a>', $newWindowTeamOutput, 'Team Grid telephone links must never inherit the profile new-window behavior.');
     assertContainsText('href="https://person.example" aria-label="Website: Current Person https://person.example" target="_blank" rel="noopener noreferrer">Website</a>', $newWindowTeamOutput, 'Team Grid website links must receive target and rel when the profile option is enabled.');

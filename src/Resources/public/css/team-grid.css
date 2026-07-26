@@ -18,15 +18,11 @@
     flex-direction: column;
 }
 
-.team-grid .team-grid__content > .team-grid__contacts {
+.team-grid .team-grid__content > .team-grid__socials {
     margin-top: auto;
 }
 
-.team-grid .team-grid__content > :not(.team-grid__contacts) + .team-grid__socials,
-.team-grid .team-grid__content > .team-grid__socials:first-child {
-    margin-top: auto;
-}
-
+.team-grid .team-grid__role,
 .team-grid .team-grid__contact,
 .team-grid .team-grid__social {
     font-size: var(--vtxm-team-grid-contact-font-size, 1em);
