@@ -18,6 +18,13 @@
     flex-direction: column;
 }
 
+.team-grid .team-grid__name,
+.team-grid .team-grid__role,
+.team-grid .team-grid__contacts {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .team-grid .team-grid__content > .team-grid__socials {
     margin-top: auto;
 }
