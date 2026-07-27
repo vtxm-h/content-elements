@@ -76,27 +76,10 @@
     width: 100%;
 }
 
-#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon select,
-#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon .chosen-container,
-#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon .chosen-container-single,
-#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon .chosen-container-single .chosen-single {
+#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon select {
     display: block;
-    box-sizing: border-box;
-    width: 100% !important;
-    inline-size: 100% !important;
-    min-width: min(12rem, 100%);
-    min-inline-size: min(12rem, 100%);
-    max-width: 100%;
-    max-inline-size: 100%;
-}
-
-#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon .chosen-container .chosen-drop {
-    width: max(100%, 16rem);
-    inline-size: max(100%, 16rem);
-    min-width: min(16rem, calc(100vw - 3rem));
-    min-inline-size: min(16rem, calc(100vw - 3rem));
-    max-width: calc(100vw - 3rem);
-    max-inline-size: calc(100vw - 3rem);
+    min-width: 12rem;
+    min-inline-size: 12rem;
 }
 
 #ctrl_teamGridItems .widget.team-grid-profile-field--open-links input[type="checkbox"] {
