@@ -277,10 +277,15 @@ namespace {
     assertContainsText('min-height: 9rem', $backendCss, 'Team Grid biography must have a comfortable backend height.');
     assertContainsText('overflow: visible', $backendCss, 'Team Grid profile cells must not clip Chosen icon menus.');
     assertContainsText('#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon .chosen-container', $backendCss, 'Team Grid icon Chosen containers must receive a scoped width rule.');
+    assertContainsText("#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon {\n    grid-column: span 3;\n    width: 100%;\n}", $backendCss, 'Team Grid icon-select field wrappers must fill their grid column.');
+    assertContainsText('display: block', $backendCss, 'Team Grid icon Chosen containers must not size themselves as inline controls.');
     assertContainsText('width: 100% !important', $backendCss, 'Team Grid icon Chosen containers must override collapsed inline widths.');
+    assertContainsText('inline-size: 100% !important', $backendCss, 'Team Grid icon Chosen containers must keep a label-independent visible inline size.');
     assertContainsText('min-width: min(12rem, 100%)', $backendCss, 'Team Grid icon selects must keep a sensible responsive minimum width.');
+    assertContainsText('min-inline-size: min(12rem, 100%)', $backendCss, 'Team Grid icon selects must keep the same responsive minimum on logical inline sizing.');
     assertContainsText('#ctrl_teamGridItems .widget.team-grid-profile-field--link-icon .chosen-container .chosen-drop', $backendCss, 'Team Grid icon Chosen option lists must receive a scoped dropdown width rule.');
     assertContainsText('width: max(100%, 16rem)', $backendCss, 'Team Grid icon Chosen option lists must remain wide enough for platform names.');
+    assertContainsText('inline-size: max(100%, 16rem)', $backendCss, 'Team Grid icon Chosen option lists must use the same label-independent logical width.');
     assertContainsText('#ctrl_teamGridItems .widget.team-grid-profile-field--open-links input[type="checkbox"]', $backendCss, 'Team Grid backend CSS must keep the new checkbox from inheriting full text-field width.');
     assertNotContainsText('overflow: hidden', $backendCss, 'Team Grid profile cells must keep Chosen icon menus reachable.');
     assertNotContainsText('body {', $backendCss, 'Team Grid backend CSS must not add a global body override.');
@@ -296,6 +301,7 @@ namespace {
     assertContainsText('height: 100%', $teamFrontendCss, 'Team Grid cards/items must use percentage height rather than a fixed height.');
     assertContainsText('display: flex', $teamFrontendCss, 'Team Grid cards and content must use a robust column layout.');
     assertContainsText('flex-direction: column', $teamFrontendCss, 'Team Grid cards and content must retain column flow.');
+    assertContainsText(".team-grid .team-grid__name,\n.team-grid .team-grid__role,\n.team-grid .team-grid__contacts {\n    margin-top: 0;\n    margin-bottom: 0;\n}", $teamFrontendCss, 'Team Grid name, role and contact links must stay as one compact visual group.');
     assertContainsText('.team-grid .team-grid__content > .team-grid__socials', $teamFrontendCss, 'Only the Team Grid additional-links region should align toward the card bottom.');
     assertContainsText('margin-top: auto', $teamFrontendCss, 'Team Grid additional links must be able to align toward the card bottom.');
     assertNotContainsText(".team-grid .team-grid__content > .team-grid__contacts {\n    margin-top: auto;\n}", $teamFrontendCss, 'Team Grid contact links must stay grouped with the profile identity instead of being pushed to the card bottom.');
