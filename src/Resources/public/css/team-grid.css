@@ -27,6 +27,7 @@
 
 .team-grid .team-grid__content > .team-grid__socials {
     margin-top: auto;
+    padding-block-start: 1.5rem;
 }
 
 .team-grid .team-grid__role,

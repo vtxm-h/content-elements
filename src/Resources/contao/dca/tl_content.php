@@ -816,7 +816,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['teamGridItems'] = [
                 'inputType' => 'select',
                 'options' => TeamGridIconRegistry::keys(),
                 'reference' => &$GLOBALS['TL_LANG']['tl_content']['teamGridLinkIconOptions'],
-                'eval' => ['includeBlankOption' => true, 'chosen' => true, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--link-icon team-grid-profile-field--link-1-icon'],
+                'eval' => ['includeBlankOption' => true, 'chosen' => false, 'style' => 'min-width:12rem', 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--link-icon team-grid-profile-field--link-1-icon'],
             ],
             'link1Label' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink1Label'],
@@ -834,7 +834,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['teamGridItems'] = [
                 'inputType' => 'select',
                 'options' => TeamGridIconRegistry::keys(),
                 'reference' => &$GLOBALS['TL_LANG']['tl_content']['teamGridLinkIconOptions'],
-                'eval' => ['includeBlankOption' => true, 'chosen' => true, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--link-icon'],
+                'eval' => ['includeBlankOption' => true, 'chosen' => false, 'style' => 'min-width:12rem', 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--link-icon'],
             ],
             'link2Label' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink2Label'],
@@ -852,7 +852,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['teamGridItems'] = [
                 'inputType' => 'select',
                 'options' => TeamGridIconRegistry::keys(),
                 'reference' => &$GLOBALS['TL_LANG']['tl_content']['teamGridLinkIconOptions'],
-                'eval' => ['includeBlankOption' => true, 'chosen' => true, 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--link-icon'],
+                'eval' => ['includeBlankOption' => true, 'chosen' => false, 'style' => 'min-width:12rem', 'columnPos' => 'profile', 'tl_class' => 'team-grid-profile-field team-grid-profile-field--link-icon'],
             ],
             'link3Label' => [
                 'label' => &$GLOBALS['TL_LANG']['tl_content']['teamGridItemsLink3Label'],
